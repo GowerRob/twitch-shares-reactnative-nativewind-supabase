@@ -14,9 +14,11 @@ const Home = () => {
 const router = useRouter();
 
     return(
-        <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
+        <SafeAreaView>
             <Stack.Screen
                 options={{
+                    headerStyle:{backgroundColor:'white'},
+                    headerShadowVisible:false,
                     headerTitle:''
                 }}
             />
