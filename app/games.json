@@ -1,0 +1,607 @@
+{
+    "data": [
+        {
+            "id": "33214",
+            "name": "Fortnite",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg",
+            "igdb_id": "1905"
+        },
+        {
+            "id": "509658",
+            "name": "Just Chatting",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/509658-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "32982",
+            "name": "Grand Theft Auto V",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1020"
+        },
+        {
+            "id": "21779",
+            "name": "League of Legends",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/21779-{width}x{height}.jpg",
+            "igdb_id": "115"
+        },
+        {
+            "id": "32399",
+            "name": "Counter-Strike",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/32399-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "516575",
+            "name": "VALORANT",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/516575-{width}x{height}.jpg",
+            "igdb_id": "126459"
+        },
+        {
+            "id": "513143",
+            "name": "Teamfight Tactics",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/513143-{width}x{height}.jpg",
+            "igdb_id": "120176"
+        },
+        {
+            "id": "599619814",
+            "name": "Casino Jackpot",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/599619814_IGDB-{width}x{height}.jpg",
+            "igdb_id": "206893"
+        },
+        {
+            "id": "27471",
+            "name": "Minecraft",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/27471_IGDB-{width}x{height}.jpg",
+            "igdb_id": "121"
+        },
+        {
+            "id": "143106037",
+            "name": "EA Sports FC 24",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/143106037_IGDB-{width}x{height}.jpg",
+            "igdb_id": "256092"
+        },
+        {
+            "id": "18122",
+            "name": "World of Warcraft",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/18122-{width}x{height}.jpg",
+            "igdb_id": "123"
+        },
+        {
+            "id": "515025",
+            "name": "Overwatch 2",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/515025-{width}x{height}.jpg",
+            "igdb_id": "125174"
+        },
+        {
+            "id": "29595",
+            "name": "Dota 2",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/29595-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "511224",
+            "name": "Apex Legends",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/511224-{width}x{height}.jpg",
+            "igdb_id": "114795"
+        },
+        {
+            "id": "460630",
+            "name": "Tom Clancy's Rainbow Six Siege",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/460630_IGDB-{width}x{height}.jpg",
+            "igdb_id": "7360"
+        },
+        {
+            "id": "55453844",
+            "name": "Street Fighter 6",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/55453844_IGDB-{width}x{height}.jpg",
+            "igdb_id": "191692"
+        },
+        {
+            "id": "1337444628",
+            "name": "Call of Duty: Modern Warfare III",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1337444628_IGDB-{width}x{height}.jpg",
+            "igdb_id": "260780"
+        },
+        {
+            "id": "29452",
+            "name": "Virtual Casino",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/29452_IGDB-{width}x{height}.jpg",
+            "igdb_id": "45517"
+        },
+        {
+            "id": "498566",
+            "name": "Slots",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/498566-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "491487",
+            "name": "Dead by Daylight",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/491487-{width}x{height}.jpg",
+            "igdb_id": "18866"
+        },
+        {
+            "id": "27546",
+            "name": "World of Tanks",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/27546-{width}x{height}.jpg",
+            "igdb_id": "1184"
+        },
+        {
+            "id": "26936",
+            "name": "Music",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/26936-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "515024",
+            "name": "Diablo IV",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/515024-{width}x{height}.jpg",
+            "igdb_id": "125165"
+        },
+        {
+            "id": "491931",
+            "name": "Escape from Tarkov",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/491931_IGDB-{width}x{height}.jpg",
+            "igdb_id": "15536"
+        },
+        {
+            "id": "518203",
+            "name": "Sports",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/518203-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "509660",
+            "name": "Art",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/509660-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "512710",
+            "name": "Call of Duty: Warzone",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/512710-{width}x{height}.jpg",
+            "igdb_id": "131800"
+        },
+        {
+            "id": "460316",
+            "name": "Brawlhalla",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/460316_IGDB-{width}x{height}.jpg",
+            "igdb_id": "10233"
+        },
+        {
+            "id": "263490",
+            "name": "Rust",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/263490_IGDB-{width}x{height}.jpg",
+            "igdb_id": "3277"
+        },
+        {
+            "id": "556907291",
+            "name": "Cities: Skylines II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/556907291_IGDB-{width}x{height}.jpg",
+            "igdb_id": "240902"
+        },
+        {
+            "id": "511181708",
+            "name": "Dread Hunger",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/511181708_IGDB-{width}x{height}.jpg",
+            "igdb_id": "141365"
+        },
+        {
+            "id": "490100",
+            "name": "Lost Ark",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/490100-{width}x{height}.jpg",
+            "igdb_id": "26128"
+        },
+        {
+            "id": "735904419",
+            "name": "ARK: Survival Ascended",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/735904419_IGDB-{width}x{height}.jpg",
+            "igdb_id": "250509"
+        },
+        {
+            "id": "509659",
+            "name": "ASMR",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/509659-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "386821",
+            "name": "Black Desert",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/386821_IGDB-{width}x{height}.jpg",
+            "igdb_id": "6292"
+        },
+        {
+            "id": "5784346",
+            "name": "For the King II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/5784346_IGDB-{width}x{height}.jpg",
+            "igdb_id": "217311"
+        },
+        {
+            "id": "513181",
+            "name": "Genshin Impact",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/513181_IGDB-{width}x{height}.jpg",
+            "igdb_id": "119277"
+        },
+        {
+            "id": "1910103699",
+            "name": "THE FINALS",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1910103699_IGDB-{width}x{height}.jpg",
+            "igdb_id": "214417"
+        },
+        {
+            "id": "66082",
+            "name": "Games + Demos",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/66082-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "138585",
+            "name": "Hearthstone",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/138585_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1279"
+        },
+        {
+            "id": "459931",
+            "name": "Old School RuneScape",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/459931_IGDB-{width}x{height}.jpg",
+            "igdb_id": "79824"
+        },
+        {
+            "id": "493551",
+            "name": "Conan Exiles",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/493551_IGDB-{width}x{height}.jpg",
+            "igdb_id": "16999"
+        },
+        {
+            "id": "511844",
+            "name": "The Lord of the Rings: Gollum",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/511844_IGDB-{width}x{height}.jpg",
+            "igdb_id": "116584"
+        },
+        {
+            "id": "13389",
+            "name": "Age of Empires II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/13389-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "493057",
+            "name": "PUBG: BATTLEGROUNDS",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/493057-{width}x{height}.jpg",
+            "igdb_id": "27789"
+        },
+        {
+            "id": "1074044196",
+            "name": "Alan Wake II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1074044196_IGDB-{width}x{height}.jpg",
+            "igdb_id": "185246"
+        },
+        {
+            "id": "743",
+            "name": "Chess",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/743-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "1675361804",
+            "name": "Drive Up",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1675361804-{width}x{height}.jpg",
+            "igdb_id": "266997"
+        },
+        {
+            "id": "65654",
+            "name": "The Elder Scrolls Online",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/65654_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1081"
+        },
+        {
+            "id": "512864",
+            "name": "Eternal Return",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/512864_IGDB-{width}x{height}.jpg",
+            "igdb_id": "135842"
+        },
+        {
+            "id": "31339",
+            "name": "Project Zomboid",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/31339_IGDB-{width}x{height}.jpg",
+            "igdb_id": "3189"
+        },
+        {
+            "id": "687129551",
+            "name": "Trackmania",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/687129551_IGDB-{width}x{height}.jpg",
+            "igdb_id": "133807"
+        },
+        {
+            "id": "19619",
+            "name": "Tibia",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/19619_IGDB-{width}x{height}.jpg",
+            "igdb_id": "9596"
+        },
+        {
+            "id": "884809056",
+            "name": "Warcraft Rumble",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/884809056_IGDB-{width}x{height}.jpg",
+            "igdb_id": "199925"
+        },
+        {
+            "id": "490422",
+            "name": "StarCraft II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/490422-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "512033",
+            "name": "GODDESS OF VICTORY: NIKKE",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/512033_IGDB-{width}x{height}.jpg",
+            "igdb_id": "117199"
+        },
+        {
+            "id": "509672",
+            "name": "Travel & Outdoors",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/509672-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "417752",
+            "name": "Talk Shows & Podcasts",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/417752-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "65632",
+            "name": "DayZ",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/65632_IGDB-{width}x{height}.jpg",
+            "igdb_id": "2117"
+        },
+        {
+            "id": "19554",
+            "name": "iRacing",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/19554_IGDB-{width}x{height}.jpg",
+            "igdb_id": "8204"
+        },
+        {
+            "id": "1489336423",
+            "name": "Robocop: Rogue City",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1489336423_IGDB-{width}x{height}.jpg",
+            "igdb_id": "154775"
+        },
+        {
+            "id": "417528",
+            "name": "Albion Online",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/417528_IGDB-{width}x{height}.jpg",
+            "igdb_id": "19698"
+        },
+        {
+            "id": "67972",
+            "name": "GetAmped",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/67972_IGDB-{width}x{height}.jpg",
+            "igdb_id": "64614"
+        },
+        {
+            "id": "1229",
+            "name": "Super Mario World",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1229_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1070"
+        },
+        {
+            "id": "509663",
+            "name": "Special Events",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/509663-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "492789",
+            "name": "The Talos Principle II",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/492789_IGDB-{width}x{height}.jpg",
+            "igdb_id": "79864"
+        },
+        {
+            "id": "1469308723",
+            "name": "Software and Game Development",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1469308723-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "2692",
+            "name": "Super Mario 64",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/2692_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1074"
+        },
+        {
+            "id": "1702559244",
+            "name": "Suika Game",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1702559244_IGDB-{width}x{height}.jpg",
+            "igdb_id": "221740"
+        },
+        {
+            "id": "739179365",
+            "name": "The Invincible",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/739179365_IGDB-{width}x{height}.jpg",
+            "igdb_id": "138906"
+        },
+        {
+            "id": "24241",
+            "name": "FINAL FANTASY XIV ONLINE",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/24241_IGDB-{width}x{height}.jpg",
+            "igdb_id": "386"
+        },
+        {
+            "id": "71375",
+            "name": "Star Citizen",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/71375_IGDB-{width}x{height}.jpg",
+            "igdb_id": "1595"
+        },
+        {
+            "id": "461221",
+            "name": "MARVEL Contest of Champions",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/461221_IGDB-{width}x{height}.jpg",
+            "igdb_id": "28107"
+        },
+        {
+            "id": "2009321156",
+            "name": "Dark and Darker",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-{width}x{height}.jpg",
+            "igdb_id": "207266"
+        },
+        {
+            "id": "146467191",
+            "name": "HeadBangers: Rhythm Royale",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/146467191_IGDB-{width}x{height}.jpg",
+            "igdb_id": "252788"
+        },
+        {
+            "id": "490377",
+            "name": "Sea of Thieves",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/490377-{width}x{height}.jpg",
+            "igdb_id": "11137"
+        },
+        {
+            "id": "518186",
+            "name": "Party Animals",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/518186_IGDB-{width}x{height}.jpg",
+            "igdb_id": "137989"
+        },
+        {
+            "id": "340920845",
+            "name": "Backpack Battles",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/340920845_IGDB-{width}x{height}.jpg",
+            "igdb_id": "253659"
+        },
+        {
+            "id": "497057",
+            "name": "Destiny 2",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/497057-{width}x{height}.jpg",
+            "igdb_id": "25657"
+        },
+        {
+            "id": "500188",
+            "name": "Hunt: Showdown",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/500188_IGDB-{width}x{height}.jpg",
+            "igdb_id": "7291"
+        },
+        {
+            "id": "496902",
+            "name": "Slay the Spire",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/496902_IGDB-{width}x{height}.jpg",
+            "igdb_id": "40477"
+        },
+        {
+            "id": "245018539",
+            "name": "Only Up!",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/245018539_IGDB-{width}x{height}.jpg",
+            "igdb_id": "247935"
+        },
+        {
+            "id": "488190",
+            "name": "Poker",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/488190-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "2748",
+            "name": "Magic: The Gathering",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/2748-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "21136",
+            "name": "Wakfu",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/21136_IGDB-{width}x{height}.jpg",
+            "igdb_id": "9280"
+        },
+        {
+            "id": "1941249372",
+            "name": "Half Sword",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1941249372_IGDB-{width}x{height}.jpg",
+            "igdb_id": "261571"
+        },
+        {
+            "id": "493597",
+            "name": "New World",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/493597_IGDB-{width}x{height}.jpg",
+            "igdb_id": "24654"
+        },
+        {
+            "id": "1967084783",
+            "name": "Marvel's Spider-Man 2",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1967084783_IGDB-{width}x{height}.jpg",
+            "igdb_id": "127044"
+        },
+        {
+            "id": "653624336",
+            "name": "Lies of P",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/653624336_IGDB-{width}x{height}.jpg",
+            "igdb_id": "148241"
+        },
+        {
+            "id": "508509",
+            "name": "Codenames",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/508509_IGDB-{width}x{height}.jpg",
+            "igdb_id": "105254"
+        },
+        {
+            "id": "1743359147",
+            "name": "Marvel Snap",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1743359147_IGDB-{width}x{height}.jpg",
+            "igdb_id": "202279"
+        },
+        {
+            "id": "495589",
+            "name": "FIFA 18",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/495589_IGDB-{width}x{height}.jpg",
+            "igdb_id": "27081"
+        },
+        {
+            "id": "19976",
+            "name": "MapleStory",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/19976_IGDB-{width}x{height}.jpg",
+            "igdb_id": "9804"
+        },
+        {
+            "id": "73914",
+            "name": "Clash of Clans",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/73914_IGDB-{width}x{height}.jpg",
+            "igdb_id": "5589"
+        },
+        {
+            "id": "27284",
+            "name": "Retro",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/27284-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "637756067",
+            "name": "Anime World",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/637756067_IGDB-{width}x{height}.jpg",
+            "igdb_id": "167886"
+        },
+        {
+            "id": "116747788",
+            "name": "Pools, Hot Tubs, and Beaches",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/116747788-{width}x{height}.jpg",
+            "igdb_id": ""
+        },
+        {
+            "id": "512923",
+            "name": "Baldur's Gate 3",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/512923_IGDB-{width}x{height}.jpg",
+            "igdb_id": "119171"
+        },
+        {
+            "id": "1480440720",
+            "name": "My Time at Sandrock",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/1480440720_IGDB-{width}x{height}.jpg",
+            "igdb_id": "140427"
+        },
+        {
+            "id": "2091165871",
+            "name": "Football Manager 2024",
+            "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/2091165871_IGDB-{width}x{height}.jpg",
+            "igdb_id": "266382"
+        }
+    ],
+    "pagination": {
+        "cursor": "eyJzIjoxMDAsImQiOmZhbHNlLCJ0Ijp0cnVlfQ=="
+    }
+}
