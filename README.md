@@ -1,3 +1,12 @@
+# Starter Setup- React-Native/Expo, Tailwindcss/Nativewind and supabase configured
+
+ please change the api key and url for supabase in the .env file
+
+ 
+
+
+
+
 # Expo Router Example
 
 Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
