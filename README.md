@@ -2,7 +2,9 @@
 
  please change the api key and url for supabase in the .env file
 
- 
+ Routes need to be added the the app folder eg href='/login' will end a file called login.js in app
+
+ Components should go in the component folder
 
 
 

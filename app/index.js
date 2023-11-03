@@ -2,7 +2,6 @@ import {View, Text,ScrollView, SafeAreaView} from 'react-native'
 import { useState } from 'react'
 import {Stack, useRouter} from 'expo-router' 
 
-import Dummy from '../components/login/Dummy';
 
 // The below snippet also multiple nativewind classes to be applied
 import { NativeWindStyleSheet } from "nativewind";
@@ -24,10 +23,9 @@ const router = useRouter();
             />
 
             <ScrollView >
-                <View className="flex-1">
+                <View className="flex-1 ">
             
-                {/* Dummy Can be removed, just used for Demo */}
-                <Dummy />          
+                <Text className='text-xl text-red-500 text-center'>Test page</Text>         
 
                 </View>
             </ScrollView>
