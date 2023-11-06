@@ -7,12 +7,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
 import InvestedGameCard from "./InvestedGameCard";
 import { NativeWindStyleSheet } from "nativewind";
+import { fetchUser, fetchUserDetails } from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
+import supabase from "../config/supabaseConfig";
 
 const Profile = () => {
   const router = useRouter();
@@ -21,16 +24,29 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setUser({ username: "John", portfolio_value: 100, current_credits: 800 });
-
-    setInvestedGames([
-      { game_name: "Valorant", quantity: 50, share_value: 10 },
-      { game_name: "Fortnite", quantity: 20, share_value: 15 },
-      { game_name: "World of Warcraft", quantity: 30, share_value: 20 },
-    ]);
-    setIsLoading(false);
+    fetchUser().then(({ data }) => {
+      console.log(data);
+      fetchUserDetails(data.session.user.id).then((result) => {
+        setUser({
+          username: result.username,
+          portfolio_value: 100,
+          current_credits: result.credits,
+        });
+        setInvestedGames([
+          { game_name: "Valorant", quantity: 50, share_value: 10 },
+          { game_name: "Fortnite", quantity: 20, share_value: 15 },
+          { game_name: "World of Warcraft", quantity: 30, share_value: 20 },
+        ]);
+        setIsLoading(false);
+      });
+    });
   }, []);
-  console.log(investedGames);
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    router.push(`/`);
+  };
+
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
@@ -38,12 +54,23 @@ const Profile = () => {
       <View>
         <Text className="text-center">
           {" "}
-          Your portfolio value = {user.portfolio_value} cr
+          Hello {user.username} to your Profile page. Your portfolio value ={" "}
+          {user.portfolio_value} cr
         </Text>
       </View>
-
+      <Pressable
+        className="border bg-primary-light text-white my-2"
+        onPress={handleSignOut}
+      >
+        <Text>Sign out</Text>
+      </Pressable>
       <View>
-        <Text className="text-center">Invested games</Text>
+        <Text className="text-center">
+          Your available credit: {user.current_credits}
+        </Text>
+      </View>
+      <View>
+        <Text className="text-center">Your invested games</Text>
       </View>
 
       <View className="flex-column items-center border">

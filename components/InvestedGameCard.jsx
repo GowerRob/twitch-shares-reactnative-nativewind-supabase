@@ -9,7 +9,9 @@ const InvestedGameCard = ({ game_name, quantity, share_value }) => {
     <View>
       <Text>
         <TouchableOpacity>
-          {game_name} {share_value}
+          <Text>
+            {game_name} {share_value}
+          </Text>
           {/*  onPress={router.push} to gamecard to trade */}
         </TouchableOpacity>{" "}
         <TouchableOpacity>
