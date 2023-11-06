@@ -1,7 +1,7 @@
-import {View, Text,ScrollView, SafeAreaView} from 'react-native'
-import { useState } from 'react'
-import {Stack, useRouter} from 'expo-router' 
-
+import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { useState } from "react";
+import { Stack, useRouter } from "expo-router";
+import Profile from "../components/Profile";
 
 // The below snippet also multiple nativewind classes to be applied
 import { NativeWindStyleSheet } from "nativewind";
@@ -10,29 +10,26 @@ NativeWindStyleSheet.setOutput({
 });
 
 const Home = () => {
-const router = useRouter();
+  const router = useRouter();
 
-    return(
-        <SafeAreaView>
-            <Stack.Screen
-                options={{
-                    headerStyle:{backgroundColor:'white'},
-                    headerShadowVisible:false,
-                    headerTitle:''
-                }}
-            />
+  return (
+    <SafeAreaView>
+      <Stack.Screen
+        options={{
+          headerStyle: { backgroundColor: "white" },
+          headerShadowVisible: false,
+          headerTitle: "",
+        }}
+      />
 
-            <ScrollView >
-                <View className="flex-1 ">
-            
-                <Text className='text-xl text-red-500 text-center'>Test page</Text>         
-
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-
-    )
-
-}
+      <ScrollView>
+        <View className="flex-1 ">
+          <Text className="text-xl text-red-500 text-center">Test page</Text>
+          <Profile />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
 export default Home;
