@@ -19,6 +19,7 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [investedGames, setInvestedGames] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setUser({ username: "John", portfolio_value: 100, current_credits: 800 });
 
