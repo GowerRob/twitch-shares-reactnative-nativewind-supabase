@@ -1,6 +1,7 @@
 import {View, Text,ScrollView, SafeAreaView} from 'react-native'
 import { useState } from 'react'
 import {Stack, useRouter} from 'expo-router' 
+import Login from '../components/Login'
 
 
 // The below snippet also multiple nativewind classes to be applied
@@ -23,11 +24,8 @@ const router = useRouter();
             />
 
             <ScrollView >
-                <View className="flex-1 ">
-            
-                <Text className='text-xl text-red-500 text-center'>Test page</Text>         
-
-                </View>
+                <Login/>
+             
             </ScrollView>
         </SafeAreaView>
 
