@@ -6,14 +6,19 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import InvestedGameCard from "./InvestedGameCard";
+import { NativeWindStyleSheet } from "nativewind";
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const Profile = () => {
   const router = useRouter();
   const [user, setUser] = useState();
   const [investedGames, setInvestedGames] = useState();
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setUser({ username: "John", portfolio_value: 100, current_credits: 800 });
 
@@ -22,15 +27,25 @@ const Profile = () => {
       { game_name: "Fortnite", quantity: 20, share_value: 15 },
       { game_name: "World of Warcraft", quantity: 30, share_value: 20 },
     ]);
+    setIsLoading(false);
   }, []);
   console.log(investedGames);
-  return (
-    <SafeAreaView>
+  return isLoading ? (
+    <ActivityIndicator size="large" />
+  ) : (
+    <SafeAreaView className="flex-column items-center">
       <View>
-        <Text>Invested games</Text>
+        <Text className="text-center">
+          {" "}
+          Your portfolio value = {user.portfolio_value} cr
+        </Text>
       </View>
 
       <View>
+        <Text className="text-center">Invested games</Text>
+      </View>
+
+      <View className="flex-column items-center border">
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
