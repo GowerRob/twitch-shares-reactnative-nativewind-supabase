@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import {Text,TextInput,Pressable,ActivityIndicator} from 'react-native'
 import {router} from 'expo-router' 
+import { UserContext } from '../context/User'
 
 import supabase from '../config/supabaseConfig'
+
+
 
 const RegistrationComp =() => {
 
@@ -11,14 +14,18 @@ const RegistrationComp =() => {
     const [username, setUsername] = useState('')
     const [repassword, setRepassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-    const [errors, setErrors]=useState({})
+    const [errors, setErrors]=useState({});
+
+    const {user, setUser} = useContext(UserContext);
+
 
     const handleSignUp = async ( )=>{
+
+        
         if (password!==repassword){
             let errors={}
             errors.passwordMismatch='Password mismatch'
             setErrors(errors)
-            console.log(error)
 
             return
         }
@@ -28,14 +35,16 @@ const RegistrationComp =() => {
             {
                 email,
                 password,
-                options:{
+                options:{data:{
                     username
+                }
+                    
                 }
             }
         )
         setIsLoading(false)
 
-        console.log(error)
+
         if(error){
             let errors={}
             errors.checkInput="Please check that you have given a valid email address and you password is 6 characters or more"
@@ -44,6 +53,8 @@ const RegistrationComp =() => {
         }
 
         if(data.session!==null){
+            console.log(data.user)
+            setUser(data.user)
             router.push(`account`)
         }
 

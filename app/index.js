@@ -4,8 +4,10 @@ import {Stack, useRouter} from 'expo-router'
 import Login from '../components/Login'
 
 
+
 // The below snippet also multiple nativewind classes to be applied
 import { NativeWindStyleSheet } from "nativewind";
+
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -14,6 +16,7 @@ const Home = () => {
 const router = useRouter();
 
     return(
+
         <SafeAreaView>
             <Stack.Screen
                 options={{
@@ -28,6 +31,7 @@ const router = useRouter();
              
             </ScrollView>
         </SafeAreaView>
+
 
     )
 
