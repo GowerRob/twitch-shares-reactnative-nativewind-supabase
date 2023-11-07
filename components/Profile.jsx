@@ -31,6 +31,13 @@ const Profile = () => {
         current_credits: current.current_credits - new_value,
       };
     });
+    fetchInvestedGames(user.user_id).then((data) => {
+      const filteredData = data.filter((game) => {
+        return game.quantity !== 0;
+      });
+
+      setInvestedGames(filteredData.sort((a, b) => a.game_id - b.game_id));
+    });
   }
 
   useEffect(() => {
@@ -46,10 +53,11 @@ const Profile = () => {
       })
       .then((id) => {
         fetchInvestedGames(id).then((result) => {
-          const newArr = result.map((game) => {
-            return game;
+          const newArr = result.filter((game) => {
+            return game.quantity !== 0;
           });
-          setInvestedGames(newArr);
+
+          setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
 
           const totalValue = result.reduce(
             (total, current) => {
@@ -73,7 +81,7 @@ const Profile = () => {
     const { error } = await supabase.auth.signOut();
     router.push(`/`);
   };
-  console.log(user);
+
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
