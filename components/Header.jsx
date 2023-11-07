@@ -9,9 +9,8 @@ import secondsToTime from '../utils/secondsToTime'
 
 const Header =()=>{
     const {user, setUser} = useContext(UserContext);
-    const [currentCredits, setCurrentCredits]=useState(0);
     const [timeOfUpdate, setTimeOfUpdate]= useState(Date.now()/1000);
-    const [displayTime, setDisplayTime]=useState('');
+    const [displayTime, setDisplayTime]=useState(0);
     const [isLoggedIn, setIsLoggedIn]=useState(true);
 
 
@@ -22,49 +21,28 @@ const Header =()=>{
             .order("id", {ascending:false})
             .limit(1).
             single();
-            console.log("Returned time",(data.next_update))
-            console.log("Returned time",(new Date(data.next_update).getTime())/1000)
-            // if(error!==null){
-            //     fetchUpdateTime();
-            // }
-            
-            
-            const timeInSeconds=Math.floor((new Date(data.next_update).getTime())/1000)
-            setTimeOfUpdate(timeInSeconds)
-            //return data
+
+        return
     };
 
 
 
 useEffect(()=>{
-
-    console.log("Header ",user)
     if (Object.keys(user).length>0){
         setIsLoggedIn(true)
     }
     fetchUpdateTime();
+    console.log
+
 
 },[user])
 
-const callDisplay=async ()=>{
-    // const timeNow=Date.now()/1000;
-    // console.log("callDow update",timeNow)
-    // console.log("callDis update",timeOfUpdate)
-    // const timeLeft=Math.floor(timeOfUpdate-timeNow)
-    // if(timeLeft===0 ){
-    //     await fetchUpdateTime();
-    // }else{
-    //     setDisplayTime(secondsToTime(Math.floor(timeLeft)))
-    // }
-    fetchUpdateTime();
-    console.log("Now",Date.now()/1000)
-}
 
 
-useEffect(()=>{
-    const interval =setInterval(callDisplay,1000);
-    return ()=> clearInterval(interval);
-},[displayTime])
+// useEffect(()=>{
+//     const interval =setInterval(func,10000);
+//     return ()=> clearInterval(interval);
+// },[displayTime])
 
 const handleSignOut = () =>{
     setUser({});
