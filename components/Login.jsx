@@ -26,12 +26,6 @@ const Login = () =>{
     };
 
 
-
-
-
-
-
-
     const handleSignIn = async ()=>{
         setIsLoading(true)
         let errors={}

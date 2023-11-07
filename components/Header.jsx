@@ -12,7 +12,7 @@ const Header =()=>{
     const [currentCredits, setCurrentCredits]=useState(0);
     const [timeOfUpdate, setTimeOfUpdate]= useState(Date.now()/1000);
     const [displayTime, setDisplayTime]=useState('');
-    const [isLoggedIn, setIsLoggedIn]=useState(false);
+    const [isLoggedIn, setIsLoggedIn]=useState(true);
 
 
     const fetchUpdateTime = async () => {
@@ -46,16 +46,18 @@ useEffect(()=>{
 
 },[user])
 
-const callDisplay=()=>{
-    const timeNow=Date.now()/1000;
-    console.log("callDnow update",timeNow)
-    console.log("callDis update",timeOfUpdate)
-    const timeLeft=Math.floor(timeOfUpdate-timeNow)
-    if(timeLeft===0 ){
-        fetchUpdateTime();
-    }else{
-        setDisplayTime(secondsToTime(Math.floor(timeLeft)))
-    }
+const callDisplay=async ()=>{
+    // const timeNow=Date.now()/1000;
+    // console.log("callDow update",timeNow)
+    // console.log("callDis update",timeOfUpdate)
+    // const timeLeft=Math.floor(timeOfUpdate-timeNow)
+    // if(timeLeft===0 ){
+    //     await fetchUpdateTime();
+    // }else{
+    //     setDisplayTime(secondsToTime(Math.floor(timeLeft)))
+    // }
+    fetchUpdateTime();
+    console.log("Now",Date.now()/1000)
 }
 
 
