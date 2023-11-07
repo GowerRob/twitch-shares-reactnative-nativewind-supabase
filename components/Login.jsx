@@ -1,15 +1,34 @@
-import {useState} from 'react'
+import {useState,useContext} from 'react'
 import {Text, Pressable,TextInput,ActivityIndicator} from 'react-native'
 import {Link,router} from 'expo-router' 
+import { UserContext } from '../context/User'
 
 import supabase from '../config/supabaseConfig'
 
 const Login = () =>{
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors]=useState({})
     const [isLoading, setIsLoading] = useState(false)
+    const {user, setUser} = useContext(UserContext)
+
+    const fetchUserDetails = async (id) => {
+        console.log(user)
+        const {data, error} = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
+            console.log("Returned data",data)
+            setUser(data); 
+ 
+        return data;
+    };
+
+
+
+
+
 
 
 
@@ -34,8 +53,8 @@ const Login = () =>{
                 errors.invalid="Email or password is incorrect, please try again"
                 setErrors(errors)
             }
-            if(data.session!==null){
-                console.log("Data, " ,data)
+            if(data.user!==null){
+                fetchUserDetails(data.user.id)
                 router.push(`account`)
             }
         }
