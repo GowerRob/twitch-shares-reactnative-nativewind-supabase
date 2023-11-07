@@ -18,6 +18,18 @@ const RegistrationComp =() => {
 
     const {user, setUser} = useContext(UserContext);
 
+    const fetchUserDetails = async (id) => {
+        console.log(user)
+        const {data, error} = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
+            console.log("Returned data",data)
+            setUser(data); 
+ 
+        return data;
+    };
 
     const handleSignUp = async ( )=>{
 
@@ -53,8 +65,7 @@ const RegistrationComp =() => {
         }
 
         if(data.session!==null){
-            console.log(data.user)
-            setUser(data.user)
+            fetchUserDetails(data.user.id)
             router.push(`account`)
         }
 

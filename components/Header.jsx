@@ -9,10 +9,10 @@ import secondsToTime from '../utils/secondsToTime'
 
 const Header =()=>{
     const {user, setUser} = useContext(UserContext);
-    const [currentCredits, setCurrentCredits]=useState(0);
     const [timeOfUpdate, setTimeOfUpdate]= useState(Date.now()/1000);
     const [displayTime, setDisplayTime]=useState('');
     const [isLoggedIn, setIsLoggedIn]=useState(false);
+    const [count,setCount] = useState(0)
 
 
     const fetchUpdateTime = async () => {
@@ -22,39 +22,35 @@ const Header =()=>{
             .order("id", {ascending:false})
             .limit(1).
             single();
-            console.log("Returned time",(data.next_update))
-            console.log("Returned time",(new Date(data.next_update).getTime())/1000)
-            // if(error!==null){
-            //     fetchUpdateTime();
-            // }
-            
-            
             const timeInSeconds=Math.floor((new Date(data.next_update).getTime())/1000)
-            setTimeOfUpdate(timeInSeconds)
-            //return data
+            const currentDate=Math.ceil(Date.now()/1000)
+            console.log(currentDate,timeInSeconds)
+            if(currentDate>=timeInSeconds){
+                setTimeout(fetchUpdateTime,10000)
+                
+            }else{
+                setTimeOfUpdate(timeInSeconds)
+            }
+            
     };
 
 
 
 useEffect(()=>{
-
-    console.log("Header ",user)
     if (Object.keys(user).length>0){
         setIsLoggedIn(true)
     }
     fetchUpdateTime();
-
 },[user])
 
 const callDisplay=()=>{
-    const timeNow=Date.now()/1000;
-    console.log("callDnow update",timeNow)
-    console.log("callDis update",timeOfUpdate)
-    const timeLeft=Math.floor(timeOfUpdate-timeNow)
+    const timeNow=Math.ceil(Date.now()/1000)
+    const timeLeft=timeOfUpdate-timeNow
     if(timeLeft===0 ){
         fetchUpdateTime();
     }else{
-        setDisplayTime(secondsToTime(Math.floor(timeLeft)))
+        setDisplayTime(secondsToTime(timeLeft))
+        setCount(timeLeft)
     }
 }
 
@@ -62,7 +58,7 @@ const callDisplay=()=>{
 useEffect(()=>{
     const interval =setInterval(callDisplay,1000);
     return ()=> clearInterval(interval);
-},[displayTime])
+},[count])
 
 const handleSignOut = () =>{
     setUser({});

@@ -13,13 +13,11 @@ const Login = () =>{
     const {user, setUser} = useContext(UserContext)
 
     const fetchUserDetails = async (id) => {
-        console.log(user)
         const {data, error} = await supabase
             .from("profiles")
             .select("*")
             .eq("id", id)
             .maybeSingle();
-            console.log("Returned data",data)
             setUser(data); 
  
         return data;
@@ -49,7 +47,6 @@ const Login = () =>{
             )
             setIsLoading(false)
             if(error){
-                console.log("Error",error)
                 errors.invalid="Email or password is incorrect, please try again"
                 setErrors(errors)
             }
