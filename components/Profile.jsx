@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import InvestedGameCard from "./InvestedGameCard";
 import { NativeWindStyleSheet } from "nativewind";
-import { fetchUser, fetchUserDetails } from "../Utils";
+import { fetchInvestedGames, fetchUser, fetchUserDetails, fetchGameValue } from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -20,26 +20,30 @@ import supabase from "../config/supabaseConfig";
 const Profile = () => {
   const router = useRouter();
   const [user, setUser] = useState();
-  const [investedGames, setInvestedGames] = useState();
+  const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
+
   useEffect(() => {
-    fetchUser().then(({ data }) => {
-      console.log(data);
-      fetchUserDetails(data.session.user.id).then((result) => {
-        setUser({
-          username: result.username,
-          portfolio_value: 100,
-          current_credits: result.credits,
-        });
-        setInvestedGames([
-          { game_name: "Valorant", quantity: 50, share_value: 10 },
-          { game_name: "Fortnite", quantity: 20, share_value: 15 },
-          { game_name: "World of Warcraft", quantity: 30, share_value: 20 },
-        ]);
-        setIsLoading(false);
-      });
-    });
+
+    fetchUser()
+    .then(({details})=>{
+      setUser({username: details.username, current_credits: details.credits, portfolio_value: 1000})
+      return details.id
+    })
+    .then((id)=>{
+      fetchInvestedGames(id)
+      .then((result)=>{
+        setInvestedGames(result)
+        
+        
+        
+      })
+    })
+    
+   
+    
   }, []);
 
   const handleSignOut = async () => {
@@ -91,3 +95,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
