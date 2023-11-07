@@ -6,13 +6,31 @@ import { UserContext } from '../context/User'
 import supabase from '../config/supabaseConfig'
 
 const Login = () =>{
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors]=useState({})
     const [isLoading, setIsLoading] = useState(false)
-    
     const {user, setUser} = useContext(UserContext)
+
+    const fetchUserDetails = async (id) => {
+        console.log(user)
+        const {data, error} = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
+            console.log("Returned data",data)
+            setUser(data); 
+ 
+        return data;
+    };
+
+
+
+
+
+
+
 
     const handleSignIn = async ()=>{
         setIsLoading(true)
@@ -36,7 +54,7 @@ const Login = () =>{
                 setErrors(errors)
             }
             if(data.user!==null){
-                setUser(data.user)
+                fetchUserDetails(data.user.id)
                 router.push(`account`)
             }
         }
