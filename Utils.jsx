@@ -18,36 +18,28 @@ export const fetchUserDetails = async (id) => {
     .maybeSingle();
 
   if (error) {
-    console.log(error);
     throw new Error(error.message);
   }
   return data;
 };
 
-export const fetchInvestedGames = async (id) =>{
-
-  const {data, error} = await supabase
-  .from('shares')
-  .select('game_id, quantity, games (game_name)')
-  .eq('user_id', id)
+export const fetchInvestedGames = async (id) => {
+  const { data, error } = await supabase
+    .from("shares")
+    .select("game_id, quantity, games (game_name, value)")
+    .eq("user_id", id);
 
   if (error) {
-    
     throw new Error(error.message);
   }
   return data;
-}
+};
 
-export const fetchGameValue = async (game_id) =>{
-
-  const {data, error} = await supabase
-  .from('games')
-  .select('value', 'game_name')
-  .eq('game_id', game_id)
-
+export const handleTrade = async (user_id, game_id, quantity) => {
+  const { error } = await supabase
+    .from("transactions")
+    .insert({ user_id, game_id, quantity });
   if (error) {
-  
     throw new Error(error.message);
   }
-  return data;
-}
+};

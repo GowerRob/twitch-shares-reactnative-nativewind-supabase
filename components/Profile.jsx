@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import InvestedGameCard from "./InvestedGameCard";
 import { NativeWindStyleSheet } from "nativewind";
-import { fetchInvestedGames, fetchUser, fetchUserDetails, fetchGameValue } from "../Utils";
+import { fetchInvestedGames, fetchUser } from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -23,34 +23,57 @@ const Profile = () => {
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
+  function handleUserState(new_value) {
+    setUser((current) => {
+      return {
+        ...current,
+        portfolio_value: current.portfolio_value + new_value,
+        current_credits: current.current_credits - new_value,
+      };
+    });
+  }
 
   useEffect(() => {
-
     fetchUser()
-    .then(({details})=>{
-      setUser({username: details.username, current_credits: details.credits, portfolio_value: 1000})
-      return details.id
-    })
-    .then((id)=>{
-      fetchInvestedGames(id)
-      .then((result)=>{
-        setInvestedGames(result)
-        
-        
-        
+      .then(({ details }) => {
+        setUser({
+          user_id: details.id,
+          username: details.username,
+          current_credits: details.credits,
+          portfolio_value: 0,
+        });
+        return details.id;
       })
-    })
-    
-   
-    
+      .then((id) => {
+        fetchInvestedGames(id).then((result) => {
+          const newArr = result.map((game) => {
+            return game;
+          });
+          setInvestedGames(newArr);
+
+          const totalValue = result.reduce(
+            (total, current) => {
+              return Number(
+                (total = total + current.games.value * current.quantity)
+              );
+            },
+            [0]
+          );
+
+          setUser((current) => {
+            return { ...current, portfolio_value: totalValue };
+          });
+
+          setIsLoading(false);
+        });
+      });
   }, []);
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();
     router.push(`/`);
   };
-
+  console.log(user);
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
@@ -82,12 +105,16 @@ const Profile = () => {
           data={investedGames}
           renderItem={({ item }) => (
             <InvestedGameCard
-              game_name={item.game_name}
-              share_value={item.share_value}
+              handleUserState={handleUserState}
+              user_id={user.user_id}
+              game_id={item.game_id}
+              game_name={item.games.game_name}
+              share_value={item.games.value}
               quantity={item.quantity}
+              current_credits={user.current_credits}
             />
           )}
-          keyExtractor={(item) => item.game_name}
+          keyExtractor={(item) => item.games.game_name}
         />
       </View>
     </SafeAreaView>
@@ -95,4 +122,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
