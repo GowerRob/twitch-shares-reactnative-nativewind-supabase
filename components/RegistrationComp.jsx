@@ -71,59 +71,60 @@ const RegistrationComp =() => {
 
     }
 
+    if (data.session !== null) {
+      router.push(`account`);
+    }
+  };
 
-    return(<>
-        {isLoading?<ActivityIndicator size="large"/>:
+  return (
+    <>
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : (
         <>
-        <Text>New User Registration Page</Text>
+          <Text>New User Registration Page</Text>
 
-        <Text>Enter Email</Text>
-        <TextInput 
-        value={email}
-        onChangeText={setEmail}
-        className="border"
-        />
-        
-        <Text>Enter Username</Text>
-        <TextInput 
-        value={username}
-        onChangeText={setUsername}
-        className="border"
-        />
+          <Text>Enter Email</Text>
+          <TextInput value={email} onChangeText={setEmail} className="border" />
 
-        <Text>Enter Password</Text>
-        <TextInput 
-        secureTextEntry="true"
-        value={password}
-        onChangeText={setPassword}
-        className="border"
-        />
+          <Text>Enter Username</Text>
+          <TextInput
+            value={username}
+            onChangeText={setUsername}
+            className="border"
+          />
 
-        <Text>ReEnter Password</Text>
-        <TextInput 
-        secureTextEntry="true"
-        value={repassword}
-        onChangeText={setRepassword}
-        className="border"
-        />
-        {errors.passwordMismatch?<Text>{errors.passwordMismatch}</Text>:null}
+          <Text>Enter Password</Text>
+          <TextInput
+            secureTextEntry="true"
+            value={password}
+            onChangeText={setPassword}
+            className="border"
+          />
 
+          <Text>ReEnter Password</Text>
+          <TextInput
+            secureTextEntry="true"
+            value={repassword}
+            onChangeText={setRepassword}
+            className="border"
+          />
+          {errors.passwordMismatch ? (
+            <Text>{errors.passwordMismatch}</Text>
+          ) : null}
 
-            <Pressable 
+          <Pressable
             className="border bg-primary-light text-white my-2"
             onPress={handleSignUp}
-            >
+          >
             <Text>Create user account</Text>
-            </Pressable>
+          </Pressable>
 
-        {errors.checkInput?<Text>{errors.checkInput}</Text>:null}
-
-        
-        
+          {errors.checkInput ? <Text>{errors.checkInput}</Text> : null}
         </>
-        }
+      )}
     </>
+  );
+};
 
-    )}
-
-    export default RegistrationComp;
+export default RegistrationComp;

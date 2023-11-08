@@ -1,3 +1,4 @@
+
 import {useState,useContext} from 'react'
 import {Text, Pressable,TextInput,ActivityIndicator} from 'react-native'
 import {Link,router} from 'expo-router' 
@@ -56,54 +57,44 @@ const Login = () =>{
             }
         }
 
-    }
 
 
+  return (
+    <>
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <>
+          <Text>Enter Email</Text>
+          <TextInput value={email} onChangeText={setEmail} className="border" />
+          {errors.email ? <Text>{errors.email}</Text> : null}
 
-    return (<>
-       {isLoading?<ActivityIndicator size="large"/>:
-       <>
-            <Text>Enter Email</Text>
-            <TextInput 
-            value={email}
-            onChangeText={setEmail}
-            className="border"
-            />
-            {errors.email?<Text>{errors.email}</Text>:null}
-
-            <Text>Enter Password</Text>
-            <TextInput 
+          <Text>Enter Password</Text>
+          <TextInput
             secureTextEntry="true"
             value={password}
             onChangeText={setPassword}
             className="border"
-            />
-            {errors.password?<Text>{errors.password}</Text>:null}
+          />
+          {errors.password ? <Text>{errors.password}</Text> : null}
 
-            <Pressable 
+          <Pressable
             className="border bg-primary-light text-white my-2"
             onPress={handleSignIn}
-            >
+          >
             <Text>Log In</Text>
+          </Pressable>
+          {errors.invalid ? <Text>{errors.invalid}</Text> : null}
+
+          <Link href={`/registration`} asChild>
+            <Pressable className="border bg-primary-light text-white my-2">
+              <Text>Sign up</Text>
             </Pressable>
-            {errors.invalid?<Text>{errors.invalid}</Text>:null}
-
-
-            <Link href={`/registration`} asChild>
-                <Pressable 
-                className="border bg-primary-light text-white my-2">
-                <Text>Sign up</Text>
-                </Pressable>
-            </Link>
-
-
-
-
-            </>}
-        
+          </Link>
         </>
-    )
+      )}
+    </>
+  );
+};
 
-}
-
-export default Login
+export default Login;
