@@ -13,70 +13,102 @@ import { Pressable } from 'react-native-web'
 const Search = () =>{
   
     const [searchText, setSearchText]=useState('');
-    const [gamesData, setGamesData]=useState([]);
+    const [gamesDataAsc, setGamesDataAsc]=useState([]);
+    const [gamesDataDesc, setGamesDataDesc]=useState([]);
     const [filteredGames, setFilteredGames]=useState([]);
     const [isEnabled, setIsEnabled] = useState(false);
-    const [initialRender, setInitialRender]=useState(false)
+    const [initialRender, setInitialRender]=useState(true);
+    const [sortby, setSortby]=useState('game_name');
 
-    const fetchGames=async (order)=>{
-        console.log("ascending=",!order)
+    const fetchGamesAsc=async ()=>{
         const { data, error } = await supabase
         .from('games')
         .select("*")
-        .order("game_name", {ascending:!order});
+        .order("game_name", {ascending:true});
         // is this updating quick enough for the filter
-        await setGamesData(data)
-        console.log("Games before filter", data)
-        if(searchText.length!==0){
-            console.log("In here")
-            filterGames()
-        }else{
-            setFilteredGames(data)
-        }
-        console.log("Fetched games after filter,",filteredGames)
-
+        setGamesDataAsc(data)
+        return data;
+        
+    }    
+    const fetchGamesDesc=async ()=>{
+        const { data, error } = await supabase
+        .from('games')
+        .select("*")
+        .order("game_name", {ascending:false});
+        // is this updating quick enough for the filter
+        setGamesDataDesc(data)
     }
 
+
+
     const filterGames=()=>{
+        let copyArray=[];
+        if(isEnabled){ 
+            copyArray=[...gamesDataDesc]
+        }else{
+            copyArray=[...gamesDataAsc]
+        }
+        if(sortby==='value'){
+            if(isEnabled){
+                copyArray.sort((a,b)=>{return b.value-a.value})
+            }else{
+                copyArray.sort((a,b)=>{return a.value-b.value})
+            }
+            
+        }
+        
 
-        const copyArray=[...gamesData]
+
         const pattern=new RegExp(`${searchText}`,'i')
-
-
         const filterTest=copyArray.filter(item=>{
-                
             return pattern.test(item.game_name)
         })
+
+
+
+
+
+
+
 
         setFilteredGames(filterTest)
     }
 
-    useEffect(()=>{
-        console.log("Change")
-        fetchGames(isEnabled)
-    },[isEnabled])
 
     useEffect(()=>{
-        fetchGames(isEnabled)
+        initialise();
     },[])
 
+    const initialise=async()=>{
+
+        const initialData=await fetchGamesAsc()
+        await fetchGamesDesc()
+        setFilteredGames(initialData)
+    }
 
     useEffect(()=>{
-    filterGames()
-
-    },[searchText])
+        filterGames()
+    },[searchText,isEnabled,sortby])
 
     
-   
     const toggleSwitch = () => {
-        setInitialRender(true);
         setIsEnabled(previousState => !previousState)};
 
-
+    const handleSortPress = (e) =>{
+        setSortby(e.target.id);
+    }
 
     return (<>
-                <Pressable className="bg-red-400"><Text>Name</Text></Pressable>
-                <Pressable className="bg-blue-400"><Text>Value</Text></Pressable>
+                <Pressable 
+                    className="bg-red-400"
+                    onPress={handleSortPress}
+                ><Text id='game_name'>Name</Text></Pressable>
+
+                <Pressable 
+                    className="bg-blue-400"
+                    onPress={handleSortPress}
+                    ><Text id='value'>Value</Text></Pressable>
+                
                 <Switch
                     trackColor={{false: '#fff', true: 'blue'}}
                     thumbColor={isEnabled ? '#fff' : 'red'}

@@ -1,5 +1,4 @@
 const secondsToTime=(seconds)=>{
-    console.log(seconds)
     let returnTime=''
 
     if(seconds<0){
