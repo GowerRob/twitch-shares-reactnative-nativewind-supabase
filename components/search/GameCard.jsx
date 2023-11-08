@@ -1,10 +1,8 @@
 
-import {TextInput,FlatList,Text,View} from 'react-native'
-import {useState,useEffect} from 'react'
+import { Text,View } from 'react-native'
 
-import {styled} from 'nativewind'
+import { styled } from 'nativewind'
 
-import supabase from '../../config/supabaseConfig'
 
 const StyledView=styled(View);
 

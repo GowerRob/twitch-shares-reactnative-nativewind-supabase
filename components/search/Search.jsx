@@ -11,13 +11,11 @@ import { Pressable } from 'react-native-web'
 
 
 const Search = () =>{
-  
     const [searchText, setSearchText]=useState('');
     const [gamesDataAsc, setGamesDataAsc]=useState([]);
     const [gamesDataDesc, setGamesDataDesc]=useState([]);
     const [filteredGames, setFilteredGames]=useState([]);
     const [isEnabled, setIsEnabled] = useState(false);
-    const [initialRender, setInitialRender]=useState(true);
     const [sortby, setSortby]=useState('game_name');
 
     const fetchGamesAsc=async ()=>{
@@ -25,7 +23,6 @@ const Search = () =>{
         .from('games')
         .select("*")
         .order("game_name", {ascending:true});
-        // is this updating quick enough for the filter
         setGamesDataAsc(data)
         return data;
         
@@ -35,7 +32,6 @@ const Search = () =>{
         .from('games')
         .select("*")
         .order("game_name", {ascending:false});
-        // is this updating quick enough for the filter
         setGamesDataDesc(data)
     }
 
