@@ -19,19 +19,21 @@ const Search = () =>{
     const [initialRender, setInitialRender]=useState(false)
 
     const fetchGames=async (order)=>{
+        console.log("ascending=",!order)
         const { data, error } = await supabase
         .from('games')
         .select("*")
         .order("game_name", {ascending:!order});
-        setGamesData(data)
-
+        // is this updating quick enough for the filter
+        await setGamesData(data)
+        console.log("Games before filter", data)
         if(searchText.length!==0){
-
+            console.log("In here")
             filterGames()
         }else{
             setFilteredGames(data)
         }
-        console.log(filteredGames)
+        console.log("Fetched games after filter,",filteredGames)
 
     }
 
