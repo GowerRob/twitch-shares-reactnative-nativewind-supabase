@@ -1,42 +1,63 @@
-import { useState } from "react";
-import { Text, Pressable, TextInput, ActivityIndicator } from "react-native";
-import { Link, router } from "expo-router";
 
-import supabase from "../config/supabaseConfig";
+import {useState,useContext} from 'react'
+import {Text, Pressable,TextInput,ActivityIndicator} from 'react-native'
+import {Link,router} from 'expo-router' 
+import { UserContext } from '../context/User'
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+import supabase from '../config/supabaseConfig'
 
-  const handleSignIn = async () => {
-    setIsLoading(true);
-    let errors = {};
+const Login = () =>{
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [errors, setErrors]=useState({})
+    const [isLoading, setIsLoading] = useState(false)
+    const {user, setUser} = useContext(UserContext)
 
-    if (!email) errors.email = "Email is required";
-    if (!password) errors.password = "Password is required";
-    setErrors(errors);
+    const fetchUserDetails = async (id) => {
+        const {data, error} = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
+            setUser(data); 
+ 
+        return data;
+    };
 
-    if (Object.keys(errors).length === 0) {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      setIsLoading(false);
-      if (error) {
-        console.log("Error", error);
-        errors.invalid = "Email or password is incorrect, please try again";
-        setErrors(errors);
-      }
-      if (data.session !== null) {
-        console.log("Data, ", data);
-        setEmail("");
-        setPassword("");
-        router.push(`account`);
-      }
-    }
-  };
+
+
+
+
+
+
+
+    const handleSignIn = async ()=>{
+        setIsLoading(true)
+        let errors={}
+
+        if(!email) errors.email="Email is required"
+        if(!password) errors.password="Password is required"
+        setErrors(errors)
+
+        if (Object.keys(errors).length===0){
+            const {data,error} = await supabase.auth.signInWithPassword(
+                {
+                    email,
+                    password
+                }
+            )
+            setIsLoading(false)
+            if(error){
+                errors.invalid="Email or password is incorrect, please try again"
+                setErrors(errors)
+            }
+            if(data.user!==null){
+                fetchUserDetails(data.user.id)
+                router.push(`account`)
+            }
+        }
+
+
 
   return (
     <>
