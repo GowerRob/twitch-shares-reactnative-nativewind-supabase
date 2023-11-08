@@ -15,9 +15,8 @@ const InvestedGameCard = ({
   share_value,
   current_credits,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   function onPressFunction(amount) {
-   
     handleTrade(user_id, game_id, amount)
       .then(() => {
         handleUserState(amount * share_value);
@@ -29,7 +28,7 @@ const InvestedGameCard = ({
   return (
     <View>
       <Text>
-        <Pressable onPress={()=>router.push(`/${game_id}`)}>
+        <Pressable onPress={() => router.push(`/${game_id}`)}>
           <Text>
             {game_name} {share_value}
           </Text>
