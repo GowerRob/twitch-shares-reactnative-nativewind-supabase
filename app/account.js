@@ -5,10 +5,5 @@ const account = () => {
   return <Profile />;
 };
 
-const account =() => {
-    return(
-        <Text>Account Page</Text>
-    )
-}
 export default account;
 
