@@ -9,72 +9,63 @@ import supabase from '../config/supabaseConfig'
 
 const RegistrationComp =() => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [username, setUsername] = useState('')
-    const [repassword, setRepassword] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
-    const [errors, setErrors]=useState({});
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('')
+  const [repassword, setRepassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors]=useState({});
 
-    const {user, setUser} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
 
-    const fetchUserDetails = async (id) => {
-        console.log(user)
-        const {data, error} = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", id)
-            .maybeSingle();
-            console.log("Returned data",data)
-            setUser(data); 
+  const fetchUserDetails = async (id) => {
+    console.log(user)
+    const {data, error} = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+    console.log("Returned data",data)
+    setUser(data); 
  
-        return data;
-    };
+    return data;
+  };
 
-    const handleSignUp = async ( )=>{
-
-        
-        if (password!==repassword){
-            let errors={}
-            errors.passwordMismatch='Password mismatch'
-            setErrors(errors)
-
-            return
+  const handleSignUp = async ( )=>{
+    if (password!==repassword){
+      let errors={}
+      errors.passwordMismatch='Password mismatch'
+      setErrors(errors)
+      return
+    }
+    setIsLoading(true)
+    const {data,error} = await supabase.auth.signUp(
+      {
+        email,
+        password,
+        options:{data:{
+            username
+          }
+              
         }
-        setIsLoading(true)
-
-        const {data,error} = await supabase.auth.signUp(
-            {
-                email,
-                password,
-                options:{data:{
-                    username
-                }
-                    
-                }
-            }
-        )
-        setIsLoading(false)
-
-
-        if(error){
-            let errors={}
-            errors.checkInput="Please check that you have given a valid email address and you password is 6 characters or more"
-            setErrors(errors)
-
-        }
-
-        if(data.session!==null){
-            fetchUserDetails(data.user.id)
-            router.push(`account`)
-        }
+      }
+    )
+  setIsLoading(false)
+  if(error){
+      let errors={}
+      errors.checkInput="Please check that you have given a valid email address and you password is 6 characters or more"
+      setErrors(errors)
+    }
+      if(data.session!==null){
+          fetchUserDetails(data.user.id)
+          router.push(`account`)
+      }
 
     }
 
     if (data.session !== null) {
       router.push(`account`);
     }
-  };
 
   return (
     <>
@@ -125,6 +116,6 @@ const RegistrationComp =() => {
       )}
     </>
   );
-};
+}
 
 export default RegistrationComp;
