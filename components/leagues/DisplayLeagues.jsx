@@ -23,10 +23,14 @@ const DisplayLeagues = () => {
         .select("*")
         .eq('user_id',user.id)
         console.log(data)
-        const leagueIds = data.map((league)=>{
+        
+        if(data!==null){
+            const leagueIds = data.map((league)=>{
             return league.league_id
         })
         setUserLeagues(leagueIds)
+        }
+        
     }
 
     useEffect(()=>{

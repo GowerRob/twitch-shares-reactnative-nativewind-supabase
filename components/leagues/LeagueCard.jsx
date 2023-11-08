@@ -10,9 +10,12 @@ const LeagueCard = ({leagueItem, userLeagues}) => {
     const [peopleCount, setPeopleCount] = useState(0)
 
     useEffect(()=>{
-        const checkInLeague = userLeagues.includes(leagueItem.league_id)
-        console.log(checkInLeague)
-        setInLeague(checkInLeague)
+        if(!inLeague){
+            const checkInLeague = userLeagues.includes(leagueItem.league_id)
+            setInLeague(checkInLeague)
+
+        }
+        
         countPeople()
     },[inLeague])
 
@@ -31,8 +34,8 @@ const LeagueCard = ({leagueItem, userLeagues}) => {
         .insert({
             user_id:user.id,
             league_id:leagueItem.league_id
-        })
-        setInLeague(true)
+        });
+        setInLeague(true);
     }
     
     return (<View className='border bg-background-light my-5 mx-3'>
