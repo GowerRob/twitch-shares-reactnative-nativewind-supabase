@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import supabase from '../../config/supabaseConfig'
-import { FlatList } from 'react-native'
+import { FlatList, Pressable } from 'react-native'
 import LeagueCard from './LeagueCard'
 import { UserContext } from '../../context/User'
+import {router} from 'expo-router' 
 
 const DisplayLeagues = () => {
     const [leagues, setLeagues] = useState([])
@@ -22,7 +23,7 @@ const DisplayLeagues = () => {
         .from('user_leagues')
         .select("*")
         .eq('user_id',user.id)
-        console.log(data)
+
         
         if(data!==null){
             const leagueIds = data.map((league)=>{
@@ -42,7 +43,9 @@ const DisplayLeagues = () => {
         <FlatList
             data={leagues}
             renderItem={({item})=>{
-                return <LeagueCard leagueItem={item} userLeagues={userLeagues}/>
+                return <Pressable
+                onPress={()=>{router.push(`/leaguepage/${item.league_id}`)}}>
+                    <LeagueCard leagueItem={item} userLeagues={userLeagues}/></Pressable>
             }}
             keyExtractor={item=>item.league_id}>
         </FlatList>
