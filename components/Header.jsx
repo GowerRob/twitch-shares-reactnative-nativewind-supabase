@@ -10,8 +10,9 @@ import secondsToTime from '../utils/secondsToTime'
 const Header =()=>{
     const {user, setUser} = useContext(UserContext);
     const [timeOfUpdate, setTimeOfUpdate]= useState(Date.now()/1000);
-    const [displayTime, setDisplayTime]=useState(0);
-    const [isLoggedIn, setIsLoggedIn]=useState(true);
+    const [displayTime, setDisplayTime]=useState('');
+    const [isLoggedIn, setIsLoggedIn]=useState(false);
+    const [count,setCount] = useState(0)
 
 
     const fetchUpdateTime = async () => {
@@ -21,8 +22,15 @@ const Header =()=>{
             .order("id", {ascending:false})
             .limit(1).
             single();
-
-        return
+            const timeInSeconds=Math.floor((new Date(data.next_update).getTime())/1000)
+            const currentDate=Math.ceil(Date.now()/1000)
+            if(currentDate>=timeInSeconds){
+                setTimeout(fetchUpdateTime,10000)
+                
+            }else{
+                setTimeOfUpdate(timeInSeconds)
+            }
+            
     };
 
 
@@ -32,17 +40,24 @@ useEffect(()=>{
         setIsLoggedIn(true)
     }
     fetchUpdateTime();
-    console.log
-
-
 },[user])
 
+const callDisplay=()=>{
+    const timeNow=Date.now()/1000
+    const timeLeft=Math.floor(timeOfUpdate-timeNow)
+    if(timeLeft===0 ){
+        fetchUpdateTime();
+    }else{
+        setDisplayTime(secondsToTime(timeLeft))
+        setCount(timeLeft)
+    }
+}
 
 
-// useEffect(()=>{
-//     const interval =setInterval(func,10000);
-//     return ()=> clearInterval(interval);
-// },[displayTime])
+useEffect(()=>{
+    const interval =setInterval(callDisplay,1000);
+    return ()=> clearInterval(interval);
+},[count])
 
 const handleSignOut = () =>{
     setUser({});

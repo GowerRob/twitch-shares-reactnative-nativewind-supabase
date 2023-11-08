@@ -1,9 +1,10 @@
 const secondsToTime=(seconds)=>{
+    console.log(seconds)
     let returnTime=''
-    if(seconds<0){
-        return returnTime="Waiting for refresh"
-    }
 
+    if(seconds<0){
+       returnTime = '15 minutes'
+    }else{
         if(seconds<60){
             returnTime=`${Math.round(seconds)} seconds`
         }else
@@ -24,10 +25,7 @@ const secondsToTime=(seconds)=>{
         {
             returnTime= `${Math.round(seconds/31536000)} years`
         }
-    
-
-
-
+    }
     return returnTime;
 }
 
