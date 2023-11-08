@@ -43,3 +43,30 @@ export const handleTrade = async (user_id, game_id, quantity) => {
     throw new Error(error.message);
   }
 };
+
+export const fetchGameInfo = async (game_id, user_id) =>{
+
+  const { data, error } = await supabase
+    .from("games")
+    .select("game_name, value, cover_url")
+    .eq("game_id", game_id)
+    .maybeSingle();
+
+   data.quantity = await fetchCurrentInvestedGame(user_id, game_id)
+
+  return data;
+}
+
+export const fetchCurrentInvestedGame = async (user_id, game_id) => {
+  const { data, error } = await supabase
+    .from("shares")
+    .select("quantity")
+    .eq("user_id", user_id)
+    .eq("game_id", game_id)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(error.message);
+  } 
+  return data.quantity;
+};

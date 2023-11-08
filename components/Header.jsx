@@ -14,7 +14,6 @@ const Header =()=>{
     const [isLoggedIn, setIsLoggedIn]=useState(false);
     const [count,setCount] = useState(0)
 
-
     const fetchUpdateTime = async () => {
         const { data, error } = await supabase
             .from('stats')
