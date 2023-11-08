@@ -24,7 +24,6 @@ const Header =()=>{
             single();
             const timeInSeconds=Math.floor((new Date(data.next_update).getTime())/1000)
             const currentDate=Math.ceil(Date.now()/1000)
-            console.log(currentDate,timeInSeconds)
             if(currentDate>=timeInSeconds){
                 setTimeout(fetchUpdateTime,10000)
                 
@@ -44,8 +43,8 @@ useEffect(()=>{
 },[user])
 
 const callDisplay=()=>{
-    const timeNow=Math.ceil(Date.now()/1000)
-    const timeLeft=timeOfUpdate-timeNow
+    const timeNow=Date.now()/1000
+    const timeLeft=Math.floor(timeOfUpdate-timeNow)
     if(timeLeft===0 ){
         fetchUpdateTime();
     }else{
