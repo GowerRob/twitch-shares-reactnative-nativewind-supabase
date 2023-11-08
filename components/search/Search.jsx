@@ -9,20 +9,20 @@ import { Pressable } from 'react-native-web'
 
 
 
+
 const Search = () =>{
   
     const [searchText, setSearchText]=useState('');
     const [gamesData, setGamesData]=useState([]);
     const [filteredGames, setFilteredGames]=useState([]);
     const [isEnabled, setIsEnabled] = useState(false);
-    const [initialRender, setInitialRender]=useState(false);
+    const [initialRender, setInitialRender]=useState(false)
 
     const fetchGames=async (order)=>{
-        order?console.log(order, "Ascending"):console.log(order, "Descending");
         const { data, error } = await supabase
         .from('games')
         .select("*")
-        .order("game_name", {ascending:order});
+        .order("game_name", {ascending:!order});
         setGamesData(data)
 
         if(searchText.length!==0){
@@ -50,11 +50,12 @@ const Search = () =>{
     }
 
     useEffect(()=>{
+        console.log("Change")
         fetchGames(isEnabled)
     },[isEnabled])
 
     useEffect(()=>{
-        fetchGames(true)
+        fetchGames(isEnabled)
     },[])
 
 
@@ -64,19 +65,27 @@ const Search = () =>{
     },[searchText])
 
     
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+   
+    const toggleSwitch = () => {
+        setInitialRender(true);
+        setIsEnabled(previousState => !previousState)};
+
 
 
     return (<>
                 <Pressable className="bg-red-400"><Text>Name</Text></Pressable>
                 <Pressable className="bg-blue-400"><Text>Value</Text></Pressable>
                 <Switch
-                     trackColor={{false: '#B2BEB5', true: '#B2BEB5'}}
-                     thumbColor={isEnabled ? '#B2BEB5' : '##B2BEB5'}
-                    ios_backgroundColor="#B2BEB5"
+                    trackColor={{false: '#fff', true: 'blue'}}
+                    thumbColor={isEnabled ? '#fff' : 'red'}
+                    ios_backgroundColor='black'
                     onValueChange={toggleSwitch}
                     value={isEnabled}
-                ></Switch>
+                />
+                        {isEnabled?<Text>Descending</Text>:<Text>Ascending</Text>}
+                
+
+
                 <TextInput 
                 value={searchText}
                 onChangeText={setSearchText}
