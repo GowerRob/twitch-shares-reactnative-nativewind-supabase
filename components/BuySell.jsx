@@ -42,15 +42,15 @@ const BuySell = ({game_id, value = 50, closeModal}) => {
             </View>
             <View className="sm:flex-col md:flex-row md:justify-between md:items-center md:mt-4">
                 <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 rounded-l-lg border-white border flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(-100)}>
                         <Text numberOfLines={1} className="text-text-dark text-center ">-100</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 border-white border-t border-b flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(-10)}>
                         <Text className="text-text-dark text-center">-10</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 rounded-r-lg border-white border flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(-1)}>
                         <Text className="text-text-dark text-center">-1</Text>
                     </TouchableOpacity>
@@ -63,15 +63,15 @@ const BuySell = ({game_id, value = 50, closeModal}) => {
                     onChangeText={text => setQuantity(+text.replace(/[^0-9]/g, ""))}
                 />
                 <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 rounded-l-lg border-white border flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(1)}>
                         <Text className="text-text-dark text-center">+1</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 border-white border-t border-b flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(10)}>
                         <Text className="text-text-dark text-center">+10</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="p-2 rounded border-white border flex-1 min-w-[70px]"
+                    <TouchableOpacity className="p-2 rounded-r-lg border-white border flex-1 min-w-[70px]"
                                       onPress={() => adjustQuantity(100)}>
                         <Text className="text-text-dark text-center">+100</Text>
                     </TouchableOpacity>
