@@ -18,7 +18,7 @@ const Transactions = ({data}) => {
 
     return (
         <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
-            <Text className={`text-xl font-bold text-text-dark mb-4`}>Transaction History</Text>
+            <Text className="text-2xl font-bold text-text-dark mb-4">Transaction History</Text>
             <Text className={`text-lg text-text-${colorScheme} mb-2`}>Total Shares
                 Owned: {numberWithCommas(total_shares_owned)}</Text>
             <Text className={`text-lg text-text-${colorScheme} mb-4`}>Total Shares
