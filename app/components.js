@@ -6,6 +6,7 @@ import BuySell from "../components/BuySell";
 import supabase from "../config/supabaseConfig";
 import {useEffect, useState} from "react";
 import ShareOverview from "../components/ShareOverview";
+import PortfolioHistory from "../components/PortfolioHistory";
 
 NativeWindStyleSheet.setOutput({});
 
@@ -14,6 +15,7 @@ const account = () => {
     const [GTAGamePrices, setGTAGamePrices] = useState([]);
     const [gameBGameInfo, setGameBGameInfo] = useState();
     const [gameBGamePrices, setGameBGamePrices] = useState([]);
+    const [portfolioHistory, setPortfolioHistory] = useState();
 
     const [userShares, setUserShares] = useState();
 
@@ -48,6 +50,16 @@ const account = () => {
                 .order("quantity", {ascending: false});
             return data;
         };
+
+        const fetchUserPortfolioHistory = async (userID) => {
+            const {data} = await supabase
+                .from("portfolio_history")
+                .select("*")
+                .eq("user_id", userID)
+                .order("time", {ascending: true});
+            return data;
+        };
+
         fetchUserShares("683673b5-9e7e-46fd-8bd0-30e49867c2ab")
             .then(result =>
                 setUserShares(result));
@@ -64,6 +76,11 @@ const account = () => {
         fetchGamePrices(463447553)
             .then(result =>
                 setGameBGamePrices(result));
+
+        fetchUserPortfolioHistory("683673b5-9e7e-46fd-8bd0-30e49867c2ab")
+            .then(result =>
+                setPortfolioHistory(result));
+
     }, []);
 
 
@@ -214,6 +231,7 @@ const account = () => {
                 "total_shares_value": 123456,
                 "transactions": transactionsWithGames
             }}/>
+            {portfolioHistory && <PortfolioHistory portfolio_history={portfolioHistory}/>}
             {userShares && <ShareOverview shares={userShares}/>}
             {GTAGameInfo && GTAGamePrices &&
                 <GamePreview game={GTAGameInfo} user_info={userInfo} value_history={GTAGamePrices}/>}

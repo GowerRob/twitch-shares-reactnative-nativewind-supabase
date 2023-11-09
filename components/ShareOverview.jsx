@@ -14,10 +14,13 @@ function numberWithCommas(x) {
 
 const ShareOverview = ({shares}) => {
     const colorScheme = "dark";
-    console.log(shares);
     return (
         <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
             <Text className="text-2xl font-bold text-text-dark mb-4">Shares</Text>
+            <Text className={`text-lg text-text-${colorScheme} mb-2`}>Total Shares
+                Owned: {numberWithCommas(shares.reduce((total, current) => total + current.quantity, 0))}</Text>
+            <Text className={`text-lg text-text-${colorScheme} mb-4`}>Total Shares
+                Value: {numberWithCommas(shares.reduce((total, current) => total + current.quantity * current.games.value, 0))}</Text>
             <View className="sm:flex-col md:flex-row justify-between">
                 <View className="flex-1">
                     <Text className="text-lg font-bold text-text-dark text-center">Shares by Quantity</Text>
@@ -55,7 +58,7 @@ const ShareOverview = ({shares}) => {
                           key={index}>
                         <Text className={`text-text-${colorScheme} text-right flex-1`}>{share.games.game_name}</Text>
                         <Text
-                            className={`text-text-${colorScheme} text-right flex-1`}>{share.quantity}</Text>
+                            className={`text-text-${colorScheme} text-right flex-1`}>{numberWithCommas(share.quantity)}</Text>
                         <Text
                             className={`text-text-${colorScheme} text-right flex-1`}>{numberWithCommas(share.games.value * share.quantity)}</Text>
                     </View>

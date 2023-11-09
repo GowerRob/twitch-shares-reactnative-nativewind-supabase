@@ -45,7 +45,7 @@ const Transactions = ({data}) => {
                         {transactions[0].game &&
                             <Text className={`text-text-${colorScheme} text-right flex-1`}>{transaction.game}</Text>}
                         <Text
-                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{transaction.quantity}</Text>
+                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{numberWithCommas(transaction.quantity)}</Text>
                         <Text
                             className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{numberWithCommas(transaction.value)}</Text>
                         {/*<Text*/}
