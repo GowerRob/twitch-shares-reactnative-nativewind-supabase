@@ -1,11 +1,11 @@
-import {Text, View} from "react-native";
+import {View} from "react-native";
 import Transactions from "../components/Transactions";
 import {NativeWindStyleSheet} from "nativewind";
-import {useColorScheme} from "nativewind";
 import GamePreview from "../components/GamePreview";
 import BuySell from "../components/BuySell";
 import supabase from "../config/supabaseConfig";
 import {useEffect, useState} from "react";
+import ShareOverview from "../components/ShareOverview";
 
 NativeWindStyleSheet.setOutput({});
 
@@ -15,13 +15,15 @@ const account = () => {
     const [gameBGameInfo, setGameBGameInfo] = useState();
     const [gameBGamePrices, setGameBGamePrices] = useState([]);
 
+    const [userShares, setUserShares] = useState();
+
     const userInfo = {
         shares_owned: 20
     };
 
     useEffect(() => {
         const fetchGame = async (gameID) => {
-            const {data, error} = await supabase
+            const {data} = await supabase
                 .from("games")
                 .select("*")
                 .eq("game_id", gameID)
@@ -29,7 +31,7 @@ const account = () => {
             return data;
         };
         const fetchGamePrices = async (gameID) => {
-            const {data, error} = await supabase
+            const {data} = await supabase
                 .from("price_history")
                 .select("*")
                 .eq("game_id", gameID)
@@ -37,6 +39,19 @@ const account = () => {
                 .order("time", {ascending: true});
             return data;
         };
+
+        const fetchUserShares = async (userID) => {
+            const {data} = await supabase
+                .from("shares")
+                .select("*, games(game_name, value)")
+                .eq("user_id", userID)
+                .order("quantity", {ascending: false});
+            return data;
+        };
+        fetchUserShares("683673b5-9e7e-46fd-8bd0-30e49867c2ab")
+            .then(result =>
+                setUserShares(result));
+
         fetchGame(32982)
             .then(result =>
                 setGTAGameInfo(result));
@@ -199,6 +214,7 @@ const account = () => {
                 "total_shares_value": 123456,
                 "transactions": transactionsWithGames
             }}/>
+            {userShares && <ShareOverview shares={userShares}/>}
             {GTAGameInfo && GTAGamePrices &&
                 <GamePreview game={GTAGameInfo} user_info={userInfo} value_history={GTAGamePrices}/>}
             {gameBGameInfo && gameBGamePrices &&
