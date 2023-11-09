@@ -10,10 +10,6 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
     const [peopleCount, setPeopleCount] = useState(0)
 
     useEffect(()=>{
-        orderbytime()
-    },[])
-
-    useEffect(()=>{
         if(!inLeague){
             const checkInLeague = userLeagues.includes(leagueItem.league_id)
             setInLeague(checkInLeague)
@@ -33,16 +29,6 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         }
         
     }
-
-    const orderbytime = async () => {
-        const {data,error} = await supabase
-        .from('portfolio_history')
-        .select("*")
-        .eq('user_id'==='4ad81a96-52e7-42db-820d-ce47d539e760')
-        .order('time')
-      console.log(data)
-    }
-
 
     const handleJoinLeague = async () => {
         const {error} = await supabase
