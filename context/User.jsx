@@ -4,7 +4,7 @@ export const UserProvider = ({children})=>{
     const [user, setUser]=useState(()=>{
         const stickyUser = window.localStorage.getItem('userData');
         if(stickyUser === null){
-            return 'hello'
+            return {}
         }else{
             return JSON.parse(stickyUser)
         }
