@@ -32,6 +32,7 @@ export const fetchInvestedGames = async (id) => {
   if (error) {
     throw new Error(error.message);
   }
+
   return data;
 };
 

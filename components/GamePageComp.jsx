@@ -1,9 +1,9 @@
-import { Text, View, Image, Pressable } from "react-native";
+import { Text, View, Image, FlatList } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
 import { fetchGameInfo, fetchGameTransactions, handleTrade } from "../Utils";
-import { FlatList } from "react-native-gesture-handler";
+
 import TradeShares from "./TradeShares";
 
 export default function GamePageComp() {

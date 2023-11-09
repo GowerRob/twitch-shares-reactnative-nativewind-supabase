@@ -1,64 +1,51 @@
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
   FlatList,
   SafeAreaView,
-  TouchableOpacity,
   ActivityIndicator,
-  Pressable,
 } from "react-native";
 import InvestedGameCard from "./InvestedGameCard";
 import { NativeWindStyleSheet } from "nativewind";
-import { fetchInvestedGames, fetchUser } from "../Utils";
+import { fetchInvestedGames } from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
-import supabase from "../config/supabaseConfig";
+import { UserContext } from "../context/User";
 
 const Profile = () => {
-  const router = useRouter();
-  const [user, setUser] = useState();
+  const { user, setUser } = useContext(UserContext);
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [portfolioValue, setPortfolioValue] = useState(0);
 
-  function handleUserState(new_value) {
-    setUser((current) => {
-      return {
-        ...current,
-        portfolio_value: current.portfolio_value + new_value,
-        current_credits: current.current_credits - new_value,
-      };
-    });
-    fetchInvestedGames(user.user_id).then((data) => {
-      const filteredData = data.filter((game) => {
-        return game.quantity !== 0;
-      });
+  // function handleUserState(new_value) {
+  //   setUser((current) => {
+  //     return {
+  //       ...current,
+  //       portfolio_value: current.portfolio_value + new_value,
+  //       current_credits: current.current_credits - new_value,
+  //     };
+  //   });
+  //   fetchInvestedGames(user.user_id).then((data) => {
+  //     const filteredData = data.filter((game) => {
+  //       return game.quantity !== 0;
+  //     });
 
-      setInvestedGames(filteredData.sort((a, b) => a.game_id - b.game_id));
-    });
-  }
+  //     setInvestedGames(filteredData.sort((a, b) => a.game_id - b.game_id));
+  //   });
+  // }
 
   useEffect(() => {
-    fetchUser()
-      .then(({ details }) => {
-        setUser({
-          user_id: details.id,
-          username: details.username,
-          current_credits: details.credits,
-          portfolio_value: 0,
-        });
-        return details.id;
-      })
-      .then((id) => {
-        fetchInvestedGames(id).then((result) => {
+    if (user.id) {
+      fetchInvestedGames(user.id)
+        .then((result) => {
           const newArr = result.filter((game) => {
             return game.quantity !== 0;
           });
 
           setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
-
           const totalValue = result.reduce(
             (total, current) => {
               return Number(
@@ -67,15 +54,14 @@ const Profile = () => {
             },
             [0]
           );
-
-          setUser((current) => {
-            return { ...current, portfolio_value: totalValue };
-          });
-
+          setPortfolioValue(totalValue);
           setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      });
-  }, []);
+    }
+  }, [user.id, user.credits]);
 
   return isLoading ? (
     <ActivityIndicator size="large" />
@@ -85,11 +71,11 @@ const Profile = () => {
         <Text className="text-center">
           {" "}
           Hello {user.username} to your Profile page. Your portfolio value ={" "}
-          {user.portfolio_value} cr
+          {portfolioValue} cr
         </Text>
 
         <Text className="text-center">
-          Your available credit: {user.current_credits}
+          Your available credit: {user.credits}
         </Text>
       </View>
       <View>
@@ -101,13 +87,11 @@ const Profile = () => {
           data={investedGames}
           renderItem={({ item }) => (
             <InvestedGameCard
-              handleUserState={handleUserState}
-              user_id={user.user_id}
+              setInvestedGames={setInvestedGames}
               game_id={item.game_id}
               game_name={item.games.game_name}
-              share_value={item.games.value}
+              value={item.games.value}
               quantity={item.quantity}
-              current_credits={user.current_credits}
             />
           )}
           keyExtractor={(item) => item.games.game_name}
