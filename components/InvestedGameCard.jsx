@@ -1,6 +1,7 @@
 import { Pressable, View, Text } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
 import { fetchInvestedGames, handleTrade } from "../Utils";
+import { useRouter } from "expo-router";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -14,8 +15,8 @@ const InvestedGameCard = ({
   share_value,
   current_credits,
 }) => {
+  const router = useRouter();
   function onPressFunction(amount) {
-    console.log(amount);
     handleTrade(user_id, game_id, amount)
       .then(() => {
         handleUserState(amount * share_value);
@@ -27,7 +28,7 @@ const InvestedGameCard = ({
   return (
     <View>
       <Text>
-        <Pressable>
+        <Pressable onPress={() => router.push(`/${game_id}`)}>
           <Text>
             {game_name} {share_value}
           </Text>

@@ -22,7 +22,7 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   function handleUserState(new_value) {
     setUser((current) => {
       return {
