@@ -1,25 +1,35 @@
 import { Pressable, View, Text } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
 import { fetchInvestedGames, handleTrade } from "../Utils";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/User";
 import { useRouter } from "expo-router";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
 
 const InvestedGameCard = ({
-  handleUserState,
-  user_id,
+  setInvestedGames,
   game_id,
   game_name,
   quantity,
-  share_value,
-  current_credits,
+  value,
 }) => {
+  const { user, setUser } = useContext(UserContext);
   const router = useRouter();
   function onPressFunction(amount) {
-    handleTrade(user_id, game_id, amount)
+    handleTrade(user.id, game_id, amount)
       .then(() => {
-        handleUserState(amount * share_value);
+        const newVal = amount * value;
+        setUser((current) => {
+          return { ...current, credits: current.credits - newVal };
+        });
+        fetchInvestedGames(user.id).then((result) => {
+          const newArr = result.filter((game) => {
+            return game.quantity !== 0;
+          });
+          setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -30,7 +40,7 @@ const InvestedGameCard = ({
       <Text>
         <Pressable onPress={() => router.push(`/${game_id}`)}>
           <Text>
-            {game_name} {share_value}
+            {game_name} {value}
           </Text>
           {/*  onPress={router.push} to gamecard to trade */}
         </Pressable>{" "}
@@ -53,19 +63,19 @@ const InvestedGameCard = ({
         </Pressable>
         <Text>{quantity}</Text>
         <Pressable
-          disabled={current_credits < 1 * share_value}
+          disabled={user.credits < 1 * value}
           onPress={() => onPressFunction(1)}
         >
           <Text className="border rounded ml-2 text-red-500">+1</Text>
         </Pressable>
         <Pressable
-          disabled={current_credits < 10 * share_value}
+          disabled={user.credits < 10 * value}
           onPress={() => onPressFunction(10)}
         >
           <Text className="border rounded ml-2 text-red-500">+10</Text>
         </Pressable>
         <Pressable
-          disabled={current_credits < 100 * share_value}
+          disabled={user.credits < 100 * value}
           onPress={() => onPressFunction(100)}
         >
           <Text className="border rounded ml-2 text-red-500">+100</Text>
@@ -73,7 +83,7 @@ const InvestedGameCard = ({
       </Text>
       <Text>
         {" "}
-        Total value for {game_name} {share_value * quantity}
+        Total value for {game_name} {value * quantity}
       </Text>
     </View>
   );

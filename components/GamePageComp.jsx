@@ -1,16 +1,16 @@
-import { Text, View, Image, Pressable } from "react-native";
+import { Text, View, Image, FlatList } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
 import { fetchGameInfo, fetchGameTransactions, handleTrade } from "../Utils";
-import { FlatList } from "react-native-gesture-handler";
+
+import TradeShares from "./TradeShares";
 
 export default function GamePageComp() {
   const { game_id } = useLocalSearchParams("game_id");
   const { user, setUser } = useContext(UserContext);
   const [currentGame, setCurrentGame] = useState({});
-  const [amount, setAmount] = useState(0);
-  const [buy, setBuy] = useState(true);
+
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function GamePageComp() {
     });
   }, [game_id]);
 
-  function onPressFunction(amount, value) {
+  function onPressFunction(amount, value, buy) {
     if (!buy) amount = -amount;
     console.log(amount);
 
@@ -56,44 +56,26 @@ export default function GamePageComp() {
   return (
     <>
       <View>
-        <Text>
-          {currentGame.game_name} share price: {currentGame.value}
-        </Text>
-        <Text>
-          You own {currentGame.quantity} shares in {currentGame.game_name}
-        </Text>
+        <Text>{currentGame.game_name}</Text>
         <Image
           style={{ width: 200, height: 300 }}
           source={{ uri: currentGame.cover_url }}
         />
+        <Text>{currentGame.description}</Text>
+        <Text> </Text>
       </View>
       <View>
-        <Pressable onPress={() => setBuy(true)}>
-          <Text>Buy</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable onPress={() => setBuy(false)}>
-          <Text>Sell</Text>
-        </Pressable>
+        <Text>
+          share price: {currentGame.value} Shares: {currentGame.quantity}
+        </Text>
+        <Text>Total value of: {currentGame.value * currentGame.quantity}</Text>
       </View>
 
-      <View>
-        <Pressable onPress={() => setAmount((current) => ++current)}>
-          <Text>+1</Text>
-        </Pressable>
-        <Text>Amount {amount}</Text>
-        <Pressable onPress={() => setAmount((current) => --current)}>
-          <Text>-1</Text>
-        </Pressable>
+      <TradeShares
+        currentGame={currentGame}
+        onPressFunction={onPressFunction}
+      />
 
-        <Pressable
-          disabled={amount === 0}
-          onPress={() => onPressFunction(amount, currentGame.value)}
-        >
-          <Text>Confirm</Text>
-        </Pressable>
-      </View>
       <View>
         <Text> Last 10 transactions</Text>
         <FlatList
