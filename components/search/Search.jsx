@@ -139,3 +139,5 @@ const Search = () =>{
 }
 
 export default Search;
+
+<GamePreview game={GTAGameInfo} user_info={userInfo} value_history={GTAGamePrices}/>}
