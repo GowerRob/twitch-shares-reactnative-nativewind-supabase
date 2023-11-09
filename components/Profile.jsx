@@ -22,7 +22,7 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   function handleUserState(new_value) {
     setUser((current) => {
       return {
@@ -77,11 +77,6 @@ const Profile = () => {
       });
   }, []);
 
-  const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    router.push(`/`);
-  };
-
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
@@ -92,14 +87,7 @@ const Profile = () => {
           Hello {user.username} to your Profile page. Your portfolio value ={" "}
           {user.portfolio_value} cr
         </Text>
-      </View>
-      <Pressable
-        className="border bg-primary-light text-white my-2"
-        onPress={handleSignOut}
-      >
-        <Text>Sign out</Text>
-      </Pressable>
-      <View>
+
         <Text className="text-center">
           Your available credit: {user.current_credits}
         </Text>

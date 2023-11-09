@@ -47,7 +47,7 @@ export const handleTrade = async (user_id, game_id, quantity) => {
 export const fetchGameInfo = async (game_id, user_id) => {
   const { data, error } = await supabase
     .from("games")
-    .select("game_name, value, cover_url")
+    .select("game_name, value, cover_url, description")
     .eq("game_id", game_id)
     .maybeSingle();
 
