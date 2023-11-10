@@ -56,6 +56,11 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         <Text>League Name : {leagueItem.league_name} </Text>
         <Text>Number of people in league : {peopleCount}</Text>
         <Text>Total Value : {sumLeagueValue()}</Text>
+        {/* Vistory Graph */}
+
+
+
+
         {!inLeague&&<Pressable
             className="border bg-primary-light text-white my-2"
             onPress={handleJoinLeague}>

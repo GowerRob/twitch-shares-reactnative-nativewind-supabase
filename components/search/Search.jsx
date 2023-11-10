@@ -1,12 +1,14 @@
-
 import {TextInput,FlatList,Text,Switch,Pressable} from 'react-native'
-import {useState,useEffect} from 'react'
-
+import {useState,useEffect,useContext} from 'react'
+import { UserContext } from '../../context/User'
 import GamePreview from '../GamePreview'
 
 import supabase from '../../config/supabaseConfig'
 
+
+
 const Search = () =>{
+    const {user} = useContext(UserContext);
     const [searchText, setSearchText]=useState('');
     const [gamesDataAsc, setGamesDataAsc]=useState([]);
     const [gamesDataDesc, setGamesDataDesc]=useState([]);
@@ -22,17 +24,20 @@ const Search = () =>{
     const fetchGamesAsc=async ()=>{
         const { data, error } = await supabase
         .from('games')
-        .select(`*, price_history(game_id, value)`)
+        .select(`*, 
+        price_history(game_id, value),
+        shares!left(game_id,quantity,user_id)`)
         .order("game_name", {ascending:true});
         setGamesDataAsc(data)
-        console.log(data)
         return data;
         
     }    
     const fetchGamesDesc=async ()=>{
         const { data, error } = await supabase
         .from('games')
-        .select(`*, price_history(game_id, value)`)
+        .select(`*, 
+        price_history(game_id, value)
+        shares!left(game_id,quantity,user_id)`)
         .order("game_name", {ascending:false});
         setGamesDataDesc(data)
     }
@@ -71,6 +76,9 @@ const Search = () =>{
             tempObject.value=filterTest[i].value
             tempObject.cover_url=filterTest[i].cover_url
             tempObject.price_history=filterTest[i].price_history
+            tempObject.usersShares=filterTest[i].shares.filter((item)=>{
+                item.user_id===user.id
+            })
             reducedFilteredData.push(tempObject)
         }
         setFilteredGames(reducedFilteredData)
@@ -93,6 +101,9 @@ const Search = () =>{
             tempObject.value=initialData[i].value
             tempObject.cover_url=initialData[i].cover_url
             tempObject.price_history=initialData[i].price_history
+            tempObject.usersShares=initialData[i].shares.filter((item)=>{
+                return item.user_id===user.id
+            })
             reducedFilteredData.push(tempObject)
         }
         const numResults=initialData.length
@@ -180,7 +191,11 @@ const Search = () =>{
                 {!isLoading&&<FlatList
                 data={filteredGames}
                 renderItem={({item})=>{
-                    return <GamePreview game={item} user_info={{shares_owned:20}} value_history={item.price_history}/>
+                        let usersShares=0;
+                        if(item.usersShares.length>0){
+                            usersShares=item.usersShares[0].quantity
+                        }
+                    return <GamePreview game={item} user_info={{shares_owned:usersShares}} value_history={item.price_history}/>
                 }}
                 keyExtractor={item=>item.game_id}>
                 </FlatList>}
