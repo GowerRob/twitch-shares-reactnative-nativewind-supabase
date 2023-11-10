@@ -15,7 +15,7 @@ import BuySell from "./BuySell";
 import { UserContext } from "../context/User";
 import { fetchGamePrices, fetchGameTransactions } from "../Utils";
 import { fetchGameInfo } from "../Utils";
-import Transactions from './Transactions'
+import Transactions from "./Transactions";
 
 NativeWindStyleSheet.setOutput({});
 
@@ -48,16 +48,15 @@ export default function GamePage() {
   useEffect(() => {
     fetchGamePrices(game_id)
       .then((result) => setGamePrices(result))
-      .then(()=>{
-        fetchGameTransactions(user.id, game_id)
-        .then((data)=>{
-          const newData = data.map((item)=>{
-            const newItem = {...item}
-            newItem.date = new Date(item.transaction_date)
-            return newItem
-          })
-          setTransactions(newData)
-        })
+      .then(() => {
+        fetchGameTransactions(user.id, game_id).then((data) => {
+          const newData = data.map((item) => {
+            const newItem = { ...item };
+            newItem.date = new Date(item.transaction_date);
+            return newItem;
+          });
+          setTransactions(newData);
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +92,11 @@ export default function GamePage() {
             Owned value:{" "}
             {numberWithCommas(currentGame.quantity * currentGame.value)}
           </Text>
-          <View className="flex-row justify-end mt-4"></View>
+          <View className="flex-row self-center justify-center mt-4">
+            <Text className={`text-sm text-text-dark`}>
+              {currentGame.description}
+            </Text>
+          </View>
         </View>
       </View>
       <View className="flex-grow m-0 p-0 rounded-lg hidden sm:flex">
@@ -146,8 +149,11 @@ export default function GamePage() {
       </View>
       <View>
         <Transactions
-        data={{"transactions": transactions}}
-       
+          data={{
+            total_shares_owned: currentGame.quantity,
+            total_shares_value: currentGame.quantity * currentGame.value,
+            transactions: transactions,
+          }}
         />
       </View>
     </>

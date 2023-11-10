@@ -6,37 +6,31 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
-import InvestedGameCard from "./InvestedGameCard";
+
 import { NativeWindStyleSheet } from "nativewind";
-import { fetchInvestedGames } from "../Utils";
+import PortfolioHistory from "./PortfolioHistory";
+import Transactions from "./Transactions";
+import {
+  fetchInvestedGames,
+  fetchUserPortfolioHistory,
+  fetchUserShares,
+  fetchAllTransactions,
+} from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
 import { UserContext } from "../context/User";
 import GamePreview from "./GamePreview";
+import ShareOverview from "./ShareOverview";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [portfolioValue, setPortfolioValue] = useState(0);
-
-  // function handleUserState(new_value) {
-  //   setUser((current) => {
-  //     return {
-  //       ...current,
-  //       portfolio_value: current.portfolio_value + new_value,
-  //       current_credits: current.current_credits - new_value,
-  //     };
-  //   });
-  //   fetchInvestedGames(user.user_id).then((data) => {
-  //     const filteredData = data.filter((game) => {
-  //       return game.quantity !== 0;
-  //     });
-
-  //     setInvestedGames(filteredData.sort((a, b) => a.game_id - b.game_id));
-  //   });
-  // }
+  const [portfolioHistory, setPortfolioHistory] = useState();
+  const [userShares, setUserShares] = useState();
+  const [allTransactions, setAllTransactions] = useState();
 
   useEffect(() => {
     if (user.id) {
@@ -57,6 +51,27 @@ const Profile = () => {
           );
           setPortfolioValue(totalValue);
           setIsLoading(false);
+        })
+        .then(() => {
+          fetchUserPortfolioHistory(user.id).then((data) => {
+            setPortfolioHistory(data);
+          });
+        })
+        .then(() => {
+          fetchUserShares(user.id).then((data) => {
+            setUserShares(data);
+          });
+        })
+        .then(() => {
+          fetchAllTransactions(user.id).then((result) => {
+            const newData = result.map((item) => {
+              const newItem = { ...item };
+              newItem.date = new Date(item.transaction_date);
+              newItem.game_name = newItem.games.game_name;
+              return newItem;
+            });
+            setAllTransactions(newData);
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -95,6 +110,21 @@ const Profile = () => {
           keyExtractor={(item) => item.games.game_name}
         />
       </View>
+      <View>{userShares && <ShareOverview shares={userShares} />}</View>
+      <View>
+        {portfolioHistory && (
+          <PortfolioHistory portfolio_history={portfolioHistory} />
+        )}
+      </View>
+      {allTransactions && (
+        <Transactions
+          data={{
+            total_shares_owned: 0,
+            total_shares_value: 0,
+            transactions: allTransactions,
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };
