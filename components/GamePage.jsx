@@ -61,7 +61,7 @@ export default function GamePage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [user.credits]);
 
   const colorScheme = "dark";
   return (

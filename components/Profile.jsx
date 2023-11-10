@@ -20,7 +20,7 @@ NativeWindStyleSheet.setOutput({
   default: "native",
 });
 import { UserContext } from "../context/User";
-import GamePreview from "./GamePreview";
+import PGGamePreview from "./PGGamePreview";
 import ShareOverview from "./ShareOverview";
 
 const Profile = () => {
@@ -102,7 +102,7 @@ const Profile = () => {
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
-            <GamePreview
+            <PGGamePreview
               setInvestedGames={setInvestedGames}
               game={{ ...item, ...item.games }}
             />
