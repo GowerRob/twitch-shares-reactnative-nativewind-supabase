@@ -17,7 +17,6 @@ import {
 } from "victory-native";
 import BuySell from "./BuySell";
 
-NativeWindStyleSheet.setOutput({});
 
 const PopupModal = ({visible, children, closeModal}) => {
     return (
@@ -58,16 +57,17 @@ const GamePreview = ({game, user_info, value_history}) => {
     };
     const colorScheme = "dark";
     return (
-        <View className={`flex-row rounded-lg m-4 bg-background-dark`}>
+        <View className={`flex-row rounded-lg m-4 bg-background-dark h-[215px]`}>
             <Image
                 source={{uri: cover_url.replace("{width}", "450").replace("{height}", "600")}}
-                style={{width: 150, height: "100%", resizeMode: "cover", borderRadius: 10}}
+                style={{width: 160, height: 215, resizeMode: "cover", borderRadius: 10}}
             />
             <View className={`flex-1 justify-evenly flex-grow rounded m-4`}>
                 <Text className={`text-xl text-text-dark font-bold mb-2`}>{game_name}</Text>
                 <Text className={`text-sm text-text-dark`}>Value: {numberWithCommas(value)}</Text>
                 <Text className={`text-sm text-text-dark`}>Shares owned: {numberWithCommas(shares_owned)}</Text>
-                <Text className={`text-sm text-text-dark`}>Owned value: {numberWithCommas(shares_owned * value)}</Text>
+                <Text className={`text-sm text-text-dark`}>Owned
+                    value: {numberWithCommas((shares_owned ?? 0) * value)}</Text>
                 <View className="flex-row justify-end mt-4">
                     <TouchableOpacity className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}
                                       onPress={openModal}>
@@ -78,8 +78,8 @@ const GamePreview = ({game, user_info, value_history}) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View className="flex-grow m-0 p-0 rounded-lg hidden md:flex">
-                <VictoryChart height={90} width={170} theme={VictoryTheme.grayscale} padding={0}>
+            <View className="m-0 p-0 rounded-lg hidden max-w-[345px] w-[345px] h-[215px] md:flex">
+                <VictoryChart height={112} width={180} theme={VictoryTheme.grayscale} padding={0}>
                     <svg style={{height: 0}}>
                         <defs>
                             <linearGradient id="myGradient1">
