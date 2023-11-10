@@ -13,6 +13,7 @@ NativeWindStyleSheet.setOutput({
   default: "native",
 });
 import { UserContext } from "../context/User";
+import GamePreview from "./GamePreview";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -86,12 +87,9 @@ const Profile = () => {
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
-            <InvestedGameCard
+            <GamePreview
               setInvestedGames={setInvestedGames}
-              game_id={item.game_id}
-              game_name={item.games.game_name}
-              value={item.games.value}
-              quantity={item.quantity}
+              game={{ ...item, ...item.games }}
             />
           )}
           keyExtractor={(item) => item.games.game_name}

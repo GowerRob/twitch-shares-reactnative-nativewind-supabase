@@ -26,7 +26,7 @@ export const fetchUserDetails = async (id) => {
 export const fetchInvestedGames = async (id) => {
   const { data, error } = await supabase
     .from("shares")
-    .select("game_id, quantity, games (game_name, value)")
+    .select("game_id, quantity, games (game_name, value, cover_url)")
     .eq("user_id", id);
 
   if (error) {
@@ -82,5 +82,15 @@ export const fetchGameTransactions = async (user_id, game_id) => {
   if (error) {
     throw new Error(error.message);
   }
+  return data;
+};
+
+export const fetchGamePrices = async (gameID) => {
+  const { data } = await supabase
+    .from("price_history")
+    .select("*")
+    .eq("game_id", gameID)
+    .gte("time", new Date(Date.now() - 86400000).toISOString())
+    .order("time", { ascending: true });
   return data;
 };
