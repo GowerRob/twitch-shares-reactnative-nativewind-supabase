@@ -13,8 +13,9 @@ import {
 } from "victory-native";
 import BuySell from "./BuySell";
 import { UserContext } from "../context/User";
-import { fetchGamePrices } from "../Utils";
+import { fetchGamePrices, fetchGameTransactions } from "../Utils";
 import { fetchGameInfo } from "../Utils";
+import Transactions from './Transactions'
 
 NativeWindStyleSheet.setOutput({});
 
@@ -28,6 +29,7 @@ export default function GamePage() {
   const { user, setUser } = useContext(UserContext);
   const [currentGame, setCurrentGame] = useState({});
   const [gamePrices, setGamePrices] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     fetchGameInfo(game_id, user.id)
@@ -46,6 +48,17 @@ export default function GamePage() {
   useEffect(() => {
     fetchGamePrices(game_id)
       .then((result) => setGamePrices(result))
+      .then(()=>{
+        fetchGameTransactions(user.id, game_id)
+        .then((data)=>{
+          const newData = data.map((item)=>{
+            const newItem = {...item}
+            newItem.date = new Date(item.transaction_date)
+            return newItem
+          })
+          setTransactions(newData)
+        })
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -129,6 +142,12 @@ export default function GamePage() {
           game_id={game_id}
           game_name={currentGame.game_name}
           value={currentGame.value}
+        />
+      </View>
+      <View>
+        <Transactions
+        data={{"transactions": transactions}}
+       
         />
       </View>
     </>

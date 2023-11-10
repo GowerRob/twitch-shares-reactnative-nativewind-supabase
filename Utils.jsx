@@ -72,6 +72,7 @@ export const fetchCurrentInvestedGame = async (user_id, game_id) => {
 };
 
 export const fetchGameTransactions = async (user_id, game_id) => {
+  
   const { data, error } = await supabase
     .from("transactions")
     .select("*")

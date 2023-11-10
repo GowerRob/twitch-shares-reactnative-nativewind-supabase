@@ -116,16 +116,8 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
           placeholder="Quantity"
           keyboardType="numeric"
           value={tradeQuantity}
-          onChangeText={(text) => {
-            if (selectedOption === 'SELL' && quantity < tradeQuantity){
-            setTradeQuantity(quantity)
-
-            } else {
-              setTradeQuantity(+text.replace(/[^0-9]/g, ""))
-            }
-            
-          }
-            
+          onChangeText={(text) =>
+            setTradeQuantity(+text.replace(/[^0-9]/g, ""))
           }
         />
         <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">

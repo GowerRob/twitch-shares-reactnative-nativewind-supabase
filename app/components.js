@@ -226,11 +226,11 @@ const account = () => {
                 "total_shares_value": 123456,
                 "transactions": transactions
             }}/>
-            <Transactions data={{
+            {/* <Transactions data={{
                 "total_shares_owned": 20,
                 "total_shares_value": 123456,
                 "transactions": transactionsWithGames
-            }}/>
+            }}/> */}
             {portfolioHistory && <PortfolioHistory portfolio_history={portfolioHistory}/>}
             {userShares && <ShareOverview shares={userShares}/>}
             {GTAGameInfo && GTAGamePrices &&
