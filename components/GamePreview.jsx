@@ -49,6 +49,10 @@ const GamePreview = ({game, user_info, value_history}) => {
     const {shares_owned} = user_info;
     const [modalVisible, setModalVisible] = useState(false);
 
+    if (value_history.length===0){
+
+    }
+
     const openModal = () => {
         setModalVisible(true);
     };

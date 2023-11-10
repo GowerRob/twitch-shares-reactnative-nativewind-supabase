@@ -6,7 +6,7 @@ import { styled } from 'nativewind'
 
 const StyledView=styled(View);
 
-const GameCard= ({gameItem}) =>{
+const GameCard= ({gameItem, index}) =>{
   
 
 
@@ -15,7 +15,7 @@ const GameCard= ({gameItem}) =>{
             <StyledView className="flex flex-row space-x-2">
                 <Text >{gameItem.game_name} - </Text>
                 <Text>{gameItem.value}</Text>
-
+                <Text>{index}</Text>
             </StyledView>
 
 
