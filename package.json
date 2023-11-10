@@ -31,7 +31,8 @@
     "react-native-svg": "^13.14.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.6",
-    "victory-native": "^36.6.12"
+    "victory-native": "^36.6.12",
+    "@react-native-picker/picker": "2.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
