@@ -19,10 +19,6 @@ const account = () => {
 
     const [userShares, setUserShares] = useState();
 
-    const userInfo = {
-        shares_owned: 20
-    };
-
     useEffect(() => {
         const fetchGame = async (gameID) => {
             const {data} = await supabase
@@ -234,9 +230,9 @@ const account = () => {
             {portfolioHistory && <PortfolioHistory portfolio_history={portfolioHistory}/>}
             {userShares && <ShareOverview shares={userShares}/>}
             {GTAGameInfo && GTAGamePrices &&
-                <GamePreview game={GTAGameInfo} user_info={userInfo} value_history={GTAGamePrices}/>}
+             <GamePreview game={GTAGameInfo} shares_owned={20} value_history={GTAGamePrices}/>}
             {gameBGameInfo && gameBGamePrices &&
-                <GamePreview game={gameBGameInfo} user_info={userInfo} value_history={gameBGamePrices}/>}
+             <GamePreview game={gameBGameInfo} shares_owned={10} value_history={gameBGamePrices}/>}
             <BuySell game_id={123} share_value={1234}/>
         </View>
     </View>;

@@ -6,14 +6,11 @@ import {
     TouchableOpacity,
     Modal
 } from "react-native";
-import {NativeWindStyleSheet} from "nativewind";
 import {
     VictoryArea,
     VictoryAxis,
-    VictoryChart, VictoryLabel,
-    VictoryTheme,
-    VictoryTooltip,
-    VictoryVoronoiContainer
+    VictoryChart,
+    VictoryTheme
 } from "victory-native";
 import BuySell from "./BuySell";
 
@@ -43,9 +40,8 @@ function numberWithCommas(x = 0) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const GamePreview = ({game, user_info, value_history}) => {
+const GamePreview = ({game, shares_owned, value_history}) => {
     const {game_name, value, cover_url, game_id} = game;
-    const {shares_owned} = user_info;
     const [modalVisible, setModalVisible] = useState(false);
 
     const openModal = () => {
@@ -65,9 +61,11 @@ const GamePreview = ({game, user_info, value_history}) => {
             <View className={`flex-1 justify-evenly flex-grow rounded m-4`}>
                 <Text className={`text-xl text-text-dark font-bold mb-2`}>{game_name}</Text>
                 <Text className={`text-sm text-text-dark`}>Value: {numberWithCommas(value)}</Text>
-                <Text className={`text-sm text-text-dark`}>Shares owned: {numberWithCommas(shares_owned)}</Text>
-                <Text className={`text-sm text-text-dark`}>Owned
-                    value: {numberWithCommas((shares_owned ?? 0) * value)}</Text>
+                {shares_owned !== undefined && <View>
+                    <Text className={`text-sm text-text-dark`}>Shares owned: {numberWithCommas(shares_owned)}</Text>
+                    <Text className={`text-sm text-text-dark`}>Owned
+                        value: {numberWithCommas(shares_owned * value)}</Text>
+                </View>}
                 <View className="flex-row justify-end mt-4">
                     <TouchableOpacity className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}
                                       onPress={openModal}>
