@@ -29,6 +29,7 @@ const Search = () =>{
         shares!left(game_id,quantity,user_id)`)
         .order("game_name", {ascending:true});
         setGamesDataAsc(data)
+        console.log(data)
         return data;
         
     }    
@@ -45,7 +46,8 @@ const Search = () =>{
     const filterGames=()=>{
         let copyArray=[];
         if(isEnabled){ 
-            copyArray=[...gamesDataDesc]
+           copyArray=[...gamesDataDesc]
+           //copyArray=[...gamesDataAsc]
         }else{
             copyArray=[...gamesDataAsc]
         }
