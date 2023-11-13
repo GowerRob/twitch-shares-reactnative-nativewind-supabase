@@ -24,9 +24,10 @@ const DisplayLeagues = () => {
 
     return (<>
 
-<View className={`rounded-lg p-4 bg-background-${colorScheme}`}>
-        <View className={`border border-text-dark rounded-lg`}>
+<View className={`rounded-lg p-4 bg-background-${colorScheme} id-outerView`}>
+        <View className={`bg-background-dark border border-text-dark rounded-lg flex flex-column items-center id-innerView`}>
         <FlatList
+        className={`w-4/5`}
             data={leagues}
             renderItem={({item})=>{
                 return <Pressable
