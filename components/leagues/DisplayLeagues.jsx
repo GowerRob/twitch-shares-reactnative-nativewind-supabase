@@ -25,7 +25,7 @@ const DisplayLeagues = () => {
     return (<>
 
 <View className={`rounded-lg p-4 bg-background-${colorScheme} id-outerView`}>
-        <View className={`bg-background-dark border border-text-dark rounded-lg flex flex-column items-center id-innerView`}>
+        <View className={`bg-background-dark rounded-lg flex flex-column items-center id-innerView`}>
         <FlatList
         className={`w-4/5`}
             data={leagues}
