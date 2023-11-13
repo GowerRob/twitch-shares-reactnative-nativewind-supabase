@@ -4,8 +4,9 @@ import {
   Text,
   FlatList,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
-
+import Collapsible from "react-native-collapsible"
 import { NativeWindStyleSheet } from "nativewind";
 import PortfolioHistory from "./PortfolioHistory";
 import Transactions from "./Transactions";
@@ -30,6 +31,7 @@ const Profile = () => {
   const [portfolioHistory, setPortfolioHistory] = useState();
   const [userShares, setUserShares] = useState();
   const [allTransactions, setAllTransactions] = useState();
+  const [isCollapsed, setIsCollapsed] = useState(true)
   
 
   useEffect(() => {
@@ -67,7 +69,7 @@ const Profile = () => {
             const newData = result.map((item) => {
               const newItem = { ...item };
               newItem.date = new Date(item.transaction_date);
-              newItem.game_name = newItem.games.game_name;
+              newItem.game = newItem.games.game_name;
               return newItem;
             });
             setAllTransactions(newData);
@@ -92,18 +94,10 @@ const colorScheme = 'dark'
       <View>
         <Text className="text-center text-text-dark">
           {" "}
-          Hello {user.username} to your Profile page. Your portfolio value ={" "}
+          Hello {user.username}! This is your Profile page. Your portfolio value ={" "}
           {portfolioValue} cr
         </Text>
-
-        <Text className="text-center">
-          Your available credit: {user.credits}
-        </Text>
       </View>
-      <View>
-        <Text className="text-center">Your invested games</Text>
-      </View>
-
       <View className="flex-column items-center">
         <FlatList
           data={investedGames}
@@ -113,15 +107,22 @@ const colorScheme = 'dark'
               game={{ ...item, ...item.games }}
             />
           )}
-          keyExtractor={(item) => item.games.game_name}
+          keyExtractor={(item) => item.games.game_namse}
         />
       </View>
+      <Pressable className="bg-accent-light self-center hover:bg-accent-dark rounded p-2 m-2 max-w-[110px]" onPress={()=>setIsCollapsed(!isCollapsed)}>
+        <Text className='text-text-dark'>
+          {isCollapsed ? 'Show Charts' : 'Hide Charts'}
+          </Text>
+          </Pressable>
+      <Collapsible collapsed={isCollapsed}>
       <View>{userShares && <ShareOverview shares={userShares} />}</View>
       <View>
         {portfolioHistory && (
           <PortfolioHistory portfolio_history={portfolioHistory} />
         )}
       </View>
+      </Collapsible>
       {allTransactions && (
         <Transactions
           data={{

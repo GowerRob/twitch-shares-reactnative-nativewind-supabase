@@ -78,7 +78,7 @@ export default function GamePage() {
 
   const colorScheme = "dark";
   return (
-    <>
+    <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
       <View className={`flex-row rounded-lg m-4 bg-background-dark`}>
         <Image
           source={{
@@ -182,6 +182,6 @@ export default function GamePage() {
           }}
         />
       </View>
-    </>
+    </View>
   );
 }
