@@ -5,12 +5,13 @@ import supabase from '../../config/supabaseConfig'
 
 const CreateLeague = () => {
     const [leagueName, setLeagueName] = useState('')
+    const [leagueCreated, setLeagueCreated] = useState(false)
 
     const handleCreateLeague = async () => {
         const {error} = await supabase
         .from('leagues')
         .insert({league_name:leagueName})
-
+        setLeagueCreated(true)
         setLeagueName('')
     }
 
@@ -26,6 +27,7 @@ const CreateLeague = () => {
             onPress={handleCreateLeague}>
             <Text>Submit</Text>
         </Pressable>
+        {leagueCreated?<Text>Your League has been created</Text>:null}
      </View>)
 }
 
