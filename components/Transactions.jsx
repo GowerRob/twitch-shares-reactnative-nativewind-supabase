@@ -23,6 +23,8 @@ const Transactions = ({ data }) => {
       <Text className={`text-lg text-text-${colorScheme} mb-4`}>
         Total Shares Value: {total_shares_value}
       </Text>
+
+      
       <View className={`border border-text-dark rounded-lg`}>
         <View
           className={`flex flex-row justify-between border-b border-dar border-text-${colorScheme} py-2 px-4`}
