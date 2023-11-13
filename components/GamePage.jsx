@@ -48,18 +48,19 @@ export default function GamePage() {
   useEffect(() => {
     fetchGamePrices(game_id)
       .then((result) => {
-        
-        const filteredResult = result.filter((item, index)=>{
-          if ((index + 1) % 4 === 0){
+        const filteredResult = result.filter((item, index) => {
+          if ((index + 1) % 2 === 0) {
             // const newTime = new Date(item.time)
             // console.log(newTime)
 
-            const newTime = item.time.replace("T", "@").slice(5, 13)
+            const newTime = item.time.replace("T", "@").slice(5, 16);
 
-            item.time = newTime
-            return item}
-        })
-        setGamePrices(filteredResult)})
+            item.time = newTime;
+            return item;
+          }
+        });
+        setGamePrices(filteredResult);
+      })
       .then(() => {
         fetchGameTransactions(user.id, game_id).then((data) => {
           const newData = data.map((item) => {
@@ -74,7 +75,6 @@ export default function GamePage() {
         console.log(error);
       });
   }, [user.credits]);
-
 
   const colorScheme = "dark";
   return (
@@ -112,46 +112,52 @@ export default function GamePage() {
           </View>
         </View>
       </View>
-      <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
-      <Text className="text-2xl font-bold text-text-dark mb-4">
-        Game Value
-      </Text>
+      <View
+        className={`rounded-lg border pt-40 p-4 m-4 bg-background-${colorScheme}`}
+      >
+        <Text className="text-2xl font-bold text-text-dark mb-4">
+          Game Value
+        </Text>
         <VictoryChart
           height={300}
           width={600}
           theme={VictoryTheme.grayscale}
-          padding={70}
+          padding={60}
         >
           <svg style={{ height: 0 }}>
             <defs>
               <linearGradient id="myGradient1">
-                <stop offset="10%" stopColor="#6441A400" />
-                <stop offset="100%" stopColor="#6441A4FF" />
+                <stop offset="0%" stopColor="#6441A400" />
+                <stop offset="0%" stopColor="#6441A4FF" />
               </linearGradient>
               <linearGradient id="myGradient2">
-                <stop offset="20%" stopColor="#6441A400" />
+                <stop offset="0%" stopColor="#6441A400" />
                 <stop offset="100%" stopColor="#6441A490" />
               </linearGradient>
             </defs>
           </svg>
-          <VictoryAxis style={{axis: {stroke: 'transparent'}, 
-        ticks: {stroke: 'white'},
-        tickLabels: {fill: 'white'}
-        }}
-        dependentAxis 
-        />
-         <VictoryAxis style={{axis: {stroke: 'transparent'}, 
-        ticks: {stroke: 'white'},
-        tickLabels: {fill: 'white', angle: -45, textAnchor: 'end'},
-        
-        }}
-        
-        labelComponent={
-          <VictoryLabel angle={-45} textAnchor="end"/>
-        }
-        />
-          
-          <VictoryArea 
+          <VictoryAxis
+            style={{
+              axis: { stroke: "transparent" },
+              ticks: { stroke: "white" },
+              tickLabels: { fill: "white" },
+            }}
+            dependentAxis
+          />
+          <VictoryAxis
+            style={{
+              axis: { stroke: "transparent" },
+              ticks: { stroke: "white" },
+              tickLabels: {
+                fill: "white",
+                angle: -60,
+                textAnchor: "end",
+                fontSize: 9,
+              },
+            }}
+          />
+
+          <VictoryArea
             interpolation="natural"
             style={{
               data: {
