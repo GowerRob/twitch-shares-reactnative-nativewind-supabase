@@ -3,7 +3,6 @@ import {
   View,
   Text,
   FlatList,
-  SafeAreaView,
   ActivityIndicator,
 } from "react-native";
 
@@ -31,6 +30,7 @@ const Profile = () => {
   const [portfolioHistory, setPortfolioHistory] = useState();
   const [userShares, setUserShares] = useState();
   const [allTransactions, setAllTransactions] = useState();
+  
 
   useEffect(() => {
     if (user.id) {
@@ -79,12 +79,18 @@ const Profile = () => {
     }
   }, [user.id, user.credits]);
 
+  let totalShares = 0
+  if (userShares){totalShares = userShares.reduce((total, game)=>{
+    return total += game.quantity
+  }, 0)
+}
+const colorScheme = 'dark'
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
-    <SafeAreaView className="flex-column items-center">
+    <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
       <View>
-        <Text className="text-center">
+        <Text className="text-center text-text-dark">
           {" "}
           Hello {user.username} to your Profile page. Your portfolio value ={" "}
           {portfolioValue} cr
@@ -98,7 +104,7 @@ const Profile = () => {
         <Text className="text-center">Your invested games</Text>
       </View>
 
-      <View className="flex-column items-center border">
+      <View className="flex-column items-center">
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
@@ -119,13 +125,13 @@ const Profile = () => {
       {allTransactions && (
         <Transactions
           data={{
-            total_shares_owned: 0,
-            total_shares_value: 0,
+            total_shares_owned: totalShares,
+            total_shares_value: portfolioValue,
             transactions: allTransactions,
           }}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

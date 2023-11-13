@@ -47,7 +47,19 @@ export default function GamePage() {
 
   useEffect(() => {
     fetchGamePrices(game_id)
-      .then((result) => setGamePrices(result))
+      .then((result) => {
+        
+        const filteredResult = result.filter((item, index)=>{
+          if ((index + 1) % 4 === 0){
+            // const newTime = new Date(item.time)
+            // console.log(newTime)
+
+            const newTime = item.time.replace("T", "@").slice(5, 13)
+
+            item.time = newTime
+            return item}
+        })
+        setGamePrices(filteredResult)})
       .then(() => {
         fetchGameTransactions(user.id, game_id).then((data) => {
           const newData = data.map((item) => {
@@ -62,6 +74,7 @@ export default function GamePage() {
         console.log(error);
       });
   }, [user.credits]);
+
 
   const colorScheme = "dark";
   return (
@@ -99,12 +112,15 @@ export default function GamePage() {
           </View>
         </View>
       </View>
-      <View className="flex-grow m-0 p-0 rounded-lg hidden sm:flex">
+      <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
+      <Text className="text-2xl font-bold text-text-dark mb-4">
+        Game Value
+      </Text>
         <VictoryChart
-          height={90}
-          width={170}
+          height={300}
+          width={600}
           theme={VictoryTheme.grayscale}
-          padding={0}
+          padding={70}
         >
           <svg style={{ height: 0 }}>
             <defs>
@@ -118,14 +134,24 @@ export default function GamePage() {
               </linearGradient>
             </defs>
           </svg>
-          <VictoryAxis
-            style={{
-              axis: { stroke: "transparent" },
-              ticks: { stroke: "transparent" },
-              tickLabels: { fill: "transparent" },
-            }}
-          />
-          <VictoryArea
+          <VictoryAxis style={{axis: {stroke: 'transparent'}, 
+        ticks: {stroke: 'white'},
+        tickLabels: {fill: 'white'}
+        }}
+        dependentAxis 
+        />
+         <VictoryAxis style={{axis: {stroke: 'transparent'}, 
+        ticks: {stroke: 'white'},
+        tickLabels: {fill: 'white', angle: -45, textAnchor: 'end'},
+        
+        }}
+        
+        labelComponent={
+          <VictoryLabel angle={-45} textAnchor="end"/>
+        }
+        />
+          
+          <VictoryArea 
             interpolation="natural"
             style={{
               data: {
