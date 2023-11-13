@@ -1,8 +1,5 @@
-import GamePageComp from  '../components/GamePageComp'
+import GamePage from "../components/GamePage";
 
-export default function GamePage(){
-
-    return (
-        <GamePageComp/>
-    )
+export default function RenderGamePage() {
+  return <GamePage />;
 }
