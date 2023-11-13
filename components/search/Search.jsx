@@ -5,7 +5,7 @@ import GamePreview from '../GamePreview'
 
 import supabase from '../../config/supabaseConfig'
 
-
+//fix ascending descending button regarding shares not persisting
 
 const Search = () =>{
     const {user} = useContext(UserContext);
@@ -78,9 +78,7 @@ const Search = () =>{
             tempObject.value=filterTest[i].value
             tempObject.cover_url=filterTest[i].cover_url
             tempObject.price_history=filterTest[i].price_history
-            tempObject.usersShares=filterTest[i].shares.filter((item)=>{
-                item.user_id===user.id
-            })
+            tempObject.usersShares=filterTest[i].shares
             reducedFilteredData.push(tempObject)
         }
         setFilteredGames(reducedFilteredData)
@@ -103,9 +101,7 @@ const Search = () =>{
             tempObject.value=initialData[i].value
             tempObject.cover_url=initialData[i].cover_url
             tempObject.price_history=initialData[i].price_history
-            tempObject.usersShares=initialData[i].shares.filter((item)=>{
-                return item.user_id===user.id
-            })
+            tempObject.usersShares=initialData[i].shares
             reducedFilteredData.push(tempObject)
         }
         const numResults=initialData.length
@@ -193,10 +189,14 @@ const Search = () =>{
                 {!isLoading&&<FlatList
                 data={filteredGames}
                 renderItem={({item})=>{
-                        let usersShares=0;
-                        if(item.usersShares.length>0){
-                            usersShares=item.usersShares[0].quantity
-                        }
+                    let usersShares=0;
+                    const filteredShare = item.usersShares.filter((share)=>{
+                        return share.user_id === user.id
+                    })
+                    if(filteredShare.length > 0){
+                        console.log(filteredShare[0].quantity)
+                        usersShares=filteredShare[0].quantity
+                    }
                     return <GamePreview game={item} user_info={{shares_owned:usersShares}} value_history={item.price_history}/>
                 }}
                 keyExtractor={item=>item.game_id}>
@@ -229,5 +229,3 @@ const Search = () =>{
 }
 
 export default Search;
-
-<GamePreview game={GTAGameInfo} user_info={userInfo} value_history={GTAGamePrices}/>}

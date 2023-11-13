@@ -16,6 +16,7 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         }
         countPeople()
         sumLeagueValue()
+        
     },[inLeague])
 
     const countPeople = async () => {
@@ -61,7 +62,7 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
 
 
 
-        {!inLeague&&<Pressable
+        {inLeague?null:<Pressable
             className="border bg-primary-light text-white my-2"
             onPress={handleJoinLeague}>
             <Text>Join League</Text>
