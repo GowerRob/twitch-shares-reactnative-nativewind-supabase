@@ -64,10 +64,18 @@ const account = () => {
       setUserShares(result)
     );
 
-    fetchGame(32982).then((result) => setGTAGameInfo(result));
-    fetchGamePrices(32982).then((result) => setGTAGamePrices(result));
-    fetchGame(463447553).then((result) => setGameBGameInfo(result));
-    fetchGamePrices(463447553).then((result) => setGameBGamePrices(result));
+        fetchGame(32982)
+            .then(result =>
+                setGTAGameInfo(result));
+        fetchGamePrices(32982)
+            .then(result =>
+                setGTAGamePrices(result));
+        fetchGame(463447553)
+            .then(result =>
+                setGameBGameInfo(result));
+        fetchGamePrices(463447553)
+            .then(result =>
+                setGameBGamePrices(result));
 
     fetchUserPortfolioHistory("683673b5-9e7e-46fd-8bd0-30e49867c2ab").then(
       (result) => setPortfolioHistory(result)
@@ -209,42 +217,27 @@ const account = () => {
     },
   ];
 
-  return (
-    <View className={"bg-black h-full w-full flex justify-center items-center"}>
-      <View className={"w-full max-w-4xl h-full"}>
-        <Transactions
-          data={{
-            total_shares_owned: 20,
-            total_shares_value: 123456,
-            transactions: transactions,
-          }}
-        />
-        {/* <Transactions data={{
+    return <View className={"bg-black h-full w-full flex justify-center items-center"}>
+        <View className={"w-full max-w-4xl h-full"}>
+            <Transactions data={{
+                "total_shares_owned": 20,
+                "total_shares_value": 123456,
+                "transactions": transactions
+            }}/>
+            <Transactions data={{
                 "total_shares_owned": 20,
                 "total_shares_value": 123456,
                 "transactions": transactionsWithGames
-            }}/> */}
-        {portfolioHistory && (
-          <PortfolioHistory portfolio_history={portfolioHistory} />
-        )}
-        {userShares && <ShareOverview shares={userShares} />}
-        {GTAGameInfo && GTAGamePrices && (
-          <GamePreview
-            game={GTAGameInfo}
-            user_info={userInfo}
-            value_history={GTAGamePrices}
-          />
-        )}
-        {gameBGameInfo && gameBGamePrices && (
-          <GamePreview
-            game={gameBGameInfo}
-            user_info={userInfo}
-            value_history={gameBGamePrices}
-          />
-        )}
-        <BuySell game_id={123} share_value={1234} />
-      </View>
-    </View>
-  );
+            }}/>
+            {portfolioHistory && <PortfolioHistory portfolio_history={portfolioHistory}/>}
+            {userShares && <ShareOverview shares={userShares}/>}
+            {GTAGameInfo && GTAGamePrices &&
+             <GamePreview game={GTAGameInfo} shares_owned={20} value_history={GTAGamePrices}/>}
+            {gameBGameInfo && gameBGamePrices &&
+             <GamePreview game={gameBGameInfo} shares_owned={10} value_history={gameBGamePrices}/>}
+            <BuySell game_id={123} share_value={1234}/>
+        </View>
+    </View>;
 };
 export default account;
+
