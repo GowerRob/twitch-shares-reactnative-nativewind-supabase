@@ -1,14 +1,12 @@
 
-import {TextInput,FlatList,Text,View} from 'react-native'
-import {useState,useEffect} from 'react'
+import { Text,View } from 'react-native'
 
-import {styled} from 'nativewind'
+import { styled } from 'nativewind'
 
-import supabase from '../../config/supabaseConfig'
 
 const StyledView=styled(View);
 
-const GameCard= ({gameItem}) =>{
+const GameCard= ({gameItem, index}) =>{
   
 
 
@@ -17,7 +15,7 @@ const GameCard= ({gameItem}) =>{
             <StyledView className="flex flex-row space-x-2">
                 <Text >{gameItem.game_name} - </Text>
                 <Text>{gameItem.value}</Text>
-
+                <Text>{index}</Text>
             </StyledView>
 
 

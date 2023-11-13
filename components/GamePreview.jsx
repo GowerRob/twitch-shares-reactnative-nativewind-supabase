@@ -15,29 +15,31 @@ import {
 import BuySell from "./BuySell";
 
 
-const PopupModal = ({visible, children, closeModal}) => {
-    return (
-        <Modal
-            visible={visible}
-            transparent
-            animationType="fade"
-            onRequestClose={closeModal}
-        >
-            <View style={{
-                minWidth: "200px",
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(0, 0, 0, 0.5)"
-            }}>
-                {children}
-            </View>
-        </Modal>
-    );
+const PopupModal = ({ visible, children, closeModal }) => {
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={closeModal}
+    >
+      <View
+        style={{
+          minWidth: "200px",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        }}
+      >
+        {children}
+      </View>
+    </Modal>
+  );
 };
 
 function numberWithCommas(x = 0) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 const GamePreview = ({game, shares_owned, value_history}) => {

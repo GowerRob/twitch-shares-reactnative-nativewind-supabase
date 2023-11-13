@@ -1,64 +1,46 @@
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
   FlatList,
   SafeAreaView,
-  TouchableOpacity,
   ActivityIndicator,
-  Pressable,
 } from "react-native";
-import InvestedGameCard from "./InvestedGameCard";
+
 import { NativeWindStyleSheet } from "nativewind";
-import { fetchInvestedGames, fetchUser } from "../Utils";
+import PortfolioHistory from "./PortfolioHistory";
+import Transactions from "./Transactions";
+import {
+  fetchInvestedGames,
+  fetchUserPortfolioHistory,
+  fetchUserShares,
+  fetchAllTransactions,
+} from "../Utils";
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
-import supabase from "../config/supabaseConfig";
+import { UserContext } from "../context/User";
+import PGGamePreview from "./PGGamePreview";
+import ShareOverview from "./ShareOverview";
 
 const Profile = () => {
-  const router = useRouter();
-  const [user, setUser] = useState();
+  const { user, setUser } = useContext(UserContext);
   const [investedGames, setInvestedGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  function handleUserState(new_value) {
-    setUser((current) => {
-      return {
-        ...current,
-        portfolio_value: current.portfolio_value + new_value,
-        current_credits: current.current_credits - new_value,
-      };
-    });
-    fetchInvestedGames(user.user_id).then((data) => {
-      const filteredData = data.filter((game) => {
-        return game.quantity !== 0;
-      });
-
-      setInvestedGames(filteredData.sort((a, b) => a.game_id - b.game_id));
-    });
-  }
+  const [portfolioValue, setPortfolioValue] = useState(0);
+  const [portfolioHistory, setPortfolioHistory] = useState();
+  const [userShares, setUserShares] = useState();
+  const [allTransactions, setAllTransactions] = useState();
 
   useEffect(() => {
-    fetchUser()
-      .then(({ details }) => {
-        setUser({
-          user_id: details.id,
-          username: details.username,
-          current_credits: details.credits,
-          portfolio_value: 0,
-        });
-        return details.id;
-      })
-      .then((id) => {
-        fetchInvestedGames(id).then((result) => {
+    if (user.id) {
+      fetchInvestedGames(user.id)
+        .then((result) => {
           const newArr = result.filter((game) => {
             return game.quantity !== 0;
           });
 
           setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
-
           const totalValue = result.reduce(
             (total, current) => {
               return Number(
@@ -67,20 +49,35 @@ const Profile = () => {
             },
             [0]
           );
-
-          setUser((current) => {
-            return { ...current, portfolio_value: totalValue };
-          });
-
+          setPortfolioValue(totalValue);
           setIsLoading(false);
+        })
+        .then(() => {
+          fetchUserPortfolioHistory(user.id).then((data) => {
+            setPortfolioHistory(data);
+          });
+        })
+        .then(() => {
+          fetchUserShares(user.id).then((data) => {
+            setUserShares(data);
+          });
+        })
+        .then(() => {
+          fetchAllTransactions(user.id).then((result) => {
+            const newData = result.map((item) => {
+              const newItem = { ...item };
+              newItem.date = new Date(item.transaction_date);
+              newItem.game_name = newItem.games.game_name;
+              return newItem;
+            });
+            setAllTransactions(newData);
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      });
-  }, []);
-
-  const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    router.push(`/`);
-  };
+    }
+  }, [user.id, user.credits]);
 
   return isLoading ? (
     <ActivityIndicator size="large" />
@@ -90,18 +87,11 @@ const Profile = () => {
         <Text className="text-center">
           {" "}
           Hello {user.username} to your Profile page. Your portfolio value ={" "}
-          {user.portfolio_value} cr
+          {portfolioValue} cr
         </Text>
-      </View>
-      <Pressable
-        className="border bg-primary-light text-white my-2"
-        onPress={handleSignOut}
-      >
-        <Text>Sign out</Text>
-      </Pressable>
-      <View>
+
         <Text className="text-center">
-          Your available credit: {user.current_credits}
+          Your available credit: {user.credits}
         </Text>
       </View>
       <View>
@@ -112,19 +102,29 @@ const Profile = () => {
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
-            <InvestedGameCard
-              handleUserState={handleUserState}
-              user_id={user.user_id}
-              game_id={item.game_id}
-              game_name={item.games.game_name}
-              share_value={item.games.value}
-              quantity={item.quantity}
-              current_credits={user.current_credits}
+            <PGGamePreview
+              setInvestedGames={setInvestedGames}
+              game={{ ...item, ...item.games }}
             />
           )}
           keyExtractor={(item) => item.games.game_name}
         />
       </View>
+      <View>{userShares && <ShareOverview shares={userShares} />}</View>
+      <View>
+        {portfolioHistory && (
+          <PortfolioHistory portfolio_history={portfolioHistory} />
+        )}
+      </View>
+      {allTransactions && (
+        <Transactions
+          data={{
+            total_shares_owned: 0,
+            total_shares_value: 0,
+            transactions: allTransactions,
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };

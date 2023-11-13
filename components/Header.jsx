@@ -14,7 +14,6 @@ const Header =()=>{
     const [isLoggedIn, setIsLoggedIn]=useState(false);
     const [count,setCount] = useState(0)
 
-
     const fetchUpdateTime = async () => {
         const { data, error } = await supabase
             .from('stats')
@@ -78,6 +77,13 @@ return(
                 <Text>Sign out</Text>
                 </Pressable>
             </Link>}
+            <Link href={`/leagues`} asChild>
+                <Pressable 
+                    className="border bg-primary-light text-white my-2"
+                >
+                <Text>leagues</Text>
+                </Pressable>
+            </Link>
     </>
 
 )

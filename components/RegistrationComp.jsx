@@ -15,19 +15,17 @@ const RegistrationComp =() => {
   const [repassword, setRepassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors]=useState({});
-
   const {user, setUser} = useContext(UserContext);
 
   const fetchUserDetails = async (id) => {
-    console.log(user)
+    
     const {data, error} = await supabase
     .from("profiles")
     .select("*")
     .eq("id", id)
     .maybeSingle();
-    console.log("Returned data",data)
     setUser(data); 
- 
+    
     return data;
   };
 
