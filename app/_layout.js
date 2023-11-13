@@ -1,7 +1,6 @@
 import {Slot} from 'expo-router'
 import Header from '../components/Header'
 import { UserProvider } from '../context/User'
-import GamePageComp from '../components/GamePageComp'
 
 const Layout = () => {
 
@@ -10,7 +9,6 @@ const Layout = () => {
             <UserProvider>
                 <Header />
                 <Slot />
-                
             </UserProvider>
 
             </>

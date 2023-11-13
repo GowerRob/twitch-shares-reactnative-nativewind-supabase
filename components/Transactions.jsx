@@ -7,9 +7,10 @@ import {NativeWindStyleSheet} from "nativewind";
 
 NativeWindStyleSheet.setOutput({});
 
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+//function numberWithCommas(x) {
+//    console.log(x)
+//    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//}
 
 const Transactions = ({data, show_overview = true}) => {
 
@@ -20,9 +21,9 @@ const Transactions = ({data, show_overview = true}) => {
         <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
             <Text className="text-2xl font-bold text-text-dark mb-4">Transaction History</Text>
             {show_overview && <View><Text className={`text-lg text-text-${colorScheme} mb-2`}>Total Shares
-                Owned: {numberWithCommas(total_shares_owned)}</Text>
+                Owned: {total_shares_owned}</Text>
                 <Text className={`text-lg text-text-${colorScheme} mb-4`}>Total Shares
-                    Value: {numberWithCommas(total_shares_value)}</Text></View>}
+                    Value: {total_shares_value}</Text></View>}
             <View className={`border border-text-dark rounded-lg`}>
                 <View
                     className={`flex flex-row justify-between border-b border-dar border-text-${colorScheme} py-2 px-4`}>
@@ -45,9 +46,9 @@ const Transactions = ({data, show_overview = true}) => {
                         {transactions[0].game &&
                          <Text className={`text-text-${colorScheme} text-right flex-1`}>{transaction.game}</Text>}
                         <Text
-                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{numberWithCommas(transaction.quantity)}</Text>
+                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{transaction.quantity}</Text>
                         <Text
-                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{numberWithCommas(transaction.value)}</Text>
+                            className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{transaction.value}</Text>
                         {/*<Text*/}
                         {/*    className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{transaction.new_total}</Text>*/}
                     </View>

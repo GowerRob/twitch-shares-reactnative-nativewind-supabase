@@ -133,22 +133,22 @@ const GameList = ({title = "", limit = 10, search = true, sort = true, filter = 
                 </Picker>}
                 {filter &&
                  <View className="flex-1 flex-row items-center m-4">
-                     <Text className="text-text-dark">Hide Unaffordable </Text>
-                     <Switch
-                         trackColor={{false: "#595959", true: "#7D5BBE"}}
-                         thumbColor={hideExpensive ? "#07040c" : "#ffffff"}
-                         onValueChange={toggleSwitch}
-                         value={hideExpensive}
-                     />
+                    <Text className="text-text-dark">Hide Unaffordable </Text>
+                    <Switch
+                        trackColor={{false: "#595959", true: "#7D5BBE"}}
+                        thumbColor={hideExpensive ? "#07040c" : "#ffffff"}
+                        onValueChange={toggleSwitch}
+                        value={hideExpensive}
+                    />
                  </View>}
             </View>}
             <View className={"bg-black rounded-lg h-auto w-full flex justify-center items-center"}>
                 {games && <FlatList className="w-full"
-                                    data={games}
-                                    renderItem={({item}) => <GamePreview value_history={item.price_history}
-                                                                         shares_owned={user ? (item.shares[0] ? item.shares[0].quantity : 0) : undefined}
-                                                                         game={item}/>}
-                                    keyExtractor={item => item.game_id}
+                    data={games}
+                    renderItem={({item}) => <GamePreview value_history={item.price_history}
+                        shares_owned={user ? (item.shares[0] ? item.shares[0].quantity : 0) : undefined}
+                        game={item}/>}
+                    keyExtractor={item => item.game_id}
                 />}
             </View>
         </View>
