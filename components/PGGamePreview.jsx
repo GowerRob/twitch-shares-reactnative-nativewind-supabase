@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, Modal } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
 import {
@@ -11,6 +11,9 @@ import {
   VictoryVoronoiContainer,
 } from "victory-native";
 import BuySell from "./BuySell";
+import { UserContext } from "../context/User";
+import { useRouter } from "expo-router";
+import { fetchGamePrices } from "../Utils";
 
 NativeWindStyleSheet.setOutput({});
 
@@ -41,10 +44,20 @@ function numberWithCommas(x = 0) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const GamePreview = ({ game, user_info, value_history }) => {
-  const { game_name, value, cover_url, game_id } = game;
-  const { shares_owned } = user_info;
+const GamePreview = ({ game, value_history }) => {
+  const router = useRouter();
+  const { game_name, value, cover_url, game_id, quantity } = game;
   const [modalVisible, setModalVisible] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+  const [gamePrices, setGamePrices] = useState([]);
+
+  useEffect(() => {
+    fetchGamePrices(game_id)
+      .then((result) => setGamePrices(result))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const openModal = () => {
     setModalVisible(true);
@@ -75,10 +88,10 @@ const GamePreview = ({ game, user_info, value_history }) => {
           Value: {numberWithCommas(value)}
         </Text>
         <Text className={`text-sm text-text-dark`}>
-          Shares owned: {numberWithCommas(shares_owned)}
+          Shares owned: {numberWithCommas(quantity)}
         </Text>
         <Text className={`text-sm text-text-dark`}>
-          Owned value: {numberWithCommas(shares_owned * value)}
+          Owned value: {numberWithCommas(quantity * value)}
         </Text>
         <View className="flex-row justify-end mt-4">
           <TouchableOpacity
@@ -88,6 +101,7 @@ const GamePreview = ({ game, user_info, value_history }) => {
             <Text className="text-white">Buy/Sell</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => router.push(`/${game_id}`)}
             className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}
           >
             <Text className="text-white">Game Page</Text>
@@ -125,14 +139,20 @@ const GamePreview = ({ game, user_info, value_history }) => {
             style={{
               data: { fill: "url(#myGradient2)", stroke: "url(#myGradient1)" },
             }}
-            data={value_history.map((value) => {
+            data={gamePrices.map((value) => {
               return { x: value.time, y: value.value };
             })}
           />
         </VictoryChart>
       </View>
       <PopupModal visible={modalVisible} closeModal={closeModal}>
-        <BuySell game_id={game_id} value={value} closeModal={closeModal} />
+        <BuySell
+          quantity={quantity}
+          game_id={game_id}
+          game_name={game_name}
+          value={value}
+          closeModal={closeModal}
+        />
       </PopupModal>
     </View>
   );

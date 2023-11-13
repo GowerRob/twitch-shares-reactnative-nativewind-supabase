@@ -26,7 +26,7 @@ export const fetchUserDetails = async (id) => {
 export const fetchInvestedGames = async (id) => {
   const { data, error } = await supabase
     .from("shares")
-    .select("game_id, quantity, games (game_name, value)")
+    .select("game_id, quantity, games (game_name, value, cover_url)")
     .eq("user_id", id);
 
   if (error) {
@@ -82,5 +82,49 @@ export const fetchGameTransactions = async (user_id, game_id) => {
   if (error) {
     throw new Error(error.message);
   }
+  return data;
+};
+
+export const fetchAllTransactions = async (user_id) => {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select(
+      "game_id, quantity, transaction_date, value, new_total, games (game_name)"
+    )
+    .eq("user_id", user_id)
+    .order("transaction_date", { ascending: false })
+    .limit(20);
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const fetchGamePrices = async (gameID) => {
+  const { data } = await supabase
+    .from("price_history")
+    .select("*")
+    .eq("game_id", gameID)
+    .gte("time", new Date(Date.now() - 86400000).toISOString())
+    .order("time", { ascending: true });
+  return data;
+};
+
+export const fetchUserPortfolioHistory = async (userID) => {
+  const { data } = await supabase
+    .from("portfolio_history")
+    .select("*")
+    .eq("user_id", userID)
+    .order("time", { ascending: true });
+  return data;
+};
+
+export const fetchUserShares = async (userID) => {
+  const { data } = await supabase
+    .from("shares")
+    .select("*, games(game_name, value)")
+    .eq("user_id", userID)
+    .order("quantity", { ascending: false });
   return data;
 };
