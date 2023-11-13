@@ -53,13 +53,12 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         return currentValue
     }
     
-    return (<View className='border bg-background-light my-5 mx-3'>
-        <Text>League Name : {leagueItem.league_name} </Text>
-        <Text>Number of people in league : {peopleCount}</Text>
+    return (
+    
+    <View className='border bg-background-light my-5 mx-3'>
+        <Text>{leagueItem.league_name} </Text>
+        <Text>Members : {peopleCount}</Text>
         <Text>Total Value : {sumLeagueValue()}</Text>
-        {/* Vistory Graph */}
-
-
 
 
         {inLeague?null:<Pressable
