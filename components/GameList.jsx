@@ -3,6 +3,8 @@ import { View, Text, FlatList, TextInput, Switch } from "react-native";
 import GamePreview from "./GamePreview";
 import supabase from "../config/supabaseConfig";
 import { Picker } from "react-native-web";
+import { useContext } from "react";
+import { UserContext } from "../context/User";
 
 const GameList = ({
   title = "",
@@ -12,7 +14,7 @@ const GameList = ({
   filter = true,
   credits = 1000,
 }) => {
-  const [user, setUser] = useState();
+  const { user, setUser } = useContext(UserContext);
   const [hideExpensive, setHideExpensive] = useState(false);
   const toggleSwitch = () =>
     setHideExpensive((previousState) => !previousState);
@@ -62,7 +64,7 @@ const GameList = ({
               .ilike("game_name", `%${searchTerm}%`)
               .order(sortOrder, { ascending: sortAscending })
               .limit(limit);
-            console.log(data);
+
             setGames(data);
           }
         }
@@ -91,14 +93,15 @@ const GameList = ({
       }
     };
     fetchGames();
-  }, [sortOrder, sortAscending, limit, searchTerm, hideExpensive, user]);
-  useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data.user);
-    };
-    getUser();
-  }, []);
+  }, [
+    sortOrder,
+    sortAscending,
+    limit,
+    searchTerm,
+    hideExpensive,
+    user,
+    user.credits,
+  ]);
 
   const handleSortChange = (item) => {
     const [field, order] = item.split("-");

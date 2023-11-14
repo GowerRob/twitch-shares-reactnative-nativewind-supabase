@@ -20,7 +20,7 @@ NativeWindStyleSheet.setOutput({
   default: "native",
 });
 import { UserContext } from "../context/User";
-import PGGamePreview from "./PGGamePreview";
+import GamePreview from "./GamePreview";
 import ShareOverview from "./ShareOverview";
 import { useRouter } from "expo-router";
 
@@ -42,8 +42,13 @@ const Profile = () => {
           const newArr = result.filter((game) => {
             return game.quantity !== 0;
           });
-
-          setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
+          const mappedData = newArr.map((datum) => {
+            return {
+              ...datum.games,
+              shares: [{ quantity: datum.quantity }],
+            };
+          });
+          setInvestedGames(mappedData.sort((a, b) => a.game_id - b.game_id));
           const totalValue = result.reduce(
             (total, current) => {
               return Number(
@@ -81,7 +86,7 @@ const Profile = () => {
         });
     }
   }, [user.id, user.credits]);
-
+  console.log(investedGames);
   let totalShares = 0;
   if (userShares) {
     totalShares = userShares.reduce((total, game) => {
@@ -104,12 +109,21 @@ const Profile = () => {
         <FlatList
           data={investedGames}
           renderItem={({ item }) => (
-            <PGGamePreview
-              setInvestedGames={setInvestedGames}
-              game={{ ...item, ...item.games }}
+            <GamePreview
+              value_history={item.price_history}
+              shares_owned={
+                user
+                  ? item.shares[0]
+                    ? item.shares[0].quantity
+                    : 0
+                  : undefined
+              }
+              game={item}
             />
+
+            // <PGGamePreview game={{ ...item, ...item.games }} />
           )}
-          keyExtractor={(item) => item.games.game_namse}
+          keyExtractor={(item) => item.game_name}
         />
       </View>
       <Pressable

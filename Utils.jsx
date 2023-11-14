@@ -26,13 +26,12 @@ export const fetchUserDetails = async (id) => {
 export const fetchInvestedGames = async (id) => {
   const { data, error } = await supabase
     .from("shares")
-    .select("game_id, quantity, games (game_name, value, cover_url)")
+    .select("game_id, quantity, games!inner(*, price_history(*))")
     .eq("user_id", id);
 
   if (error) {
     throw new Error(error.message);
   }
-
   return data;
 };
 
