@@ -68,8 +68,11 @@ const handleSignOut = () =>{
 
 return(
     <View className={`bg-background-dark flex flex-row justify-around `}>
-        <Image className="m-1" source={require('./twitch.png')}></Image>
-        <View className={`my-center`}>
+        <View className="w-1/3">
+            <Image className="m-1 w-full" resizeMode='contain' source={require('./twitch.png')}></Image>
+        </View>
+        
+        <View className={`my-center w-1/3`}>
             {isLoggedIn?<Text className={`text-text-dark`}>{user?.username}</Text>:null}
             {isLoggedIn?<Text className={`text-text-dark`}>{user?.credits} Credits</Text>:null}
             {!isLoggedIn?null:<Text className={`text-text-dark`}>{displayTime} until prices update</Text>}
