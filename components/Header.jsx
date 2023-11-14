@@ -35,10 +35,13 @@ const Header =()=>{
 
 
 useEffect(()=>{
-    if (Object.keys(user).length>0){
+    if(user !== undefined){
+        if (Object.keys(user)!== undefined){
         setIsLoggedIn(true)
     }
-    fetchUpdateTime();
+    fetchUpdateTime()
+    }
+    ;
 },[user])
 
 const callDisplay=()=>{
@@ -67,8 +70,8 @@ return(
     <View className={`bg-background-dark flex flex-row justify-around `}>
         <Image className="m-1" source={require('./twitch.png')}></Image>
         <View className={`my-center`}>
-            {isLoggedIn?<Text className={`text-text-dark`}>{user.username}</Text>:null}
-            {isLoggedIn?<Text className={`text-text-dark`}>{user.credits} Credits</Text>:null}
+            {isLoggedIn?<Text className={`text-text-dark`}>{user?.username}</Text>:null}
+            {isLoggedIn?<Text className={`text-text-dark`}>{user?.credits} Credits</Text>:null}
             {!isLoggedIn?null:<Text className={`text-text-dark`}>{displayTime} until prices update</Text>}
         </View>
   
