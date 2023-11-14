@@ -5,10 +5,12 @@ import {useEffect, useState} from "react";
 const websocket = () => {
     const [updateInfo, setUpdateInfo] = useState();
     const [gameInfo, setGameInfo] = useState([]);
+    const [messages, setMessages] = useState([]);
     const [oldGameInfo, setOldGameInfo] = useState({});
     useEffect(() => {
-        socket.emit("register user", 123);
+        socket.emit("register user", "683673b5-9e7e-46fd-8bd0-30e49867c2ab");
     }, []);
+
 
     useEffect(() => {
         socket.on("update", (newUpdateInfo) => {
@@ -19,6 +21,16 @@ const websocket = () => {
                 }
                 return newUpdateInfo.games;
             });
+        });
+        socket.on("game_update", (game_info) => {
+            setMessages(oldMessages => {
+                const newMessages = [...oldMessages];
+                newMessages.push("game_update: " + JSON.stringify(game_info));
+                return newMessages;
+            });
+        });
+        socket.onAny((event_name, content) => {
+            console.log("update received");
         });
     }, [socket]);
 
@@ -58,6 +70,7 @@ const websocket = () => {
                     </View>
                 )}
             />
+            {messages.map(message => <Text>{message}</Text>)}
         </>
 
     );

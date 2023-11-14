@@ -27,6 +27,7 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
+    "socket.io-client": "^4.7.2",
     "supabase": "^1.110.1"
   },
   "devDependencies": {
