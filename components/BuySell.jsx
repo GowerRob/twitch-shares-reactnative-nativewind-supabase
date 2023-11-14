@@ -117,7 +117,8 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
           keyboardType="numeric"
           value={tradeQuantity}
           onChangeText={(text) =>
-            setTradeQuantity(+text.replace(/[^0-9]/g, ""))
+            setTradeQuantity(Math.min(+text.replace(/[^0-9]/g, ""), Math.floor(user.credits / value)))
+
           }
         />
         <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">
