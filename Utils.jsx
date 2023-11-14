@@ -85,7 +85,7 @@ export const fetchGameTransactions = async (user_id, game_id) => {
   return data;
 };
 
-export const fetchAllTransactions = async (user_id) => {
+export const fetchAllTransactions = async (user_id, limit = 20) => {
   const { data, error } = await supabase
     .from("transactions")
     .select(
@@ -93,7 +93,7 @@ export const fetchAllTransactions = async (user_id) => {
     )
     .eq("user_id", user_id)
     .order("transaction_date", { ascending: false })
-    .limit(20);
+    .limit(limit);
   if (error) {
     throw new Error(error.message);
   }
