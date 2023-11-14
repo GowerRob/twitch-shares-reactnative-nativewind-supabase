@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Pressable, TextInput, Text, View } from "react-native"
+import { router } from "expo-router"
 
 import supabase from '../../config/supabaseConfig'
 
@@ -15,6 +16,11 @@ const CreateLeague = () => {
             .from('leagues')
             .insert({league_name:leagueName.trim()})
             setLeagueCreated(true)
+            const timer =  setTimeout(() => {
+                router.push(`leagues`)
+            }, 2000)
+             return () => clearTimeout(timer);
+
         }else{
             setError('League name must contain at least 1 none whitespace character')
         }
@@ -33,8 +39,15 @@ const CreateLeague = () => {
             onPress={handleCreateLeague}>
             <Text>Submit</Text>
         </Pressable>
+
         {leagueCreated?<Text>Your League has been created</Text>:null}
         {error?<Text>{error}</Text>:null}
+
+        <Pressable 
+            className="border bg-primary-light text-white my-2"
+            onPress={()=>{router.push(`leagues`)}}>
+            <Text>Cancel</Text>
+        </Pressable>
      </View>)
 }
 
