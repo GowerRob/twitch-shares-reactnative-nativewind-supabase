@@ -53,20 +53,22 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         return currentValue
     }
     
-    return (<View className='border bg-background-light my-5 mx-3'>
-        <Text>League Name : {leagueItem.league_name} </Text>
-        <Text>Number of people in league : {peopleCount}</Text>
-        <Text>Total Value : {sumLeagueValue()}</Text>
-        {/* Vistory Graph */}
-
-
-
-
+    return (
+    
+    <View className='border-solid border-4 border-accent-dark  my-5 mx-3 flex flex-column w-90 rounded-md'>
+        <Text className='text-text-dark text-center text-xl my-2 border-solid border-2 border-primary-dark font-bold mx-2 rounded-lg'>{leagueItem.league_name} </Text>
+        <View className='flex flex-row justify-evenly mb-2'>
+            <Text className={`text-text-dark`}>{peopleCount} Members</Text>
+            <Text className={`text-text-dark`}>{sumLeagueValue()} credits in combined assets</Text>
+        </View>
+        
+        <View>
         {inLeague?null:<Pressable
-            className="border bg-primary-light text-white my-2"
+            className="border bg-primary-dark text-white my-2 mx-3 rounded-md"
             onPress={handleJoinLeague}>
-            <Text>Join League</Text>
+            <Text className={`text-text-dark text-center`}>Join League</Text>
         </Pressable>}
+        </View>
     </View>)
 }
 

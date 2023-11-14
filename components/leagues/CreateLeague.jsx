@@ -5,12 +5,19 @@ import supabase from '../../config/supabaseConfig'
 
 const CreateLeague = () => {
     const [leagueName, setLeagueName] = useState('')
+    const [leagueCreated, setLeagueCreated] = useState(false)
+    const [error, setError] = useState('')
 
     const handleCreateLeague = async () => {
-        const {error} = await supabase
-        .from('leagues')
-        .insert({league_name:leagueName})
-
+        setError('')
+        if(leagueName.trim()){
+            const {error} = await supabase
+            .from('leagues')
+            .insert({league_name:leagueName.trim()})
+            setLeagueCreated(true)
+        }else{
+            setError('League name must contain at least 1 none whitespace character')
+        }
         setLeagueName('')
     }
 
@@ -26,6 +33,8 @@ const CreateLeague = () => {
             onPress={handleCreateLeague}>
             <Text>Submit</Text>
         </Pressable>
+        {leagueCreated?<Text>Your League has been created</Text>:null}
+        {error?<Text>{error}</Text>:null}
      </View>)
 }
 
