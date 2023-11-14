@@ -67,7 +67,12 @@ export const fetchCurrentInvestedGame = async (user_id, game_id) => {
   if (error) {
     throw new Error(error.message);
   }
-  return data.quantity;
+  console.log(data);
+  if (data === null) {
+    return 0;
+  } else {
+    return data.quantity;
+  }
 };
 
 export const fetchGameTransactions = async (user_id, game_id) => {
