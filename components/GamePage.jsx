@@ -37,7 +37,7 @@ export default function GamePage() {
         data.cover_url = data.cover_url
           .replace(/{width}/, 200)
           .replace(/{height}/, 300);
-
+        console.log(data);
         setCurrentGame(data);
       })
       .catch((error) => {
@@ -75,7 +75,7 @@ export default function GamePage() {
         console.log(error);
       });
   }, [user.credits]);
-
+  console.log(transactions);
   const colorScheme = "dark";
   return (
     <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
@@ -180,13 +180,15 @@ export default function GamePage() {
         />
       </View>
       <View>
-        <Transactions
-          data={{
-            total_shares_owned: currentGame.quantity,
-            total_shares_value: currentGame.quantity * currentGame.value,
-            transactions: transactions,
-          }}
-        />
+        {transactions.length && (
+          <Transactions
+            data={{
+              total_shares_owned: currentGame.quantity,
+              total_shares_value: currentGame.quantity * currentGame.value,
+              transactions: transactions,
+            }}
+          />
+        )}
       </View>
     </View>
   );
