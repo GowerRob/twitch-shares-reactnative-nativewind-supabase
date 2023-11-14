@@ -9,7 +9,6 @@ const Layout = () => {
             <UserProvider>
                 <Header />
                 <Slot />
-                
             </UserProvider>
 
             </>

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
-import { FlatList, Pressable, Text } from 'react-native'
+import { FlatList, Pressable, Text , View} from 'react-native'
 import LeagueCard from './LeagueCard'
 import { UserContext } from '../../context/User'
 import {router} from 'expo-router' 
 import { fetchLeagues, fetchPlayerPortfolio, fetchUserLeagues } from '../../api/api'
+import { NativeWindStyleSheet } from "nativewind";
 
 const DisplayLeagues = () => {
     const [leagues, setLeagues] = useState([])
@@ -11,7 +12,7 @@ const DisplayLeagues = () => {
     const [leagueData,setLeagueData] = useState([])
     const [isLoading, setIsloading] = useState(true)
     const {user} = useContext(UserContext)
- 
+    const colorScheme = "dark";
     useEffect(()=>{
         fetchPlayerPortfolio(setLeagueData)
         fetchUserLeagues(setUserLeagues,user)
@@ -22,7 +23,11 @@ const DisplayLeagues = () => {
     if(isLoading) return <Text>Loading ...</Text>
 
     return (<>
+
+<View className={`rounded-lg p-4 bg-background-${colorScheme} id-outerView`}>
+        <View className={`bg-background-dark rounded-lg flex flex-column items-center id-innerView`}>
         <FlatList
+        className={`w-4/5`}
             data={leagues}
             renderItem={({item})=>{
                 return <Pressable
@@ -31,6 +36,8 @@ const DisplayLeagues = () => {
             }}
             keyExtractor={item=>item.league_id}>
         </FlatList>
+        </View>
+    </View>
     </>)
  }
 

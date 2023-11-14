@@ -61,10 +61,6 @@ const RegistrationComp =() => {
 
     }
 
-    if (data.session !== null) {
-      router.push(`account`);
-    }
-
   return (
     <>
       {isLoading ? (

@@ -11,7 +11,7 @@ export const fetchPlayerPortfolio=async(setLeagueData)=>{
         portfolio_history!inner(user_id,total_value,time)
     `)
     .order('time',{ foreignTable: 'portfolio_history', ascending:false })
-    .limit(1, {foreignTable: 'portfolio_history'})
+    .limit(2, {foreignTable: 'portfolio_history'})
     data.sort((a,b)=>{
         return b.portfolio_history[0].total_value-a.portfolio_history[0].total_value})
     setLeagueData(data)

@@ -1,4 +1,4 @@
-import {Text, Pressable} from 'react-native'
+import {Text, Pressable, View, Image} from 'react-native'
 import { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../context/User'
 import {Link} from 'expo-router' 
@@ -35,10 +35,13 @@ const Header =()=>{
 
 
 useEffect(()=>{
-    if (Object.keys(user).length>0){
+    if(user !== undefined){
+        if (Object.keys(user)!== undefined){
         setIsLoggedIn(true)
     }
-    fetchUpdateTime();
+    fetchUpdateTime()
+    }
+    ;
 },[user])
 
 const callDisplay=()=>{
@@ -64,27 +67,39 @@ const handleSignOut = () =>{
 }
 
 return(
-    <>
-        <Text className="text-5xl mb-8">Twitch Shares</Text>
-        {isLoggedIn?<Text>Credits:  {user.credits}</Text>:null}
-        {isLoggedIn?<Text>Username:  {user.username}</Text>:null}
-        {!isLoggedIn?null:<Text>Time to update: {displayTime}</Text>}
+    <View className={`bg-background-dark flex flex-row justify-around `}>
+        <Image className="m-1" source={require('./twitch.png')}></Image>
+        <View className={`my-center`}>
+            {isLoggedIn?<Text className={`text-text-dark`}>{user?.username}</Text>:null}
+            {isLoggedIn?<Text className={`text-text-dark`}>{user?.credits} Credits</Text>:null}
+            {!isLoggedIn?null:<Text className={`text-text-dark`}>{displayTime} until prices update</Text>}
+        </View>
+  
+        
+        
 
-        {!isLoggedIn?null:<Link href={`/`} asChild>
+        {!isLoggedIn?
+        <Link href={`/`} asChild>
                 <Pressable 
-                className="border bg-primary-light text-white my-2"
+                className="border bg-accent-dark  my-2 rounded-md">
+                <Text className={`text-text-dark my-1 mx-1`}>Login</Text>
+                </Pressable>
+            </Link>:
+        <Link href={`/`} asChild>
+                <Pressable 
+                className="border bg-accent-dark  my-2 rounded-md"
                 onPress={handleSignOut}>
-                <Text>Sign out</Text>
+                <Text className={`text-text-dark my-1 mx-1`}>Sign out</Text>
                 </Pressable>
             </Link>}
             <Link href={`/leagues`} asChild>
-                <Pressable 
+                {/* <Pressable 
                     className="border bg-primary-light text-white my-2"
                 >
                 <Text>leagues</Text>
-                </Pressable>
+                </Pressable> */}
             </Link>
-    </>
+    </View>
 
 )
 }
