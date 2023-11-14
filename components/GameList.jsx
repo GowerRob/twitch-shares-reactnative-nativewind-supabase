@@ -114,6 +114,7 @@ const GameList = ({
   };
   const colorScheme = "dark";
 
+
   return (
     <View className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">{title}</Text>
@@ -172,7 +173,7 @@ const GameList = ({
                 onValueChange={toggleSwitch}
                 value={hideExpensive}
               />
-            </View>
+           </View>
           )}
         </View>
       )}
