@@ -64,7 +64,7 @@ const Login = () =>{
 
           <Text>Enter Password</Text>
           <TextInput
-            secureTextEntry="true"
+            secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
             className="border"
