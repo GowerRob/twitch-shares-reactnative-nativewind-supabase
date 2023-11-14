@@ -47,7 +47,20 @@ export default function GamePage() {
 
   useEffect(() => {
     fetchGamePrices(game_id)
-      .then((result) => setGamePrices(result))
+      .then((result) => {
+        const filteredResult = result.filter((item, index) => {
+          if ((index + 1) % 2 === 0) {
+            // const newTime = new Date(item.time)
+            // console.log(newTime)
+
+            const newTime = item.time.replace("T", "@").slice(5, 16);
+
+            item.time = newTime;
+            return item;
+          }
+        });
+        setGamePrices(filteredResult);
+      })
       .then(() => {
         fetchGameTransactions(user.id, game_id).then((data) => {
           const newData = data.map((item) => {
@@ -65,7 +78,7 @@ export default function GamePage() {
 
   const colorScheme = "dark";
   return (
-    <>
+    <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
       <View className={`flex-row rounded-lg m-4 bg-background-dark`}>
         <Image
           source={{
@@ -99,21 +112,26 @@ export default function GamePage() {
           </View>
         </View>
       </View>
-      <View className="flex-grow m-0 p-0 rounded-lg hidden sm:flex">
+      <View
+        className={`rounded-lg border pt-40 p-4 m-4 bg-background-${colorScheme}`}
+      >
+        <Text className="text-2xl font-bold text-text-dark mb-4">
+          Game Value
+        </Text>
         <VictoryChart
-          height={90}
-          width={170}
+          height={300}
+          width={600}
           theme={VictoryTheme.grayscale}
-          padding={0}
+          padding={60}
         >
           <svg style={{ height: 0 }}>
             <defs>
               <linearGradient id="myGradient1">
-                <stop offset="10%" stopColor="#6441A400" />
-                <stop offset="100%" stopColor="#6441A4FF" />
+                <stop offset="0%" stopColor="#6441A400" />
+                <stop offset="0%" stopColor="#6441A4FF" />
               </linearGradient>
               <linearGradient id="myGradient2">
-                <stop offset="20%" stopColor="#6441A400" />
+                <stop offset="0%" stopColor="#6441A400" />
                 <stop offset="100%" stopColor="#6441A490" />
               </linearGradient>
             </defs>
@@ -121,10 +139,24 @@ export default function GamePage() {
           <VictoryAxis
             style={{
               axis: { stroke: "transparent" },
-              ticks: { stroke: "transparent" },
-              tickLabels: { fill: "transparent" },
+              ticks: { stroke: "white" },
+              tickLabels: { fill: "white" },
+            }}
+            dependentAxis
+          />
+          <VictoryAxis
+            style={{
+              axis: { stroke: "transparent" },
+              ticks: { stroke: "white" },
+              tickLabels: {
+                fill: "white",
+                angle: -60,
+                textAnchor: "end",
+                fontSize: 9,
+              },
             }}
           />
+
           <VictoryArea
             interpolation="natural"
             style={{
@@ -156,6 +188,6 @@ export default function GamePage() {
           }}
         />
       </View>
-    </>
+    </View>
   );
 }
