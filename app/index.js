@@ -27,11 +27,11 @@ const Home = () => {
                 }}
             />
 
-            <ScrollView className="flex-1 h-screen">
+            
                 <View className="flex-1 h-screen">
                     <GameList/>
                 </View>
-            </ScrollView>
+            
         </SafeAreaView>
     );
 };
