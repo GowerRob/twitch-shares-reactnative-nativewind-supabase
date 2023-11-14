@@ -2,6 +2,7 @@ import {View, Text, ScrollView, SafeAreaView} from "react-native";
 import {useState} from "react";
 import {Stack, useRouter} from "expo-router";
 import Login from "../components/Login";
+import GameList from "../components/GameList";
 
 
 // The below snippet also multiple nativewind classes to be applied
@@ -28,7 +29,7 @@ const Home = () => {
 
             <ScrollView className="flex-1 h-screen">
                 <View className="flex-1 h-screen">
-                    <Login/>
+                    <GameList/>
                 </View>
             </ScrollView>
         </SafeAreaView>
