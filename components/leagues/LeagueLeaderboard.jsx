@@ -45,7 +45,7 @@ const LeagueLeaderboard = ({league_id}) => {
       <View className={"w-full max-w-4xl h-full"}>
         {/* <Text className="text-white font-bold text-2xl p-2">
             Total Value : {sumLeagueValue()}</Text> */}
-            <Text className="text-white font-bold text-xl">Current League</Text>
+            <Text className="text-white font-bold text-xl pl-4">Current League</Text>
 
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
         <View className={`border border-text-dark rounded-lg`}>
@@ -107,7 +107,7 @@ const LeagueLeaderboard = ({league_id}) => {
         </View>
 
     </View>
-    <Text className="text-white font-bold text-xl">Last Weeks League</Text>
+    <Text className="text-white font-bold text-xl pl-4">Last Weeks League</Text>
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
         <View className={`border border-text-dark rounded-lg`}>
             {/* Headers */}

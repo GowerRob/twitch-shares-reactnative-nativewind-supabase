@@ -110,10 +110,10 @@ return(
 
         <View 
         className={`bg-background-dark flex flex-row justify-between `}>
-            <View className="w-1/3  ">
+            <View className=" w-1/2 md:w-1/3  ">
                 <Image className="m-1 w-full  h-20" resizeMode='contain' source={require('./twitchFinal.png')}></Image>
             </View>
-            <View className="flex flex-row w-2/3 pr-2 justify-end items-center ">
+            <View className="flex flex-col-reverse items-end md:items-center md:flex-row w-1/2 md:2/3 pr-2 justify-end  ">
                 <View className={`my-center w-2/3 mr-3 flex flex-col items-end`}>
                     {isLoggedIn?<Text className={`text-text-dark font-bold text-lg`}>{user?.username}</Text>:null}
                     {isLoggedIn?<Text className={`text-text-dark`}>{user?.credits} Credits</Text>:null}
