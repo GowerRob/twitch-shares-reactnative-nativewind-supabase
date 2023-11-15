@@ -7,7 +7,7 @@
     "plugins": [
       "expo-router"
     ],
-    "name": "supabase-native",
-    "slug": "supabase-native"
+    "name": "Twitch shares",
+    "slug": "Twitch shares"
   }
 }
