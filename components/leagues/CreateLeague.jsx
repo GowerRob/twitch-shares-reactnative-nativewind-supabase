@@ -34,7 +34,6 @@ const CreateLeague = () => {
         <Text className="text-white font-bold text-xl mb-2">Enter new league name:</Text>
         <TextInput
             className="bg-white border-4 border-solid text-xl border-accent-light rounded-md mb-5"
-            placeholder="league name" 
             value={leagueName}
             onChangeText={setLeagueName}
         />
@@ -44,8 +43,8 @@ const CreateLeague = () => {
             <Text className="text-white font-bold text-xl text-center p-1">Submit</Text>
         </Pressable>
 
-        {leagueCreated?<Text>Your League has been created</Text>:null}
-        {error?<Text>{error}</Text>:null}
+        {leagueCreated?<Text className="text-white font-bold">Your League has been created</Text>:null}
+        {error?<Text className="text-white font-bold">{error}</Text>:null}
 
         <Pressable 
             className="border bg-primary-light text-white my-2 rounded-md "

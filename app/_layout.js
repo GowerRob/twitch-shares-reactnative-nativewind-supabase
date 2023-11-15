@@ -5,6 +5,9 @@ import Toast from "react-native-toast-message";
 import {useContext, useEffect, useState} from "react";
 import socket from "../socket";
 import supabase from "../config/supabaseConfig";
+import Footer from "../components/Footer";
+
+import { View } from "react-native";
 
 const Layout = () => {
 
@@ -66,19 +69,19 @@ const Layout = () => {
             });
         });
     }, [socket]);
-    return (
-        <>
-            <UserProvider>
-                <Header/>
-                <Slot/>
-            </UserProvider>
-            <Toast/>
-        </>
-    );
 
-    // return <Stack />
-};
 
+    return(<>
+        <UserProvider>
+            <Header />
+            <View className={`mt-10 py-20 h-full bg-background-dark`}>
+                <Slot />
+            </View>
+
+            <Footer />
+        </UserProvider>
+    </>)
+}
 
 export default Layout;
 

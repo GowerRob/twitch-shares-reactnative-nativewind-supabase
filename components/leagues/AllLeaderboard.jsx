@@ -1,39 +1,19 @@
 import { useEffect, useState } from "react"
-import { FlatList, Text,View } from "react-native"
+import { Text,View } from "react-native"
 import { NativeWindStyleSheet } from "nativewind";
 
-import { fetchPlayerPortfolio, fetchlastPlayerPortfolio } from "../../api/api"
+import { fetchAllPortfolio, fetchLastAllPortfolio } from "../../api/api"
 
-const LeagueLeaderboard = ({league_id}) => {
+const AllLeaderboard = () => {
     const [leagueData,setLeagueData] = useState([])
-    const [filteredData,setFilteredData] = useState([])
-    const [lastLeague, setLastLeague] = useState([])
+    const [lastLeague,setLastLeague] = useState([])
     const colorScheme = "dark";
+
     useEffect(()=>{
-        fetchPlayerPortfolio(setLeagueData)
-        fetchlastPlayerPortfolio(setLastLeague)
+        fetchAllPortfolio(setLeagueData)
+        fetchLastAllPortfolio(setLastLeague)
     },[])
     
-    useEffect(()=>{
-        const result = leagueData.filter((item)=>{
-            let value = false
-            item.leagues.forEach((league)=>{
-                if(league.league_id=== +league_id){
-                    value = true
-                }
-            })
-            return value
-        })
-        setFilteredData(result)
-    },[leagueData])
-
-    const sumLeagueValue = () => {
-        let currentValue = 0
-            filteredData.forEach((item)=>{
-                currentValue += (item.portfolio_history[0].total_value+item.portfolio_history[0].credits)
-            })
-        return currentValue
-    }
 
    
 
@@ -41,12 +21,9 @@ const LeagueLeaderboard = ({league_id}) => {
     
         
 
- <View className={`bg-background-${colorScheme} h-full w-full flex justify-center items-center`}>
-      <View className={"w-full max-w-4xl h-full"}>
-        {/* <Text className="text-white font-bold text-2xl p-2">
-            Total Value : {sumLeagueValue()}</Text> */}
-            <Text className="text-white font-bold text-xl pl-4">Current League</Text>
-
+ <View className={`bg-background-${colorScheme} h-full w-full flex justify-center items-center mt-5`}>
+    <View className={"w-full max-w-4xl h-full"}>
+    <Text className="text-white font-bold text-xl pl-4">Current League</Text>
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
         <View className={`border border-text-dark rounded-lg`}>
             {/* Headers */}
@@ -77,12 +54,12 @@ const LeagueLeaderboard = ({league_id}) => {
                 </Text>
             </View>
             {/* Data */}
-            {filteredData.map((item, index)=>(
+            {leagueData.map((item, index)=>(
                 <View             
                 className={`flex flex-row border-b border-${colorScheme}-300 py-2 px-4`}
                 key={index}>
-                    <Text
-                     className={`text-text-${colorScheme}  basis-1/4 text-left w-24 `}
+                    <Text 
+                     className={`text-text-${colorScheme} basis-1/4  text-left w-24 `}
                     >
                         {index+1}
                     </Text>
@@ -90,20 +67,25 @@ const LeagueLeaderboard = ({league_id}) => {
                         {item.username}
                     </Text>
                     <Text
-                    className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
+                    className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {item.portfolio_history[0].total_value + item.portfolio_history[0].credits}
+                        {item.portfolio_history[0].total_value}
                     </Text>
                     <Text
-                    className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
+                    className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
                         {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*(((item.portfolio_history[0].total_value+item.portfolio_history[0].credits)-(item.portfolio_history[1].total_value+item.portfolio_history[1].credits))/(item.portfolio_history[0].total_value+item.portfolio_history[0].credits))).toFixed(2) 
+                        ?(100*((item.portfolio_history[0].total_value-item.portfolio_history[1].total_value)/item.portfolio_history[0].total_value)).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
+
                 </View>
+
+
+
             ))}
+
         </View>
 
     </View>
@@ -142,8 +124,8 @@ const LeagueLeaderboard = ({league_id}) => {
                 <View             
                 className={`flex flex-row border-b border-${colorScheme}-300 py-2 px-4`}
                 key={index}>
-                    <Text
-                     className={`text-text-${colorScheme}  basis-1/4 text-left w-24 `}
+                    <Text 
+                     className={`text-text-${colorScheme} basis-1/4  text-left w-24 `}
                     >
                         {index+1}
                     </Text>
@@ -151,20 +133,25 @@ const LeagueLeaderboard = ({league_id}) => {
                         {item.username}
                     </Text>
                     <Text
-                    className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
+                    className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {item.portfolio_history[0].total_value + item.portfolio_history[0].credits}
+                        {item.portfolio_history[0].total_value}
                     </Text>
                     <Text
-                    className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
+                    className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
                         {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*(((item.portfolio_history[0].total_value+item.portfolio_history[0].credits)-(item.portfolio_history[1].total_value+item.portfolio_history[1].credits))/(item.portfolio_history[0].total_value+item.portfolio_history[0].credits))).toFixed(2) 
+                        ?(100*((item.portfolio_history[0].total_value-item.portfolio_history[1].total_value)/item.portfolio_history[0].total_value)).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
+
                 </View>
+
+
+
             ))}
+
         </View>
 
     </View>
@@ -181,4 +168,4 @@ const LeagueLeaderboard = ({league_id}) => {
     </>)
 }
 
-export default LeagueLeaderboard;
+export default AllLeaderboard;
