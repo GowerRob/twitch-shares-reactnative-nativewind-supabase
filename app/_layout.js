@@ -6,24 +6,14 @@ import Footer from '../components/Footer'
 import { View } from 'react-native'
 
 const Layout = () => {
-
-
     return(<>
-            <UserProvider>
-                <Header />
-                <View className={`py-20 h-full bg-background-dark`}>
-                    <Slot />
-                </View>
-                
-                <Footer />
-            </UserProvider>
-
-            </>
-        )
-    
-
-    // return <Stack />
-
+        <UserProvider>
+            <Header />
+            <View className={`py-20 h-full bg-background-dark`}>
+                <Slot />
+            </View>
+            
+            <Footer />
+        </UserProvider>
+    </>)
 }
-
-export default Layout
