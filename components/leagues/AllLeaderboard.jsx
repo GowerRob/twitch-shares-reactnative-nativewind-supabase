@@ -69,13 +69,13 @@ const AllLeaderboard = () => {
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {item.portfolio_history[0].total_value}
+                        {item.portfolio_history[0]?.total_value}
                     </Text>
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*((item.portfolio_history[0].total_value-item.portfolio_history[1].total_value)/item.portfolio_history[0].total_value)).toFixed(2) 
+                        {(item.portfolio_history[1]?.total_value)!==undefined
+                        ?(100*((item.portfolio_history[0]?.total_value-item.portfolio_history[1]?.total_value)/item.portfolio_history[0]?.total_value)).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
@@ -135,13 +135,13 @@ const AllLeaderboard = () => {
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {item.portfolio_history[0].total_value}
+                        {item.portfolio_history[0]?.total_value}
                     </Text>
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*((item.portfolio_history[0].total_value-item.portfolio_history[1].total_value)/item.portfolio_history[0].total_value)).toFixed(2) 
+                        {(item.portfolio_history[1]?.total_value)!==undefined
+                        ?(100*((item.portfolio_history[0]?.total_value-item.portfolio_history[1]?.total_value)/item.portfolio_history[0]?.total_value)).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
