@@ -85,9 +85,8 @@ const Profile = () => {
           console.log(error);
         });
     } else {
-      router.push('/login')
+      router.push("/login");
     }
-
   }, [user.id, user.credits]);
   let totalShares = 0;
   if (userShares) {
@@ -107,63 +106,56 @@ const Profile = () => {
           <Text className="text-center text-text-dark mb-4">
             {" "}
             Your portfolio value = {portfolioValue} cr
-        </Text>
-      </View>
-      <View className="bg-black rounded-lg h-auto w-full flex justify-center items-center">
-        <FlatList className='w-full'
-          data={investedGames}
-          renderItem={({ item }) => (
-            <GamePreview
-              value_history={item.price_history}
-              shares_owned={
-                user
-                  ? item.shares[0]
-                    ? item.shares[0].quantity
-                    : 0
-                  : undefined
-              }
-              game={item}
-            />
-
-            // <PGGamePreview game={{ ...item, ...item.games }} />
-          )}
-          keyExtractor={(item) => item.game_name}
-        />
-      </View>
-      <Pressable
-        className="bg-accent-light self-center hover:bg-accent-dark rounded p-2 m-2 max-w-[110px]"
-        onPress={() => setIsCollapsed(!isCollapsed)}
-      >
-        <Text className="text-text-dark">
-          {isCollapsed ? "Show Charts" : "Hide Charts"}
-        </Text>
-      </Pressable>
-      <Collapsible collapsed={isCollapsed}>
-        <View>{userShares && <ShareOverview shares={userShares} />}</View>
-        <View>
-          {portfolioHistory && (
-            <PortfolioHistory portfolio_history={portfolioHistory} />
-          )}
+          </Text>
         </View>
-      </Collapsible>
-      {allTransactions && (
-        <Transactions
-          data={{
-            total_shares_owned: totalShares,
-            total_shares_value: portfolioValue,
-            transactions: allTransactions,
-          }}
-        />
-      )}
-      <View>
+        <View className="bg-black rounded-lg h-auto w-full flex justify-center items-center">
+          <FlatList
+            className="w-full"
+            data={investedGames}
+            renderItem={({ item }) => (
+              <GamePreview
+                value_history={item.price_history}
+                shares_owned={
+                  user
+                    ? item.shares[0]
+                      ? item.shares[0].quantity
+                      : 0
+                    : undefined
+                }
+                game={item}
+              />
+
+              // <PGGamePreview game={{ ...item, ...item.games }} />
+            )}
+            keyExtractor={(item) => item.game_name}
+          />
+        </View>
         <Pressable
-          onPress={() => router.push("/transactionshistory")}
           className="bg-accent-light self-center hover:bg-accent-dark rounded p-2 m-2 max-w-[110px]"
+          onPress={() => setIsCollapsed(!isCollapsed)}
         >
-          <Text>Show all transactions</Text>
+          <Text className="text-text-dark">
+            {isCollapsed ? "Show Charts" : "Hide Charts"}
+          </Text>
         </Pressable>
+        <Collapsible collapsed={isCollapsed}>
+          <View>{userShares && <ShareOverview shares={userShares} />}</View>
+          <View>
+            {portfolioHistory && (
+              <PortfolioHistory portfolio_history={portfolioHistory} />
+            )}
+          </View>
+        </Collapsible>
+        {allTransactions && (
+          <Transactions
+            data={{
+              total_shares_owned: totalShares,
+              total_shares_value: portfolioValue,
+              transactions: allTransactions,
+            }}
+          />
+        )}
       </View>
-    </View>
     </View>
   );
 };
