@@ -188,14 +188,14 @@ const BuySell = ({
         )}
       </View>
       <View className="flex-row justify-between">
-        {closeModal && (
+        {closeModal ? (
           <TouchableOpacity
             className="bg-accent-light p-2 mt-4 flex-grow border-r rounded-bl-lg"
             onPress={closeModal}
           >
             <Text className="text-white text-center">Cancel Transaction</Text>
           </TouchableOpacity>
-        )}
+        ):null}
         <Pressable
           onPress={() => onPressFunction(tradeQuantity)}
           className={`bg-accent-light p-2 mt-4 flex-grow border-l ${

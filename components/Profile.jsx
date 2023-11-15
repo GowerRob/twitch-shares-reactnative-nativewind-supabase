@@ -125,6 +125,7 @@ const Profile = () => {
                 game={item}
               />
 
+
               // <PGGamePreview game={{ ...item, ...item.games }} />
             )}
             keyExtractor={(item) => item.game_name}

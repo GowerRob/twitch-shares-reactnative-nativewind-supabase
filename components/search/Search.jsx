@@ -186,7 +186,7 @@ const Search = () =>{
                 className="border"
                 placeholder="Enter search term"
                 />
-                {!isLoading&&<FlatList
+                {!isLoading?<FlatList
                 data={filteredGames}
                 renderItem={({item})=>{
                     let usersShares=0;
@@ -200,7 +200,7 @@ const Search = () =>{
                     return <GamePreview game={item} user_info={{shares_owned:usersShares}} value_history={item.price_history}/>
                 }}
                 keyExtractor={item=>item.game_id}>
-                </FlatList>}
+                </FlatList>:null}
                 
                 <Pressable
                     onPress={decSearchPage}

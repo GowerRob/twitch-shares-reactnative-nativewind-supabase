@@ -13,6 +13,7 @@ const Transactions = ({ data, show_overview = true }) => {
   const { total_shares_owned, total_shares_value, transactions } = data;
   const colorScheme = "dark";
 
+
   return (
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">

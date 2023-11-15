@@ -27,7 +27,7 @@ const GameList = ({
   useEffect(() => {
     const fetchGames = async () => {
       
-      if (user.id) {
+      if (user?.id) {
         console.log("User found");
         if (sortOrder === "user shares owned") {
           const { data } = await supabase
@@ -119,17 +119,17 @@ const GameList = ({
   return (
     <View className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">{title}</Text>
-      {(search || sort || filter) && (
+      {(search || sort || filter) ? (
         <View className="flex-row justify-end">
-          {search && (
+          {search ? (
             <TextInput
               className="border-b-2 flex flex-grow border-gray-300 p-2 my-4 text-text-dark mx-2"
               placeholder="Search for a game"
               value={searchTerm}
               onChangeText={(text) => setSearchTerm(text)}
             />
-          )}
-          {sort && (
+          ):null}
+          {sort ? (
             <Picker
               id="sorting"
               className="p-2 border-2 border-white rounded-lg my-4 bg-background-dark text-white"
@@ -151,21 +151,21 @@ const GameList = ({
                 value="share_owned-asc"
                 label="Sort by Popularity (Lowest First)"
               />
-              {user && (
+              {user ? (
                 <Picker.Item
                   value="user shares owned-desc"
                   label="Sort by Shares Owned (Highest First)"
                 />
-              )}
-              {user && (
+              ):null}
+              {user ? (
                 <Picker.Item
                   value="user shares owned-asc"
                   label="Sort by Shares Owned (Lowest First)"
                 />
-              )}
+              ):null}
             </Picker>
-          )}
-          {filter && (
+          ):null}
+          {filter ? (
             <View className="flex-1 flex-row items-center m-4">
               <Text className="text-text-dark">Hide Unaffordable </Text>
               <Switch
@@ -175,15 +175,15 @@ const GameList = ({
                 value={hideExpensive}
               />
            </View>
-          )}
+          ):null}
         </View>
-      )}
+      ):null}
       <View
         className={
           "bg-black rounded-lg h-auto w-full flex justify-center items-center"
         }
       >
-        {games && (
+        {games ? (
           <FlatList
             className="w-full"
             data={games}
@@ -202,7 +202,7 @@ const GameList = ({
             )}
             keyExtractor={(item) => item.game_id}
           />
-        )}
+        ):null}
       </View>
     </View>
   );

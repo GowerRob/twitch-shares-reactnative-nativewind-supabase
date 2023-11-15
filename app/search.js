@@ -3,7 +3,7 @@ import Search from "../components/search/Search";
 import HomeComponent from "../components/HomeComponent";
 
 const search = () => {
-  return <HomeComponent />;
+  return <Search />;
 };
 
 export default search;
