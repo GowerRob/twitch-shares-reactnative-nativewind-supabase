@@ -1,4 +1,4 @@
 import {io} from "socket.io-client/dist/socket.io";
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://twitch-shares-backend.onrender.com");
 export default socket;
