@@ -129,41 +129,41 @@ const GameList = ({
               onChangeText={(text) => setSearchTerm(text)}
             />
           ):null}
-          {sort ? (null
-            // <Picker
-            //   id="sorting"
-            //   className="p-2 border-2 border-white rounded-lg my-4 bg-background-dark text-white"
-            //   onValueChange={(itemValue) => handleSortChange(itemValue)}
-            // >
-            //   <Picker.Item
-            //     value="value-desc"
-            //     label="Sort by Value (Highest First)"
-            //   />
-            //   <Picker.Item
-            //     value="value-asc"
-            //     label="Sort by Value (Lowest First)"
-            //   />
-            //   <Picker.Item
-            //     value="shares_owned-desc"
-            //     label="Sort by Popularity (Highest First)"
-            //   />
-            //   <Picker.Item
-            //     value="share_owned-asc"
-            //     label="Sort by Popularity (Lowest First)"
-            //   />
-            //   {user ? (
-            //     <Picker.Item
-            //       value="user shares owned-desc"
-            //       label="Sort by Shares Owned (Highest First)"
-            //     />
-            //   ):null}
-            //   {user ? (
-            //     <Picker.Item
-            //       value="user shares owned-asc"
-            //       label="Sort by Shares Owned (Lowest First)"
-            //     />
-            //   ):null}
-            // </Picker>
+          {sort ? (
+            <Picker
+              id="sorting"
+              className="p-2 border-2 border-white rounded-lg my-4 bg-background-dark text-white"
+              onValueChange={(itemValue) => handleSortChange(itemValue)}
+            >
+              <Picker.Item
+                value="value-desc"
+                label="Sort by Value (Highest First)"
+              />
+              <Picker.Item
+                value="value-asc"
+                label="Sort by Value (Lowest First)"
+              />
+              <Picker.Item
+                value="shares_owned-desc"
+                label="Sort by Popularity (Highest First)"
+              />
+              <Picker.Item
+                value="share_owned-asc"
+                label="Sort by Popularity (Lowest First)"
+              />
+              {user ? (
+                <Picker.Item
+                  value="user shares owned-desc"
+                  label="Sort by Shares Owned (Highest First)"
+                />
+              ):null}
+              {user ? (
+                <Picker.Item
+                  value="user shares owned-asc"
+                  label="Sort by Shares Owned (Lowest First)"
+                />
+              ):null}
+            </Picker>
           ):null}
           {filter ? (
             <View className="flex-1 flex-row items-center m-4">

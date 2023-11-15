@@ -14,7 +14,7 @@ export const UserProvider = ({children})=>{
     })
 
     useEffect(()=>{
-        if(window?w.localStorage){
+        if(window?.localStorage){
             window.localStorage.setItem('userData',JSON.stringify(user))
         }
     },[user])
