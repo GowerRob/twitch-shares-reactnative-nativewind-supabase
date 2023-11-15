@@ -21,28 +21,28 @@ const Transactions = ({data, show_overview = true}) => {
     return (
         <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
             <Text className="text-2xl font-bold text-text-dark mb-4">Transaction History</Text>
-            {show_overview && <View><Text className={`text-lg text-text-${colorScheme} mb-2`}>Total Shares
+            {show_overview ? <View><Text className={`text-lg text-text-${colorScheme} mb-2`}>Total Shares
                 Owned: {total_shares_owned}</Text>
                 <Text className={`text-lg text-text-${colorScheme} mb-4`}>Total Shares
-                    Value: {total_shares_value}</Text></View>}
+                    Value: {total_shares_value}</Text></View>:null}
             <View className={`border border-text-dark rounded-lg`}>
                 <View
                     className={`flex flex-row justify-between border-b border-dar border-text-${colorScheme} py-2 px-4`}>
                     <Text className={`font-bold text-text-${colorScheme} text-right w-48`}>Date</Text>
-                    {transactions.length > 0 && transactions[0].game &&
-                     <Text className={`font-bold text-text-${colorScheme} text-right flex-1`}>Game</Text>}
-                    {transactions.length > 0 && <Text
-                        className={`font-bold text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>Quantity</Text>}
-                    {transactions.length > 0 && <Text
-                        className={`font-bold text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>Value</Text>}
+                    {transactions.length > 0 && transactions[0].game ?
+                     <Text className={`font-bold text-text-${colorScheme} text-right flex-1`}>Game</Text>:null}
+                    {transactions.length > 0 ? <Text
+                        className={`font-bold text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>Quantity</Text>:null}
+                    {transactions.length > 0 ? <Text
+                        className={`font-bold text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>Value</Text>:null}
                 </View>
                 {transactions.map((transaction, index) => (
                     <View className={`flex flex-row justify-between border-b border-${colorScheme}-300 py-2 px-4`}
                           key={index}>
                         <Text
                             className={`text-text-${colorScheme} text-right w-48`}>{transaction.date.toDateString() + " " + transaction.date.toLocaleTimeString()}</Text>
-                        {transactions[0]?.game &&
-                         <Text className={`text-text-${colorScheme} text-right flex-1`}>{transaction?.game}</Text>}
+                        {transactions[0]?.game ?
+                         <Text className={`text-text-${colorScheme} text-right flex-1`}>{transaction?.game}</Text>:null}
                         <Text
                             className={`text-text-${colorScheme} text-right ${transactions[0].game ? "w-24" : "flex-1"}`}>{transaction.quantity}</Text>
                         <Text

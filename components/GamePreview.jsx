@@ -70,7 +70,7 @@ const GamePreview = ({ game, shares_owned =0, value_history }) => {
         <Text className={`text-sm text-text-dark`}>
           Value: {numberWithCommas(value)}
         </Text>
-        {shares_owned !== undefined && (
+        {shares_owned !== undefined ? (
           <View>
             <Text className={`text-sm text-text-dark`}>
               Shares owned: {shares_owned}
@@ -79,7 +79,7 @@ const GamePreview = ({ game, shares_owned =0, value_history }) => {
               Owned value: {numberWithCommas(shares_owned * value)}
             </Text>
           </View>
-        )}
+        ):null}
         <View className="flex-row justify-end mt-4">
           <TouchableOpacity
             className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}

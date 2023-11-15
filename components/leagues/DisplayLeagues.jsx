@@ -36,11 +36,11 @@ const DisplayLeagues = () => {
                 onPress={()=>router.push('/leaguepage/all')}>
                 <Text className="text-white text-l font-bold text-center p-3">All Users League</Text>
             </Pressable>
-            {user.id && <Pressable 
+            {user.id ? <Pressable 
                 className="rounded-full px-3 bg-accent-light font-bold w-1/4"
                 onPress={callCreateLeague}>
                 <Text className="text-white text-l font-bold text-center p-3">Create League</Text>
-            </Pressable>}
+            </Pressable>:null}
 
         </View>
 

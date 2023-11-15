@@ -40,7 +40,7 @@ const HeaderComponent =()=>{
 
 
 useEffect(()=>{
-    if(user.id !== undefined){
+    if(user?.id !== undefined){
         if (Object.keys(user).length!==0){
         setIsLoggedIn(true)
     }

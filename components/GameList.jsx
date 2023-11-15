@@ -119,53 +119,53 @@ const GameList = ({
   return (
     <View className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">{title}</Text>
-      {(search || sort || filter) && (
+      {(search || sort || filter) ? (
         <View className="flex-row justify-end">
-          {search && (
+          {search ? (
             <TextInput
               className="border-b-2 flex flex-grow border-gray-300 p-2 my-4 text-text-dark mx-2"
               placeholder="Search for a game"
               value={searchTerm}
               onChangeText={(text) => setSearchTerm(text)}
             />
-          )}
-          {sort && (
-            <Picker
-              id="sorting"
-              className="p-2 border-2 border-white rounded-lg my-4 bg-background-dark text-white"
-              onValueChange={(itemValue) => handleSortChange(itemValue)}
-            >
-              <Picker.Item
-                value="value-desc"
-                label="Sort by Value (Highest First)"
-              />
-              <Picker.Item
-                value="value-asc"
-                label="Sort by Value (Lowest First)"
-              />
-              <Picker.Item
-                value="shares_owned-desc"
-                label="Sort by Popularity (Highest First)"
-              />
-              <Picker.Item
-                value="share_owned-asc"
-                label="Sort by Popularity (Lowest First)"
-              />
-              {user && (
-                <Picker.Item
-                  value="user shares owned-desc"
-                  label="Sort by Shares Owned (Highest First)"
-                />
-              )}
-              {user && (
-                <Picker.Item
-                  value="user shares owned-asc"
-                  label="Sort by Shares Owned (Lowest First)"
-                />
-              )}
-            </Picker>
-          )}
-          {filter && (
+          ):null}
+          {sort ? (null
+            // <Picker
+            //   id="sorting"
+            //   className="p-2 border-2 border-white rounded-lg my-4 bg-background-dark text-white"
+            //   onValueChange={(itemValue) => handleSortChange(itemValue)}
+            // >
+            //   <Picker.Item
+            //     value="value-desc"
+            //     label="Sort by Value (Highest First)"
+            //   />
+            //   <Picker.Item
+            //     value="value-asc"
+            //     label="Sort by Value (Lowest First)"
+            //   />
+            //   <Picker.Item
+            //     value="shares_owned-desc"
+            //     label="Sort by Popularity (Highest First)"
+            //   />
+            //   <Picker.Item
+            //     value="share_owned-asc"
+            //     label="Sort by Popularity (Lowest First)"
+            //   />
+            //   {user ? (
+            //     <Picker.Item
+            //       value="user shares owned-desc"
+            //       label="Sort by Shares Owned (Highest First)"
+            //     />
+            //   ):null}
+            //   {user ? (
+            //     <Picker.Item
+            //       value="user shares owned-asc"
+            //       label="Sort by Shares Owned (Lowest First)"
+            //     />
+            //   ):null}
+            // </Picker>
+          ):null}
+          {filter ? (
             <View className="flex-1 flex-row items-center m-4">
               <Text className="text-text-dark">Hide Unaffordable </Text>
               <Switch
@@ -175,15 +175,15 @@ const GameList = ({
                 value={hideExpensive}
               />
            </View>
-          )}
+          ):null}
         </View>
-      )}
+      ):null}
       <View
         className={
           "bg-black rounded-lg h-auto w-full flex justify-center items-center"
         }
       >
-        {games && (
+        {games ? (
           <FlatList
             className="w-full"
             data={games}
@@ -202,7 +202,7 @@ const GameList = ({
             )}
             keyExtractor={(item) => item.game_id}
           />
-        )}
+        ):null}
       </View>
     </View>
   );

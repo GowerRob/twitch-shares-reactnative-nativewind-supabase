@@ -182,7 +182,7 @@ export default function GamePage() {
         />
       </View>
       <View>
-        {transactions.length && (
+        {transactions.length ? (
           <Transactions
             data={{
               total_shares_owned: currentGame.quantity,
@@ -190,7 +190,7 @@ export default function GamePage() {
               transactions: transactions,
             }}
           />
-        )}
+        ):null}
       </View>
     </View>
   );

@@ -139,14 +139,14 @@ const Profile = () => {
         </Text>
       </Pressable>
       <Collapsible collapsed={isCollapsed}>
-        <View>{userShares && <ShareOverview shares={userShares} />}</View>
+        <View>{userShares ? <ShareOverview shares={userShares} />:null}</View>
         <View>
-          {portfolioHistory && (
+          {portfolioHistory ? (
             <PortfolioHistory portfolio_history={portfolioHistory} />
-          )}
+          ):null}
         </View>
       </Collapsible>
-      {allTransactions && (
+      {allTransactions ? (
         <Transactions
           data={{
             total_shares_owned: totalShares,
@@ -154,7 +154,7 @@ const Profile = () => {
             transactions: allTransactions,
           }}
         />
-      )}
+      ):null}
       <View>
         <Pressable
           onPress={() => router.push("/transactionshistory")}

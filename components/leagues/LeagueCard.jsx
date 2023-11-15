@@ -68,7 +68,7 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         </View>
         
         <View className="flex items-center">
-        {!inLeague && user.id?
+        {(!inLeague && user.id)?
 
             <Pressable
                 className="w-1/3 border bg-primary-dark text-white my-2 mx-3 rounded-md"
