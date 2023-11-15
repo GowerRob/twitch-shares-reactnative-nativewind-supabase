@@ -51,8 +51,12 @@ export const fetchGameInfo = async (game_id, user_id) => {
     .eq("game_id", game_id)
     .maybeSingle();
 
-  data.quantity = await fetchCurrentInvestedGame(user_id, game_id);
-
+  if (user_id){
+    data.quantity = await fetchCurrentInvestedGame(user_id, game_id);
+  } else {
+    data.quantity = 0;
+  }
+  
   return data;
 };
 

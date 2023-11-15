@@ -12,7 +12,6 @@ const GameList = ({
   search = true,
   sort = true,
   filter = true,
-  credits = 1000,
 }) => {
   const { user, setUser } = useContext(UserContext);
   const [hideExpensive, setHideExpensive] = useState(false);
@@ -23,10 +22,12 @@ const GameList = ({
   const [sortAscending, setSortAscending] = useState(false);
   const [sortOrder, setSortOrder] = useState("value");
   const [searchTerm, setSearchTerm] = useState("");
+  const credits = user?.credits || 1000
 
   useEffect(() => {
     const fetchGames = async () => {
-      if (user) {
+      
+      if (user.id) {
         console.log("User found");
         if (sortOrder === "user shares owned") {
           const { data } = await supabase
@@ -100,7 +101,7 @@ const GameList = ({
     searchTerm,
     hideExpensive,
     user,
-    user.credits,
+    user?.credits,
   ]);
 
   const handleSortChange = (item) => {
