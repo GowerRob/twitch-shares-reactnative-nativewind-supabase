@@ -120,7 +120,7 @@ const GameList = ({
     <View className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">{title}</Text>
       {(search || sort || filter) ? (
-        <View className="flex-row justify-end">
+        <View className="flex-col md:flex-row justify-end">
           {search ? (
             <TextInput
               className="border-b-2 flex flex-grow border-gray-300 p-2 my-4 text-text-dark mx-2"
@@ -166,7 +166,7 @@ const GameList = ({
             </Picker>
           ):null}
           {filter ? (
-            <View className="flex-1 flex-row items-center m-4">
+            <View className="flex-1 flex-row items-center m-4 self-end">
               <Text className="text-text-dark">Hide Unaffordable </Text>
               <Switch
                 trackColor={{ false: "#595959", true: "#7D5BBE" }}

@@ -10,7 +10,7 @@ const Layout = () => {
     return(<>
         <UserProvider>
             <Header />
-            <View className={`py-20 h-full bg-background-dark`}>
+            <View className={`mt-10 py-20 h-full bg-background-dark`}>
                 <Slot />
             </View>
             

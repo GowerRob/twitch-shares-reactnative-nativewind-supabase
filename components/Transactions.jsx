@@ -31,43 +31,37 @@ const Transactions = ({ data, show_overview = true }) => {
       )}
       <View className={`border border-text-dark rounded-lg`}>
         <View
-          className={`flex flex-row justify-between border-b border-dar border-text-${colorScheme} py-2 px-4`}
+          className={`flex flex-row border-b border-dar border-text-${colorScheme} py-2 px-4`}
         >
           <Text
-            className={`font-bold text-text-${colorScheme} text-center w-48`}
+            className={`font-bold text-text-${colorScheme} basis-1/5 text-center `}
           >
             Date
           </Text>
           {transactions.length > 0 && transactions[0].game && (
             <Text
-              className={`font-bold text-text-${colorScheme} text-center flex-1`}
+              className={`font-bold text-text-${colorScheme} basis-1/5 text-left`}
             >
               Game
             </Text>
           )}
           {transactions.length > 0 && (
             <Text
-              className={`font-bold text-text-${colorScheme} text-right ${
-                transactions[0].game ? "w-24" : "flex-1"
-              }`}
+              className={`font-bold text-text-${colorScheme} basis-1/5 text-center `}
             >
               Quantity
             </Text>
           )}
           {transactions.length > 0 && (
             <Text
-              className={`font-bold text-text-${colorScheme} text-right ${
-                transactions[0].game ? "w-24" : "flex-1"
-              }`}
+              className={`font-bold text-text-${colorScheme} basis-1/5 text-center `}
             >
               Share Value
             </Text>
           )}
           {transactions.length > 0 && (
             <Text
-              className={`font-bold text-text-${colorScheme} text-right ${
-                transactions[0].game ? "w-24" : "flex-1"
-              }`}
+              className={`font-bold text-text-${colorScheme} basis-1/5 text-right `}
             >
               Total Value
             </Text>
@@ -75,35 +69,35 @@ const Transactions = ({ data, show_overview = true }) => {
         </View>
         {transactions.map((transaction, index) => (
           <View
-            className={`flex flex-row justify-between border-b border-${colorScheme}-300 py-2 px-4`}
+            className={`flex flex-row  border-b border-${colorScheme}-300 py-2 px-4`}
             key={index}
           >
-            <Text className={`text-text-${colorScheme} text-left w-48`}>
+            <Text className={`text-text-${colorScheme} basis-1/5 text-left text-xs w-48`}>
               {transaction.date.toDateString() +
                 " " +
                 transaction.date.toLocaleTimeString()}
             </Text>
             {transactions[0]?.game && (
-              <Text className={`text-text-${colorScheme} text-left flex-1`}>
+              <Text className={`text-text-${colorScheme} basis-1/5 text-left  text-xs flex-1`}>
                 {transaction?.game}
               </Text>
             )}
             <Text
-              className={`text-text-${colorScheme} text-right ${
+              className={`text-text-${colorScheme} basis-1/5 text-center text-xs ${
                 transactions[0].game ? "w-24" : "flex-1"
               }`}
             >
               {transaction.quantity}
             </Text>
             <Text
-              className={`text-text-${colorScheme} text-right ${
+              className={`text-text-${colorScheme} basis-1/5 text-center text-xs ${
                 transactions[0].game ? "w-24" : "flex-1"
               }`}
             >
               {transaction.value / transaction.quantity}
             </Text>
             <Text
-              className={`text-text-${colorScheme} text-right ${
+              className={`text-text-${colorScheme} basis-1/5 text-right text-xs ${
                 transactions[0].game ? "w-24" : "flex-1"
               }`}
             >

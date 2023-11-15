@@ -62,7 +62,7 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         </View>
         
         
-        <View className='flex flex-row justify-evenly mb-2'>
+        <View className='flex flex-col items-center md:flex-row justify-evenly mb-2'>
             <Text className={`text-text-dark`}>{peopleCount} Members</Text>
             <Text className={`text-text-dark`}>{sumLeagueValue()} credits in combined assets</Text>
         </View>
@@ -71,9 +71,9 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         {(!inLeague && user.id)?
 
             <Pressable
-                className="w-1/3 border bg-primary-dark text-white my-2 mx-3 rounded-md"
+                className="w-1/3 border bg-primary-dark text-white my-2 mx-3 rounded"
                 onPress={handleJoinLeague}>
-                <Text className={`text-text-dark text-center font-bold text-xl`}>Join League</Text>
+                <Text className={`text-text-dark text-center text-sm md:text-base p-1`}>Join League</Text>
             </Pressable> :null}
 
 

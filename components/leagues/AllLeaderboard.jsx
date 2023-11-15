@@ -23,7 +23,7 @@ const AllLeaderboard = () => {
 
  <View className={`bg-background-${colorScheme} h-full w-full flex justify-center items-center mt-5`}>
     <View className={"w-full max-w-4xl h-full"}>
-    <Text className="text-white font-bold text-xl">Current League</Text>
+    <Text className="text-white font-bold text-xl pl-4">Current League</Text>
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
         <View className={`border border-text-dark rounded-lg`}>
             {/* Headers */}
@@ -89,7 +89,7 @@ const AllLeaderboard = () => {
         </View>
 
     </View>
-    <Text className="text-white font-bold text-xl">Last Weeks League</Text>
+    <Text className="text-white font-bold text-xl pl-4">Last Weeks League</Text>
     <View className={`rounded-lg p-4 m-4 bg-background-${colorScheme}`}>
         <View className={`border border-text-dark rounded-lg`}>
             {/* Headers */}
