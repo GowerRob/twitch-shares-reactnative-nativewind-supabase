@@ -1,11 +1,12 @@
-import {Slot} from 'expo-router'
-import Header from '../components/Header'
-import { UserProvider } from '../context/User'
-import Footer from '../components/Footer'
+import { Slot } from "expo-router";
+import Header from "../components/Header";
+import { UserProvider } from "../context/User";
+import Footer from "../components/Footer";
 
-import { View } from 'react-native'
+import { View } from "react-native";
 
 const Layout = () => {
+
     return(<>
         <UserProvider>
             <Header />
@@ -19,3 +20,4 @@ const Layout = () => {
 }
 
 export default Layout
+
