@@ -36,7 +36,7 @@ function numberWithCommas(x = 0) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const GamePreview = ({ game, shares_owned, value_history }) => {
+const GamePreview = ({ game, shares_owned =0, value_history }) => {
   const { game_name, value, cover_url, game_id } = game;
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();

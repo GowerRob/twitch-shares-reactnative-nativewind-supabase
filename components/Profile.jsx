@@ -84,9 +84,11 @@ const Profile = () => {
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      router.push('/login')
     }
+
   }, [user.id, user.credits]);
-  console.log(investedGames);
   let totalShares = 0;
   if (userShares) {
     totalShares = userShares.reduce((total, game) => {
@@ -97,16 +99,18 @@ const Profile = () => {
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
-    <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
-      <View>
-        <Text className="text-center text-text-dark">
-          {" "}
-          Hello {user.username}! This is your Profile page. Your portfolio value
-          = {portfolioValue} cr
+    <View className="bg-black">
+      <View
+        className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}
+      >
+        <View>
+          <Text className="text-center text-text-dark mb-4">
+            {" "}
+            Your portfolio value = {portfolioValue} cr
         </Text>
       </View>
-      <View className="flex-column items-center">
-        <FlatList
+      <View className="bg-black rounded-lg h-auto w-full flex justify-center items-center">
+        <FlatList className='w-full'
           data={investedGames}
           renderItem={({ item }) => (
             <GamePreview
@@ -159,6 +163,7 @@ const Profile = () => {
           <Text>Show all transactions</Text>
         </Pressable>
       </View>
+    </View>
     </View>
   );
 };

@@ -32,7 +32,7 @@ export default function GamePage() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    fetchGameInfo(game_id, user.id)
+    fetchGameInfo(game_id, user?.id)
       .then((data) => {
         data.cover_url = data.cover_url
           .replace(/{width}/, 200)
@@ -62,20 +62,22 @@ export default function GamePage() {
         setGamePrices(filteredResult);
       })
       .then(() => {
-        fetchGameTransactions(user.id, game_id).then((data) => {
-          const newData = data.map((item) => {
-            const newItem = { ...item };
-            newItem.date = new Date(item.transaction_date);
-            return newItem;
+        if (user.id){
+          fetchGameTransactions(user.id, game_id).then((data) => {
+            const newData = data.map((item) => {
+              const newItem = { ...item };
+              newItem.date = new Date(item.transaction_date);
+              return newItem;
+            });
+            setTransactions(newData);
           });
-          setTransactions(newData);
-        });
+        }  
       })
       .catch((error) => {
         console.log(error);
       });
   }, [user.credits]);
-  console.log(transactions);
+  
   const colorScheme = "dark";
   return (
     <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
