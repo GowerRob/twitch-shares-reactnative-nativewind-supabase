@@ -1,23 +1,62 @@
-import {FlatList, Text, View} from "react-native";
+import {Button, FlatList, Text, View} from "react-native";
 import socket from "../socket";
 import {useEffect, useState} from "react";
-import {useToast} from "react-native-toast-notifications";
+import Toast from "react-native-toast-message";
 
 const websocket = () => {
 
-    const toast = useToast();
     const [updateInfo, setUpdateInfo] = useState();
     const [gameInfo, setGameInfo] = useState([]);
     const [messages, setMessages] = useState([]);
     const [oldGameInfo, setOldGameInfo] = useState({});
+    const [toastQueue, setToastQueue] = useState([]);
     useEffect(() => {
         socket.emit("register user", "683673b5-9e7e-46fd-8bd0-30e49867c2ab");
     }, []);
 
+    useEffect(() => {
+        console.log("toast queue updated");
+        if (toastQueue.length > 0) {
+            const toastInfo = toastQueue[0];
+            toastInfo.onHide = onToastHide;
+            console.log(`Showing ${JSON.stringify(toastInfo)}`);
+            Toast.show(toastInfo);
+        }
+    }, [toastQueue]);
 
+    const addToastToQueue = (toast) => {
+        console.log("adding toast");
+        setToastQueue(currentQueue => {
+            const newQueue = [...currentQueue];
+            newQueue.push(toast);
+            return newQueue;
+        });
+    };
+
+    const onToastHide = () => {
+        setTimeout(function () {
+            setToastQueue(currentQueue => {
+                const newQueue = [...currentQueue];
+                newQueue.shift();
+                return newQueue;
+            });
+        }, 1000);
+    };
+
+    const showToast = () => {
+        addToastToQueue({
+            type: "success",
+            text1: "Hello",
+            text2: `This is some something number ${toastQueue.length}👋`
+        });
+    };
     useEffect(() => {
         socket.on("update", (newUpdateInfo) => {
-            toast.show(`Prices updated! Next update at ${new Date(updateInfo.nextUpdate).toLocaleTimeString()}`);
+            addToastToQueue({
+                type: "success",
+                text1: `Prices updated!`,
+                text2: `Next update at ${new Date(newUpdateInfo.times.nextUpdate).toLocaleTimeString()}`
+            });
             setUpdateInfo(newUpdateInfo.times);
             setGameInfo(currentInfo => {
                 if (currentInfo !== undefined) {
@@ -27,7 +66,11 @@ const websocket = () => {
             });
         });
         socket.on("game_update", (game_info) => {
-            toast.show(`Price update for ${game_info.name}! New price: ${game_info.value}`);
+            addToastToQueue({
+                type: "info",
+                text1: `Price update for ${game_info.game.name}`,
+                text2: `New price: ${game_info.game.viewer_count}`
+            });
             setMessages(oldMessages => {
                 const newMessages = [...oldMessages];
                 newMessages.push("game_update: " + JSON.stringify(game_info));
