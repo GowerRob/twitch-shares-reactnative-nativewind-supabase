@@ -40,6 +40,11 @@ const CreateLeague = () => {
         />
         <Pressable 
             className="border bg-primary-light text-white my-2 rounded-md "
+            >
+            <Text className="text-white font-bold text-xl text-center p-1">Submit</Text>
+        </Pressable>
+        <Pressable 
+            className="border bg-primary-light text-white my-2 rounded-md "
             onPress={handleCreateLeague}>
             <Text className="text-white font-bold text-xl text-center p-1">Submit</Text>
         </Pressable>

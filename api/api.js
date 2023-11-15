@@ -39,3 +39,19 @@ export const fetchUserLeagues = async (setUserLeagues,user) => {
     }
     
 }
+
+export const fetchAllPortfolio=async(setLeagueData)=>{
+
+    const {data,error} = await supabase
+    .from('profiles')
+    .select(`id,
+        username,
+        portfolio_history!inner(user_id,total_value,time)
+    `)
+    .order('time',{ foreignTable: 'portfolio_history', ascending:false })
+    .limit(2, {foreignTable: 'portfolio_history'})
+    data.sort((a,b)=>{
+        return b.portfolio_history[0].total_value-a.portfolio_history[0].total_value})
+        console.log(data)
+    setLeagueData(data)
+}

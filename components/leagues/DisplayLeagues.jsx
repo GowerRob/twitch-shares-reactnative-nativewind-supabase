@@ -30,7 +30,12 @@ const DisplayLeagues = () => {
     return (<>
 
 <View className={`p-4 bg-background-dark id-outerView`}>
-        <View className="flex flex-row justify-end mb-4">
+        <View className="flex flex-row justify-between mb-4">
+        <Pressable 
+                className="rounded-full px-3 bg-accent-light font-bold w-1/3"
+                onPress={()=>router.push('/leaguepage/all')}>
+                <Text className="text-white text-xl font-bold text-center">All Users League</Text>
+            </Pressable>
             <Pressable 
                 className="rounded-full px-3 bg-accent-light font-bold w-1/3"
                 onPress={callCreateLeague}>
