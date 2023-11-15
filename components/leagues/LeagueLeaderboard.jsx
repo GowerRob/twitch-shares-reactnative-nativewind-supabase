@@ -92,13 +92,13 @@ const LeagueLeaderboard = ({league_id}) => {
                     <Text
                     className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
                     >
-                        {item.portfolio_history[0].total_value + item.portfolio_history[0].credits}
+                        {item.portfolio_history[0]?.total_value + item.portfolio_history[0]?.credits}
                     </Text>
                     <Text
                     className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
                     >
-                        {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*(((item.portfolio_history[0].total_value+item.portfolio_history[0].credits)-(item.portfolio_history[1].total_value+item.portfolio_history[1].credits))/(item.portfolio_history[0].total_value+item.portfolio_history[0].credits))).toFixed(2) 
+                        {(item.portfolio_history[1]?.total_value)!==undefined
+                        ?(100*(((item.portfolio_history[0]?.total_value+item.portfolio_history[0]?.credits)-(item.portfolio_history[1]?.total_value+item.portfolio_history[1]?.credits))/(item.portfolio_history[0]?.total_value+item.portfolio_history[0]?.credits))).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
@@ -153,13 +153,13 @@ const LeagueLeaderboard = ({league_id}) => {
                     <Text
                     className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
                     >
-                        {item.portfolio_history[0].total_value + item.portfolio_history[0].credits}
+                        {item.portfolio_history[0]?.total_value + item.portfolio_history[0]?.credits}
                     </Text>
                     <Text
                     className={`text-text-${colorScheme} text-right basis-1/4 w-48}`}
                     >
-                        {(item.portfolio_history[1].total_value)!==undefined
-                        ?(100*(((item.portfolio_history[0].total_value+item.portfolio_history[0].credits)-(item.portfolio_history[1].total_value+item.portfolio_history[1].credits))/(item.portfolio_history[0].total_value+item.portfolio_history[0].credits))).toFixed(2) 
+                        {(item.portfolio_history[1]?.total_value)!==undefined
+                        ?(100*(((item.portfolio_history[0]?.total_value+item.portfolio_history[0]?.credits)-(item.portfolio_history[1]?.total_value+item.portfolio_history[1]?.credits))/(item.portfolio_history[0]?.total_value+item.portfolio_history[0]?.credits))).toFixed(2) 
                         : "0.00"} %
                     </Text>
 
