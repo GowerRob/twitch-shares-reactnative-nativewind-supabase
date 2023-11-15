@@ -17,3 +17,5 @@ const Layout = () => {
         </UserProvider>
     </>)
 }
+
+export default Layout

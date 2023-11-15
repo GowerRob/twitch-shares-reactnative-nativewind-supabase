@@ -7,6 +7,7 @@ export const UserProvider = ({children})=>{
             if(stickyUser === null){
                 return {}
             }else{
+                console.log(stickyUser)
                 return JSON.parse(stickyUser)
             }
         }

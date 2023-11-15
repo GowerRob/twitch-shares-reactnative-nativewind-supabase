@@ -95,7 +95,7 @@ const RegistrationComp =() => {
             className="bg-white border-4 border-solid text-xl border-accent-light rounded-md mb-5"
           />
           {errors.passwordMismatch ? (
-            <Text>{errors.passwordMismatch}</Text>
+            <Text className="text-white font-bold ">{errors.passwordMismatch}</Text>
           ) : null}
 
           <Pressable
@@ -105,7 +105,7 @@ const RegistrationComp =() => {
             <Text className="text-white font-bold text-xl text-center p-1">Create user account</Text>
           </Pressable>
 
-          {errors.checkInput ? <Text>{errors.checkInput}</Text> : null}
+          {errors.checkInput ? <Text className="text-white font-bold ">{errors.checkInput}</Text> : null}
           <Link href={`/login`} asChild>
             <Pressable className="border bg-primary-light text-white my-2 rounded-md ">
               <Text className="text-white text-xl text-center p-1">Already have an account? Log in</Text>

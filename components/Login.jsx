@@ -24,14 +24,16 @@ const Login = () =>{
       return data;
   };
   const handleSignIn = async ()=>{
-    setIsLoading(true)
-    let errors={}
+    let newErrors={}
 
-    if(!email) errors.email="Email is required"
-    if(!password) errors.password="Password is required"
-    setErrors(errors)
+    if(!email) newErrors.email="Email is required"
+    if(!password) newErrors.password="Password is required"
+    setErrors(newErrors)
+    console.log(newErrors)
 
-    if (Object.keys(errors).length===0){
+    if (Object.keys(newErrors).length===0){
+      setIsLoading(true)
+      console.log('hi')
       const {data,error} = await supabase.auth.signInWithPassword(
         {
             email,
@@ -40,12 +42,12 @@ const Login = () =>{
       )
     setIsLoading(false)
     if(error){
-        errors.invalid="Email or password is incorrect, please try again"
-        setErrors(errors)
+        newErrors.invalid="Email or password is incorrect, please try again"
+        setErrors(newErrors)
       }
       if(data.user!==null){
         fetchUserDetails(data.user.id)
-        router.push(`account`)
+        router.push(`/`)
       }
     }
   }
@@ -64,25 +66,25 @@ const Login = () =>{
           <TextInput 
           value={email} 
           onChangeText={setEmail} 
-          className="bg-white border-4 border-solid text-xl border-accent-light rounded-md mb-5" />
-          {errors.email ? <Text>{errors.email}</Text> : null}
+          className="bg-white border-4 border-solid text-xl border-accent-light rounded-md " />
+          {errors.email ? <Text className="text-white font-bold">{errors.email}</Text> : null}
 
-          <Text className="text-white font-bold text-xl">Enter Password</Text>
+          <Text className="text-white font-bold text-xl mt-5">Enter Password</Text>
           <TextInput
             secureTextEntry={true}
             value={password}
-            className="bg-white border-4 border-solid text-xl border-accent-light rounded-md mb-5"
+            className="bg-white border-4 border-solid text-xl border-accent-light rounded-md "
             onChangeText={setPassword}
           />
-          {errors.password ? <Text>{errors.password}</Text> : null}
+          {errors.password ? <Text className="text-white font-bold">{errors.password}</Text> : null}
 
           <Pressable
-            className="border bg-primary-light text-white my-2 rounded-md "
+            className="border bg-primary-light text-white my-2 rounded-md mt-5"
             onPress={handleSignIn}
           >
             <Text className="text-white font-bold text-xl text-center p-1" >Log In</Text>
           </Pressable>
-          {errors.invalid ? <Text>{errors.invalid}</Text> : null}
+          {errors.invalid ? <Text className="text-white font-bold ">{errors.invalid}</Text> : null}
 
           <Link href={`/registration`} asChild>
             <Pressable className="border bg-primary-light text-white my-2 rounded-md ">
