@@ -1,18 +1,21 @@
-import { Slot } from "expo-router";
+import {Slot} from "expo-router";
 import Header from "../components/Header";
-import { UserProvider } from "../context/User";
+import {UserProvider} from "../context/User";
+import {ToastProvider} from "react-native-toast-notifications";
 
 const Layout = () => {
-  return (
-    <>
-      <UserProvider>
-        <Header />
-        <Slot />
-      </UserProvider>
-    </>
-  );
+    return (
+        <>
+            <ToastProvider>
+                <UserProvider>
+                    <Header/>
+                    <Slot/>
+                </UserProvider>
+            </ToastProvider>
+        </>
+    );
 
-  // return <Stack />
+    // return <Stack />
 };
 
 

@@ -1,8 +1,11 @@
 import {FlatList, Text, View} from "react-native";
 import socket from "../socket";
 import {useEffect, useState} from "react";
+import {useToast} from "react-native-toast-notifications";
 
 const websocket = () => {
+
+    const toast = useToast();
     const [updateInfo, setUpdateInfo] = useState();
     const [gameInfo, setGameInfo] = useState([]);
     const [messages, setMessages] = useState([]);
@@ -14,6 +17,7 @@ const websocket = () => {
 
     useEffect(() => {
         socket.on("update", (newUpdateInfo) => {
+            toast.show(`Prices updated! Next update at ${new Date(updateInfo.nextUpdate).toLocaleTimeString()}`);
             setUpdateInfo(newUpdateInfo.times);
             setGameInfo(currentInfo => {
                 if (currentInfo !== undefined) {
@@ -23,6 +27,7 @@ const websocket = () => {
             });
         });
         socket.on("game_update", (game_info) => {
+            toast.show(`Price update for ${game_info.name}! New price: ${game_info.value}`);
             setMessages(oldMessages => {
                 const newMessages = [...oldMessages];
                 newMessages.push("game_update: " + JSON.stringify(game_info));
