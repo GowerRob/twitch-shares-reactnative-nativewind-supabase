@@ -56,7 +56,7 @@ const RegistrationComp =() => {
     }
       if(data.session!==null){
           fetchUserDetails(data.user.id)
-          router.push(`account`)
+          router.push(`/`)
       }
 
     }

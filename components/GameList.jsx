@@ -27,7 +27,6 @@ const GameList = ({
   useEffect(() => {
     const fetchGames = async () => {
       if (user?.id) {
-        console.log("User found");
         if (sortOrder === "user shares owned") {
           const { data } = await supabase
             .from("shares")

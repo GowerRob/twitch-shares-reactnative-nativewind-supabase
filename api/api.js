@@ -8,11 +8,21 @@ export const fetchPlayerPortfolio=async(setLeagueData)=>{
         username,
         user_leagues!inner(user_id,league_id),
         leagues(league_id,league_name),
-        portfolio_history!inner(user_id,total_value,time,credits)
+        portfolio_history!left(user_id,total_value,time,credits)
     `)
     .order('time',{ foreignTable: 'portfolio_history', ascending:false })
     .limit(2, {foreignTable: 'portfolio_history'})
     data.sort((a,b)=>{
+        if (a.portfolio_history[0] === undefined){
+            a.portfolio_history[0] = {}
+            a.portfolio_history[0].total_value = 0
+            a.portfolio_history[0].credits = 1000
+        }
+        if (b.portfolio_history[0] === undefined){
+            b.portfolio_history[0] = {}
+            b.portfolio_history[0].total_value = 0
+            b.portfolio_history[0].credits = 1000
+        }
         return (b.portfolio_history[0].total_value+b.portfolio_history[0].credits)-(a.portfolio_history[0].total_value+a.portfolio_history[0].credits)})
     setLeagueData(data)
 }
@@ -46,11 +56,21 @@ export const fetchAllPortfolio=async(setLeagueData)=>{
     .from('profiles')
     .select(`id,
         username,
-        portfolio_history!inner(user_id,total_value,time,credits)
+        portfolio_history!left(user_id,total_value,time,credits)
     `)
     .order('time',{ foreignTable: 'portfolio_history', ascending:false })
     .limit(2, {foreignTable: 'portfolio_history'})
     data.sort((a,b)=>{
+        if (a.portfolio_history[0] === undefined){
+            a.portfolio_history[0] = {}
+            a.portfolio_history[0].total_value = 0
+            a.portfolio_history[0].credits = 1000
+        }
+        if (b.portfolio_history[0] === undefined){
+            b.portfolio_history[0] = {}
+            b.portfolio_history[0].total_value = 0
+            b.portfolio_history[0].credits = 1000
+        }
         return (b.portfolio_history[0].total_value+b.portfolio_history[0].credits)-(a.portfolio_history[0].total_value+a.portfolio_history[0].credits)})
     setLeagueData(data)
 }
@@ -72,12 +92,22 @@ export const fetchLastAllPortfolio=async(setLeagueData)=>{
     .from('profiles')
     .select(`id,
         username,
-        portfolio_history!inner(user_id,total_value,time,credits)
+        portfolio_history!left(user_id,total_value,time,credits)
     `)
     .lte('portfolio_history.time', lastSunday)
     .order('time',{ foreignTable: 'portfolio_history', ascending:false })
     .limit(2, {foreignTable: 'portfolio_history'})
     data.sort((a,b)=>{
+        if (a.portfolio_history[0] === undefined){
+            a.portfolio_history[0] = {}
+            a.portfolio_history[0].total_value = 0
+            a.portfolio_history[0].credits = 1000
+        }
+        if (b.portfolio_history[0] === undefined){
+            b.portfolio_history[0] = {}
+            b.portfolio_history[0].total_value = 0
+            b.portfolio_history[0].credits = 1000
+        }
         return (b.portfolio_history[0].total_value+b.portfolio_history[0].credits)-(a.portfolio_history[0].total_value+a.portfolio_history[0].credits)})
     setLeagueData(data)
 }
@@ -92,12 +122,22 @@ export const fetchlastPlayerPortfolio=async(setLeagueData)=>{
         username,
         user_leagues!inner(user_id,league_id),
         leagues(league_id,league_name),
-        portfolio_history!inner(user_id,total_value,time,credits)
+        portfolio_history!left(user_id,total_value,time,credits)
     `)
     .lte('portfolio_history.time', lastSunday)
     .order('time',{ foreignTable: 'portfolio_history', ascending:false })
     .limit(2, {foreignTable: 'portfolio_history'})
     data.sort((a,b)=>{
+        if (a.portfolio_history[0] === undefined){
+            a.portfolio_history[0] = {}
+            a.portfolio_history[0].total_value = 0
+            a.portfolio_history[0].credits = 1000
+        }
+        if (b.portfolio_history[0] === undefined){
+            b.portfolio_history[0] = {}
+            b.portfolio_history[0].total_value = 0
+            b.portfolio_history[0].credits = 1000
+        }
         return (b.portfolio_history[0].total_value+b.portfolio_history[0].credits)-(a.portfolio_history[0].total_value+a.portfolio_history[0].credits)})
     setLeagueData(data)
 }
