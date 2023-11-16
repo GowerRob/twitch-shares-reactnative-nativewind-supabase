@@ -131,8 +131,10 @@ const BuySell = ({
                     +text.replace(/[^0-9]/g, ""),
                     Math.floor(user.credits / value)
                   )
-                : quantity
-            )
+                : Math.min(
+                  +text.replace(/[^0-9]/g, ""),
+                  quantity)
+            )git 
           }
         />
         <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">
