@@ -37,7 +37,7 @@ const ShareOverview = ({portfolio_history}) => {
                         })}
                         style={{
                             data: {
-                                stroke: "green",
+                                stroke: "#82de81",
                             }
                         }}
                     />
@@ -57,11 +57,14 @@ const ShareOverview = ({portfolio_history}) => {
                         })}
                         style={{
                             data: {
-                                stroke: "grey",
+                                stroke: "#757575",
                             }
                         }}
                     />
                 </VictoryChart>
+                <Text className="text-right font-bold text-[#757575]">Total Value</Text>
+                <Text className="text-right font-bold text-[#82de81]">Shares Value</Text>
+                <Text className="text-right font-bold text-[#3d84ce]">Credit Balance</Text>
             </View>
         </View>
     );
