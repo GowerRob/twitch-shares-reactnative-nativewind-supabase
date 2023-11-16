@@ -37,7 +37,6 @@ export default function GamePage() {
         data.cover_url = data.cover_url
           .replace(/{width}/, 200)
           .replace(/{height}/, 300);
-        console.log(data);
         setCurrentGame(data);
       })
       .catch((error) => {
@@ -62,7 +61,7 @@ export default function GamePage() {
         setGamePrices(filteredResult);
       })
       .then(() => {
-        if (user.id){
+        if (user.id) {
           fetchGameTransactions(user.id, game_id).then((data) => {
             const newData = data.map((item) => {
               const newItem = { ...item };
@@ -71,13 +70,13 @@ export default function GamePage() {
             });
             setTransactions(newData);
           });
-        }  
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }, [user.credits]);
-  
+
   const colorScheme = "dark";
   return (
     <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
@@ -174,12 +173,14 @@ export default function GamePage() {
         </VictoryChart>
       </View>
       <View>
-        <BuySell
-          quantity={currentGame.quantity}
-          game_id={game_id}
-          game_name={currentGame.game_name}
-          value={currentGame.value}
-        />
+        {user.id ? (
+          <BuySell
+            quantity={currentGame.quantity}
+            game_id={game_id}
+            game_name={currentGame.game_name}
+            value={currentGame.value}
+          />
+        ) : null}
       </View>
       <View>
         {transactions.length ? (
@@ -190,7 +191,7 @@ export default function GamePage() {
               transactions: transactions,
             }}
           />
-        ):null}
+        ) : null}
       </View>
     </View>
   );

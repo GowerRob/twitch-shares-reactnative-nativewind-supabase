@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, Image, TouchableOpacity, Modal } from "react-native";
 import {
   VictoryArea,
@@ -8,6 +8,7 @@ import {
 } from "victory-native";
 import BuySell from "./BuySell";
 import { useRouter } from "expo-router";
+import { UserContext } from "../context/User";
 
 const PopupModal = ({ visible, children, closeModal }) => {
   return (
@@ -36,10 +37,11 @@ function numberWithCommas(x = 0) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const GamePreview = ({ game, shares_owned =0, value_history }) => {
+const GamePreview = ({ game, shares_owned = 0, value_history }) => {
   const { game_name, value, cover_url, game_id } = game;
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
+  const { user, setUser } = useContext(UserContext);
 
   const openModal = () => {
     setModalVisible(true);
@@ -79,19 +81,21 @@ const GamePreview = ({ game, shares_owned =0, value_history }) => {
               Owned value: {numberWithCommas(shares_owned * value)}
             </Text>
           </View>
-        ):null}
+        ) : null}
         <View className="flex-row justify-end mt-4">
-          <TouchableOpacity
-            className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}
-            onPress={openModal}
-          >
-            <Text className="text-white">Buy/Sell</Text>
-          </TouchableOpacity>
+          {user.id ? (
+            <TouchableOpacity
+              className={`bg-accent-dark rounded p-2 m-2`}
+              onPress={openModal}
+            >
+              <Text className="text-text-dark">Buy/Sell</Text>
+            </TouchableOpacity>
+          ) : null}
           <TouchableOpacity
             onPress={() => router.push(`/${game_id}`)}
-            className={`bg-accent-light hover:bg-accent-dark rounded p-2 m-2`}
+            className={`bg-accent-dark rounded p-2 m-2`}
           >
-            <Text className="text-white">Game Page</Text>
+            <Text className="text-text-dark">Game Page</Text>
           </TouchableOpacity>
         </View>
       </View>

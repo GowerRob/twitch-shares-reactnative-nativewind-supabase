@@ -8,7 +8,7 @@ import { UserContext } from "../context/User";
 
 const GameList = ({
   title = "",
-  limit = 10,
+  limit = 20,
   search = true,
   sort = true,
   filter = true,
@@ -22,11 +22,10 @@ const GameList = ({
   const [sortAscending, setSortAscending] = useState(false);
   const [sortOrder, setSortOrder] = useState("value");
   const [searchTerm, setSearchTerm] = useState("");
-  const credits = user?.credits || 1000
+  const credits = user?.credits || 1000;
 
   useEffect(() => {
     const fetchGames = async () => {
-      
       if (user?.id) {
         console.log("User found");
         if (sortOrder === "user shares owned") {
@@ -115,11 +114,10 @@ const GameList = ({
   };
   const colorScheme = "dark";
 
-
   return (
     <View className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}>
       <Text className="text-2xl font-bold text-text-dark mb-4">{title}</Text>
-      {(search || sort || filter) ? (
+      {search || sort || filter ? (
         <View className="flex-col md:flex-row justify-end">
           {search ? (
             <TextInput
@@ -128,7 +126,7 @@ const GameList = ({
               value={searchTerm}
               onChangeText={(text) => setSearchTerm(text)}
             />
-          ):null}
+          ) : null}
           {sort ? (
             <Picker
               id="sorting"
@@ -156,15 +154,15 @@ const GameList = ({
                   value="user shares owned-desc"
                   label="Sort by Shares Owned (Highest First)"
                 />
-              ):null}
+              ) : null}
               {user ? (
                 <Picker.Item
                   value="user shares owned-asc"
                   label="Sort by Shares Owned (Lowest First)"
                 />
-              ):null}
+              ) : null}
             </Picker>
-          ):null}
+          ) : null}
           {filter ? (
             <View className="flex-1 flex-row items-center m-4 self-end">
               <Text className="text-text-dark">Hide Unaffordable </Text>
@@ -174,10 +172,10 @@ const GameList = ({
                 onValueChange={toggleSwitch}
                 value={hideExpensive}
               />
-           </View>
-          ):null}
+            </View>
+          ) : null}
         </View>
-      ):null}
+      ) : null}
       <View
         className={
           "bg-black rounded-lg h-auto w-full flex justify-center items-center"
@@ -202,7 +200,7 @@ const GameList = ({
             )}
             keyExtractor={(item) => item.game_id}
           />
-        ):null}
+        ) : null}
       </View>
     </View>
   );
