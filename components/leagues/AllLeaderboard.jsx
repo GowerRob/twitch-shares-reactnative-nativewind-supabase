@@ -69,7 +69,7 @@ const AllLeaderboard = () => {
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
                     >
-                        {item.portfolio_history[0]?.total_value}
+                        {item.portfolio_history[0]? item.portfolio_history[0]?.total_value+item.portfolio_history[0]?.credits : 1000}
                     </Text>
                     <Text
                     className={`text-text-${colorScheme} basis-1/4 text-right w-48}`}
