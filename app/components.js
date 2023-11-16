@@ -218,7 +218,7 @@ const account = () => {
   ];
 
     return <View className={"bg-black h-full w-full flex justify-center items-center"}>
-        <View className={"w-full max-w-4xl h-full"}>
+        {/* <View className={"w-full max-w-4xl h-full"}>
             <Transactions data={{
                 "total_shares_owned": 20,
                 "total_shares_value": 123456,
@@ -236,7 +236,7 @@ const account = () => {
             {gameBGameInfo && gameBGamePrices &&
              <GamePreview game={gameBGameInfo} shares_owned={10} value_history={gameBGamePrices}/>}
             <BuySell game_id={123} share_value={1234}/>
-        </View>
+        </View> */}
     </View>;
 };
 export default account;

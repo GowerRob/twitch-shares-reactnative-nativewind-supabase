@@ -26,13 +26,12 @@ export const fetchUserDetails = async (id) => {
 export const fetchInvestedGames = async (id) => {
   const { data, error } = await supabase
     .from("shares")
-    .select("game_id, quantity, games (game_name, value, cover_url)")
+    .select("game_id, quantity, games!inner(*, price_history(*))")
     .eq("user_id", id);
 
   if (error) {
     throw new Error(error.message);
   }
-
   return data;
 };
 
@@ -52,7 +51,11 @@ export const fetchGameInfo = async (game_id, user_id) => {
     .eq("game_id", game_id)
     .maybeSingle();
 
-  data.quantity = await fetchCurrentInvestedGame(user_id, game_id);
+  if (user_id) {
+    data.quantity = await fetchCurrentInvestedGame(user_id, game_id);
+  } else {
+    data.quantity = 0;
+  }
 
   return data;
 };
@@ -68,7 +71,12 @@ export const fetchCurrentInvestedGame = async (user_id, game_id) => {
   if (error) {
     throw new Error(error.message);
   }
-  return data.quantity;
+
+  if (data === null) {
+    return 0;
+  } else {
+    return data.quantity;
+  }
 };
 
 export const fetchGameTransactions = async (user_id, game_id) => {
@@ -85,7 +93,7 @@ export const fetchGameTransactions = async (user_id, game_id) => {
   return data;
 };
 
-export const fetchAllTransactions = async (user_id) => {
+export const fetchAllTransactions = async (user_id, limit = 20) => {
   const { data, error } = await supabase
     .from("transactions")
     .select(
@@ -93,7 +101,7 @@ export const fetchAllTransactions = async (user_id) => {
     )
     .eq("user_id", user_id)
     .order("transaction_date", { ascending: false })
-    .limit(20);
+    .limit(limit);
   if (error) {
     throw new Error(error.message);
   }

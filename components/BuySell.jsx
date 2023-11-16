@@ -18,15 +18,22 @@ function numberWithCommas(x = 0) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
+const BuySell = ({
+  quantity = 0,
+  game_id,
+  game_name,
+  value = 50,
+  closeModal,
+}) => {
   const [selectedOption, setSelectedOption] = useState("BUY");
   const { user, setUser } = useContext(UserContext);
   const [tradeQuantity, setTradeQuantity] = useState(0);
+
   const currentValue = value * quantity;
   const totalValue =
     selectedOption === "BUY"
-      ? currentValue + (value * tradeQuantity)
-      : currentValue - (value * tradeQuantity);
+      ? currentValue + value * tradeQuantity
+      : currentValue - value * tradeQuantity;
 
   const adjustQuantity = (amount) => {
     const newQuantity = parseInt(tradeQuantity) + amount;
@@ -35,6 +42,7 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
   const colorScheme = "dark";
 
   function onPressFunction(amount) {
+    if (amount === 0) return;
     selectedOption !== "BUY" ? (amount = -amount) : "";
     handleTrade(user.id, game_id, amount)
       .then(() => {
@@ -48,7 +56,7 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
             const newArr = result.filter((game) => {
               return game.quantity !== 0;
             });
-            
+
             closeModal();
           });
         }
@@ -117,8 +125,14 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
           keyboardType="numeric"
           value={tradeQuantity}
           onChangeText={(text) =>
-            setTradeQuantity(Math.min(+text.replace(/[^0-9]/g, ""), Math.floor(user.credits / value)))
-
+            setTradeQuantity(
+              selectedOption === "BUY"
+                ? Math.min(
+                    +text.replace(/[^0-9]/g, ""),
+                    Math.floor(user.credits / value)
+                  )
+                : quantity
+            )
           }
         />
         <View className="flex-row justify-between items-center mt-4 flex-1 flex-grow">
@@ -164,19 +178,24 @@ const BuySell = ({ quantity, game_id, game_name, value = 50, closeModal }) => {
         <Text className="text-text-dark mt-2">
           Value After Transaction: {numberWithCommas(totalValue)}
         </Text>
-        <Text className="text-text-dark mt-2">
-          You have {quantity} in {game_name}
-        </Text>
+        {quantity !== 0 ? (
+          <Text className="text-text-dark mt-2">
+            You have {quantity} {quantity === 1 ? "share" : "shares"} in{" "}
+            {game_name}
+          </Text>
+        ) : (
+          <></>
+        )}
       </View>
       <View className="flex-row justify-between">
-        {closeModal && (
+        {closeModal ? (
           <TouchableOpacity
             className="bg-accent-light p-2 mt-4 flex-grow border-r rounded-bl-lg"
             onPress={closeModal}
           >
             <Text className="text-white text-center">Cancel Transaction</Text>
           </TouchableOpacity>
-        )}
+        ):null}
         <Pressable
           onPress={() => onPressFunction(tradeQuantity)}
           className={`bg-accent-light p-2 mt-4 flex-grow border-l ${

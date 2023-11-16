@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
-import Collapsible from "react-native-collapsible"
+import Collapsible from "react-native-collapsible";
 import { NativeWindStyleSheet } from "nativewind";
 import PortfolioHistory from "./PortfolioHistory";
 import Transactions from "./Transactions";
@@ -20,8 +20,9 @@ NativeWindStyleSheet.setOutput({
   default: "native",
 });
 import { UserContext } from "../context/User";
-import PGGamePreview from "./PGGamePreview";
+import GamePreview from "./GamePreview";
 import ShareOverview from "./ShareOverview";
+import { useRouter } from "expo-router";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -31,8 +32,8 @@ const Profile = () => {
   const [portfolioHistory, setPortfolioHistory] = useState();
   const [userShares, setUserShares] = useState();
   const [allTransactions, setAllTransactions] = useState();
-  const [isCollapsed, setIsCollapsed] = useState(true)
-  
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     if (user.id) {
@@ -41,8 +42,13 @@ const Profile = () => {
           const newArr = result.filter((game) => {
             return game.quantity !== 0;
           });
-
-          setInvestedGames(newArr.sort((a, b) => a.game_id - b.game_id));
+          const mappedData = newArr.map((datum) => {
+            return {
+              ...datum.games,
+              shares: [{ quantity: datum.quantity }],
+            };
+          });
+          setInvestedGames(mappedData.sort((a, b) => a.game_id - b.game_id));
           const totalValue = result.reduce(
             (total, current) => {
               return Number(
@@ -78,60 +84,79 @@ const Profile = () => {
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      router.push("/login");
     }
   }, [user.id, user.credits]);
-
-  let totalShares = 0
-  if (userShares){totalShares = userShares.reduce((total, game)=>{
-    return total += game.quantity
-  }, 0)
-}
-const colorScheme = 'dark'
+  let totalShares = 0;
+  if (userShares) {
+    totalShares = userShares.reduce((total, game) => {
+      return (total += game.quantity);
+    }, 0);
+  }
+  const colorScheme = "dark";
   return isLoading ? (
     <ActivityIndicator size="large" />
   ) : (
-    <View className={`rounded-lg h-full bg-background-${colorScheme}`}>
-      <View>
-        <Text className="text-center text-text-dark">
-          {" "}
-          Hello {user.username}! This is your Profile page. Your portfolio value ={" "}
-          {portfolioValue} cr
-        </Text>
-      </View>
-      <View className="flex-column items-center">
-        <FlatList
-          data={investedGames}
-          renderItem={({ item }) => (
-            <PGGamePreview
-              setInvestedGames={setInvestedGames}
-              game={{ ...item, ...item.games }}
-            />
-          )}
-          keyExtractor={(item) => item.games.game_namse}
-        />
-      </View>
-      <Pressable className="bg-accent-light self-center hover:bg-accent-dark rounded p-2 m-2 max-w-[110px]" onPress={()=>setIsCollapsed(!isCollapsed)}>
-        <Text className='text-text-dark'>
-          {isCollapsed ? 'Show Charts' : 'Hide Charts'}
+    <View className="bg-black">
+      <View
+        className={`rounded-lg h-full p-4 m-4 bg-background-${colorScheme}`}
+      >
+        <View>
+          <Text className="text-center text-text-dark mb-4">
+            {" "}
+            Your portfolio value = {portfolioValue} cr
           </Text>
-          </Pressable>
-      <Collapsible collapsed={isCollapsed}>
-      <View>{userShares && <ShareOverview shares={userShares} />}</View>
-      <View>
-        {portfolioHistory && (
-          <PortfolioHistory portfolio_history={portfolioHistory} />
+        </View>
+        <View className="bg-black rounded-lg h-auto w-full flex justify-center items-center">
+          <FlatList
+            className="w-full"
+            data={investedGames}
+            renderItem={({ item }) => (
+              <GamePreview
+                value_history={item.price_history}
+                shares_owned={
+                  user
+                    ? item.shares[0]
+                      ? item.shares[0].quantity
+                      : 0
+                    : undefined
+                }
+                game={item}
+              />
+
+
+              // <PGGamePreview game={{ ...item, ...item.games }} />
+            )}
+            keyExtractor={(item) => item.game_name}
+          />
+        </View>
+        <Pressable
+          className="bg-accent-light self-center hover:bg-accent-dark rounded p-2 m-2 max-w-[110px]"
+          onPress={() => setIsCollapsed(!isCollapsed)}
+        >
+          <Text className="text-text-dark">
+            {isCollapsed ? "Show Charts" : "Hide Charts"}
+          </Text>
+        </Pressable>
+        <Collapsible collapsed={isCollapsed}>
+          <View>{userShares && <ShareOverview shares={userShares} />}</View>
+          <View>
+            {portfolioHistory && (
+              <PortfolioHistory portfolio_history={portfolioHistory} />
+            )}
+          </View>
+        </Collapsible>
+        {allTransactions && (
+          <Transactions
+            data={{
+              total_shares_owned: totalShares,
+              total_shares_value: portfolioValue,
+              transactions: allTransactions,
+            }}
+          />
         )}
       </View>
-      </Collapsible>
-      {allTransactions && (
-        <Transactions
-          data={{
-            total_shares_owned: totalShares,
-            total_shares_value: portfolioValue,
-            transactions: allTransactions,
-          }}
-        />
-      )}
     </View>
   );
 };

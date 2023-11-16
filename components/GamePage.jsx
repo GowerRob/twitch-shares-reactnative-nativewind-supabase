@@ -32,12 +32,11 @@ export default function GamePage() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    fetchGameInfo(game_id, user.id)
+    fetchGameInfo(game_id, user?.id)
       .then((data) => {
         data.cover_url = data.cover_url
           .replace(/{width}/, 200)
           .replace(/{height}/, 300);
-
         setCurrentGame(data);
       })
       .catch((error) => {
@@ -62,14 +61,16 @@ export default function GamePage() {
         setGamePrices(filteredResult);
       })
       .then(() => {
-        fetchGameTransactions(user.id, game_id).then((data) => {
-          const newData = data.map((item) => {
-            const newItem = { ...item };
-            newItem.date = new Date(item.transaction_date);
-            return newItem;
+        if (user.id) {
+          fetchGameTransactions(user.id, game_id).then((data) => {
+            const newData = data.map((item) => {
+              const newItem = { ...item };
+              newItem.date = new Date(item.transaction_date);
+              return newItem;
+            });
+            setTransactions(newData);
           });
-          setTransactions(newData);
-        });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -172,21 +173,25 @@ export default function GamePage() {
         </VictoryChart>
       </View>
       <View>
-        <BuySell
-          quantity={currentGame.quantity}
-          game_id={game_id}
-          game_name={currentGame.game_name}
-          value={currentGame.value}
-        />
+        {user.id ? (
+          <BuySell
+            quantity={currentGame.quantity}
+            game_id={game_id}
+            game_name={currentGame.game_name}
+            value={currentGame.value}
+          />
+        ) : null}
       </View>
       <View>
-        <Transactions
-          data={{
-            total_shares_owned: currentGame.quantity,
-            total_shares_value: currentGame.quantity * currentGame.value,
-            transactions: transactions,
-          }}
-        />
+        {transactions.length ? (
+          <Transactions
+            data={{
+              total_shares_owned: currentGame.quantity,
+              total_shares_value: currentGame.quantity * currentGame.value,
+              transactions: transactions,
+            }}
+          />
+        ) : null}
       </View>
     </View>
   );
