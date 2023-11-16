@@ -94,7 +94,7 @@ const loginDisplay=()=>{
         return <Link href={`/login`} asChild>
             <Pressable 
             className={` bg-accent-light rounded p-2 m-2`}>
-            <Text className={`text-white`}>Login</Text>
+            <Text className={`text-white`}>Login/Sign up</Text>
             </Pressable>
         </Link> 
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { FlatList, Pressable, Text , View} from 'react-native'
+import { ActivityIndicator, FlatList, Pressable, Text , View} from 'react-native'
 import LeagueCard from './LeagueCard'
 import { UserContext } from '../../context/User'
 import {router} from 'expo-router' 
@@ -12,7 +12,7 @@ const DisplayLeagues = () => {
     const [leagueData,setLeagueData] = useState([])
     const [isLoading, setIsloading] = useState(true)
     const {user} = useContext(UserContext)
-    const colorScheme = "dark";
+
     useEffect(()=>{
         fetchPlayerPortfolio(setLeagueData)
         fetchUserLeagues(setUserLeagues,user)
@@ -22,14 +22,14 @@ const DisplayLeagues = () => {
     
     const callCreateLeague=()=>{
         router.push(`create`)
-
     }
 
-    if(isLoading) return <Text>Loading ...</Text>
+    if (isLoading) return <ActivityIndicator size={'large'}/>
+    if (userLeagues.length === 0) return <ActivityIndicator size={'large'}/>
 
     return (<>
 
-<View className={`p-4 bg-background-dark id-outerView`}>
+    <View className={`p-4 bg-background-dark id-outerView`}>
         <View className="flex flex-row justify-around mb-4">
         <Pressable 
                 className="rounded-full px-3 bg-accent-light font-bold w-1/3 md:w-1/4"
@@ -58,7 +58,8 @@ const DisplayLeagues = () => {
         </FlatList>
         </View>
     </View>
-    </>)
+      </>
+    )
  }
 
 export default DisplayLeagues
