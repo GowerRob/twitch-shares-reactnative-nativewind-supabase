@@ -131,7 +131,9 @@ const BuySell = ({
                     +text.replace(/[^0-9]/g, ""),
                     Math.floor(user.credits / value)
                   )
-                : quantity
+                : Math.min(
+                  +text.replace(/[^0-9]/g, ""),
+                  quantity)
             )
           }
         />
