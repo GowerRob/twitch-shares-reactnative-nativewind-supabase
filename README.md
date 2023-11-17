@@ -78,12 +78,18 @@ On the other side, Supabase was the core of our backend due to previous experien
 # Embed our presentation video
 
 
+https://github.com/GowerRob/twitch-shares-reactnative-nativewind-supabase/assets/121888459/97ad8d41-b417-4589-98c7-2d57557d6264
+
+
+
 # Versions
 
 
 
 # Table of technologies - 
-
+| Technology | Projecy uses |
+|------------|--------------|
+| Node.js | please complete |
 
 
 
