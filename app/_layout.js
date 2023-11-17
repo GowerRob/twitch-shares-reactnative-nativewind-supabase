@@ -1,13 +1,13 @@
 import {Slot} from "expo-router";
 import Header from "../components/Header";
-import {UserContext, UserProvider} from "../context/User";
+import {UserProvider} from "../context/User";
 import Toast from "react-native-toast-message";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import socket from "../socket";
 import supabase from "../config/supabaseConfig";
 import Footer from "../components/Footer";
 
-import { View } from "react-native";
+import {View} from "react-native";
 
 const Layout = () => {
 
@@ -71,17 +71,17 @@ const Layout = () => {
     }, [socket]);
 
 
-    return(<>
+    return (<>
         <UserProvider>
-            <Header />
+            <Header/>
             <View className={`mt-10 py-20 h-full bg-background-dark`}>
-                <Slot />
+                <Slot/>
             </View>
 
-            <Footer />
+            <Footer/>
         </UserProvider>
-    </>)
-}
+    </>);
+};
 
 export default Layout;
 

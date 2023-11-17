@@ -1,10 +1,10 @@
 import DisplayLeagues from "../components/leagues/DisplayLeagues";
 
-const leagues=() => {
-    return(<>  
+const leagues = () => {
+    return (<>
 
         <DisplayLeagues/>
-    </>)
-}
+    </>);
+};
 
 export default leagues;

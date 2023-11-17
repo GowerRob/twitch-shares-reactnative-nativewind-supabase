@@ -1,15 +1,12 @@
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
-import { useState } from "react";
-import { Stack, useRouter } from "expo-router";
-import Login from "../components/Login";
+import {SafeAreaView, View} from "react-native";
+import {Stack, useRouter} from "expo-router";
 import GameList from "../components/GameList";
 
 // The below snippet also multiple nativewind classes to be applied
-import { NativeWindStyleSheet } from "nativewind";
-import HomeComponent from "../components/HomeComponent";
+import {NativeWindStyleSheet} from "nativewind";
 
 NativeWindStyleSheet.setOutput({
-  default: "native",
+    default: "native",
 });
 
 const Home = () => {
@@ -27,11 +24,11 @@ const Home = () => {
                 }}
             />
 
-            
-                <View className="flex-1 h-screen">
-                    <GameList/>
-                </View>
-            
+
+            <View className="flex-1 h-screen">
+                <GameList/>
+            </View>
+
         </SafeAreaView>
     );
 

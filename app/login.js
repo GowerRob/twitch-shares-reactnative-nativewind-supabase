@@ -1,14 +1,14 @@
-import Login from '../components/Login'
+import Login from "../components/Login";
 
-const login =() => {
+const login = () => {
 
 
-    return(
+    return (
         <Login/>
 
 
-    )
+    );
 
-}
+};
 
 export default login;

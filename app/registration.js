@@ -1,14 +1,14 @@
-import RegistrationComp from '../components/RegistrationComp'
+import RegistrationComp from "../components/RegistrationComp";
 
-const registration =() => {
+const registration = () => {
 
 
-    return(
+    return (
         <RegistrationComp/>
 
 
-    )
+    );
 
-}
+};
 
 export default registration;

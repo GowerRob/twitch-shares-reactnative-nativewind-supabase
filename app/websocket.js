@@ -1,7 +1,6 @@
-import {Button, FlatList, Text, View} from "react-native";
+import {FlatList, Text, View} from "react-native";
 import socket from "../socket";
 import {useEffect, useState} from "react";
-import Toast from "react-native-toast-message";
 
 const websocket = () => {
 
@@ -33,10 +32,8 @@ const websocket = () => {
     }, [socket]);
 
     function storeOldValues(currentInfo) {
-        console.log("Storing old values");
         const currentGameInfo = {};
         for (let i = 0; i < currentInfo.length; i++) {
-            console.log(`Setting ${currentInfo[i].game_id} to ${currentInfo[i].value}`);
             currentGameInfo[currentInfo[i].game_id] = currentInfo[i].value;
         }
         setOldGameInfo(currentGameInfo);
