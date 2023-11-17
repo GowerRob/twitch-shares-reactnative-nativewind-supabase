@@ -87,7 +87,7 @@ https://github.com/GowerRob/twitch-shares-reactnative-nativewind-supabase/assets
 
 
 # Table of technologies - 
-| Technology | Projecy uses |
+| Technology | Project uses |
 |------------|--------------|
 | Node.js | please complete |
 
