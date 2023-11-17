@@ -15,6 +15,24 @@ For a full list of tech used, please see below.
 
 To try the App out yourself, after cloning and running, feel free to register with a dummy account and use the 1000 credits granted to buy and selling shares.
 
+## Backend
+The backend component is implemented using Express.js and can be found at [Twitch Shares Backend](https://github.com/Howling-Techie/Twitch-Shares-Backend). To set up the backend, follow these steps:
+1. Clone the repository:
+```
+git clone https://github.com/Howling-Techie/Twitch-Shares-Backend.git cd Twitch-Shares-Backend
+```
+2. Install dependencies:
+```
+npm install
+```
+3. Create a ```.env``` file in the root directory and add the following variables:
+```
+SERVICE_KEY=<your_supabase_service_key> SUPABASE_URL=<your_supabase_url> TWITCH_CLIENT_ID=<your_twitch_client_id> TWITCH_CLIENT_SECRET=<your_twitch_client_secret>
+```
+4. Run the application:
+```
+npm start
+```
 
 ## Frontend
 The frontend component is built with React Native and can be found at [Twitch Shares Frontend](https://github.com/GowerRob/twitch-shares-reactnative-nativewind-supabase). To set up the frontend, follow these steps:
@@ -38,24 +56,6 @@ npm web
 //Deploy for mobile
 npm android
 npm ios
-```
-## Backend
-The backend component is implemented using Express.js and can be found at [Twitch Shares Backend](https://github.com/Howling-Techie/Twitch-Shares-Backend). To set up the backend, follow these steps:
-1. Clone the repository:
-```
-git clone https://github.com/Howling-Techie/Twitch-Shares-Backend.git cd Twitch-Shares-Backend
-```
-2. Install dependencies:
-```
-npm install
-```
-3. Create a ```.env``` file in the root directory and add the following variables:
-```
-SERVICE_KEY=<your_supabase_service_key> SUPABASE_URL=<your_supabase_url> TWITCH_CLIENT_ID=<your_twitch_client_id> TWITCH_CLIENT_SECRET=<your_twitch_client_secret>
-```
-4. Run the application:
-```
-npm start
 ```
 
 ## Important Notes
