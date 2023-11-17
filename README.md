@@ -1,8 +1,19 @@
 # Twitch Shares Project
 ## Overview
 Twitch Shares is a full-stack JavaScript project developed by Team 451.
---APP DESCRIPTION HERE--
-# Detailed description of App features...
+
+Team 451 developed Twitch-Shares to utilise viewship data from Twitch, using their public API, to create a competative stock-market trading game.  We sythesis a stock-market analog by equating viewships totals of game titles to market value and allowing users to buy and sell those stocks as the viewership, and as such the value, fluctuates throughout the week.
+
+The App features:
+- user registration and signing features,for which Supabase funcationality was utilised
+- dynamic search of available games, pulled directly from our backend, which in turn pulsls from the Twitch API
+- visualisation of stock and portfolio value data over time, using Victory Charts
+- responsive design for web and mobile, using React-Native and Tailwind (NativeWind)
+- REST API utilisation for interaction with our user, transactions and stock-market database
+
+For a full list of tech used, please see below.
+
+To try the App out yourself, after cloning and running, feel free to register with a dummy account and use the 1000 credits granted to buy and selling shares.
 
 
 ## Frontend
@@ -56,8 +67,6 @@ npm start
 We used React Native, the industry standard for making apps in react, with Nativewind to allow easy integration of Tailwind. Expo was used on top of React Native to allow for easy cross-platform development and publishing to mobile, desktop and web. Finally Victory was used for generating charts due to its popularity in the industry and built in support for React Native.
 
 On the other side, Supabase was the core of our backend due to previous experience with the service by people on the team, with an Express.js server for data refreshing (using Axios for making API calls, which simplifies the data fetching process) and websocket management, using Socket.io on both the server and client side over built in alternatives due to its simplicity and ease to set up.
-
-
 
 
 
