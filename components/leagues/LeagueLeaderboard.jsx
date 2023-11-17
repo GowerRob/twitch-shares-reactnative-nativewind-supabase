@@ -26,15 +26,6 @@ const LeagueLeaderboard = ({league_id}) => {
         setFilteredData(result);
     }, [leagueData]);
 
-    const sumLeagueValue = () => {
-        let currentValue = 0;
-        filteredData.forEach((item) => {
-            currentValue += (item.portfolio_history[0].total_value + item.portfolio_history[0].credits);
-        });
-        return currentValue;
-    };
-
-
     return (<>
 
 

@@ -1,15 +1,5 @@
 import supabase from "./config/supabaseConfig";
 
-export const fetchUser = async () => {
-    const user = await supabase.auth.getSession();
-    if (user === null) {
-        return null;
-    }
-    user.details = await fetchUserDetails(user.data.session.user.id);
-
-    return user;
-};
-
 export const fetchUserDetails = async (id) => {
     const {data, error} = await supabase
         .from("profiles")

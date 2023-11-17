@@ -45,7 +45,7 @@ const BuySell = ({
                 });
                 setTradeQuantity(0);
                 if (closeModal) {
-                    fetchInvestedGames(user.id).then((result) => {
+                    fetchInvestedGames(user.id).then(() => {
                         closeModal();
                     });
                 }
