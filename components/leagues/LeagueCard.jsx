@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Pressable, Text, View } from "react-native"
+import { ActivityIndicator, Pressable, Text, View } from "react-native"
 import { UserContext } from "../../context/User"
 
 import supabase from "../../config/supabaseConfig"
@@ -16,7 +16,6 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         }
         countPeople()
         sumLeagueValue()
-        
     },[inLeague])
 
     const countPeople = async () => {
@@ -52,7 +51,7 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         })
         return currentValue
     }
-    
+
     return (
     
     <View className='bg-background-dark   my-5 mx-3 flex flex-column w-90 rounded-md'>
@@ -69,7 +68,6 @@ const LeagueCard = ({leagueItem, userLeagues,leagueData}) => {
         
         <View className="flex items-center">
         {(!inLeague && user.id)?
-
             <Pressable
                 className="w-1/3 border bg-primary-dark text-white my-2 mx-3 rounded"
                 onPress={handleJoinLeague}>

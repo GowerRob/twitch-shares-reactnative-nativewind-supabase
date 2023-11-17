@@ -8,6 +8,7 @@ const LeagueLeaderboard = ({league_id}) => {
     const [leagueData,setLeagueData] = useState([])
     const [filteredData,setFilteredData] = useState([])
     const [lastLeague, setLastLeague] = useState([])
+    const [filteredLast, setFilteredLast] = useState([])
     const colorScheme = "dark";
     useEffect(()=>{
         fetchPlayerPortfolio(setLeagueData)
@@ -25,7 +26,22 @@ const LeagueLeaderboard = ({league_id}) => {
             return value
         })
         setFilteredData(result)
+        
     },[leagueData])
+
+    useEffect(()=>{
+        const result = lastLeague.filter((item)=>{
+            let value = false
+            item.leagues.forEach((league)=>{
+                if(league.league_id=== +league_id){
+                    value = true
+                }
+            })
+            return value
+        })
+        setFilteredLast(result)
+        
+    },[lastLeague])
 
     const sumLeagueValue = () => {
         let currentValue = 0
@@ -138,7 +154,7 @@ const LeagueLeaderboard = ({league_id}) => {
                 </Text>
             </View>
             {/* Data */}
-            {lastLeague.map((item, index)=>(
+            {filteredLast.map((item, index)=>(
                 <View             
                 className={`flex flex-row border-b border-${colorScheme}-300 py-2 px-4`}
                 key={index}>
